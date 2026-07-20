@@ -1,0 +1,87 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.lightup.ai/reference/post_api-v1-token-refresh
+docs: https://docs.lightup.ai/docs/api-credentials
+derive_note: The published OpenAPI declares no components.securitySchemes. Authorization
+  is modelled as an explicit `authorization` header parameter on 52 of the 54 operations,
+  so this profile was authored from the documented credential flow rather than derived
+  mechanically.
+summary:
+  types:
+  - http
+  api_key_in: []
+  oauth2_flows: []
+  scopes_published: false
+  model: JWT bearer access token, obtained by exchanging a long-lived refresh token
+    from a downloaded API credential file.
+schemes:
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  in: header
+  parameter_name: authorization
+  value_format: Bearer <access-token>
+  applied_to_operations: 52
+  sources:
+  - openapi/lightup-dashboard-openapi.json
+token_flow:
+  credential_file:
+    description: Generated in the Lightup app under the gear icon -> API Credentials
+      -> Generate API credential, then downloaded as a JSON file.
+    filename_pattern: lightup-api-credential*.json
+    contains:
+    - refresh token
+    - host / cluster URL
+  exchange:
+    operation: POST /api/v1/token/refresh/
+    docs: https://docs.lightup.ai/reference/post_api-v1-token-refresh
+    request_field: refresh
+    response_field: access
+    description: >-
+      Exchange the refresh value from the credential file for a short-lived access
+      token, then send it in the Authorization header as "Bearer <access>" on
+      subsequent calls.
+  cluster_scoping: Credentials are bound to a specific Lightup cluster; requests must
+    target the matching https://app.<clusterId>.lightup.ai host.
+consumers:
+- name: lightctl CLI
+  credential_path: ~/.lightup/credential
+  env: LIGHTCTL_CREDENTIAL_PATH
+- name: Lightup MCP server
+  description: Connects as /sse?host=<instance>&refresh_token=<JWT refresh token>;
+    stateless, credentials never stored server-side.
+authorization:
+  model: role-based access control
+  docs: https://docs.lightup.ai/docs/roles
+  app_roles:
+  - name: App Admin
+    description: Invite users, set app roles, create workspaces, invite users to workspaces
+      and set their initial workspace role.
+  - name: App Editor
+    description: Create workspaces, but cannot invite new app users or set app roles.
+  - name: App Viewer
+    description: Can be invited to join any workspace, but cannot create workspaces.
+  workspace_roles:
+  - name: Admin
+    description: Everything associated with creating, editing and operationalizing
+      metrics and monitors, including managing datasources.
+  - name: Editor
+    description: Everything Admins can do except managing datasources.
+  - name: Viewer
+    description: Read access to workspace objects.
+  - name: Observer
+    description: Most restricted workspace role; includes table sample preview permissions
+      added in release 4.21.
+  scoping: Most API resources are workspace-scoped via a {workspace_id} path segment;
+    a 403 is returned when the user lacks access to the workspace.
+sso:
+  cloud:
+  - Google SSO
+  - Okta
+  enterprise:
+  - Google SSO
+  - Okta
+  - SAML
+  - Microsoft AD
+  source: https://www.lightup.ai/pricing
