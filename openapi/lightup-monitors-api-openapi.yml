@@ -1,0 +1,1157 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Monitors API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Monitors
+paths:
+  /api/{api_version}/ws/{workspace_id}/monitors/:
+    get:
+      description: "\n        List all monitors in the workspace based on filters\n        "
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: Filter by list of monitor names
+        explode: true
+        in: query
+        name: names
+        required: false
+        schema:
+          description: Filter by list of monitor names
+          items:
+            type: string
+          title: names
+          type: array
+      - description: Filter by list of source uuids
+        explode: true
+        in: query
+        name: source_uuids
+        required: false
+        schema:
+          description: Filter by list of source uuids
+          items:
+            type: string
+          title: source_uuids
+          type: array
+      - description: Filter by list of metric uuids
+        explode: true
+        in: query
+        name: metric_uuids
+        required: false
+        schema:
+          description: Filter by list of metric uuids
+          items:
+            type: string
+          title: metric_uuids
+          type: array
+      - description: Filter by list of monitor uuids
+        explode: true
+        in: query
+        name: monitor_uuids
+        required: false
+        schema:
+          description: Filter by list of monitor uuids
+          items:
+            type: string
+          title: monitor_uuids
+          type: array
+      - description: Return monitors from offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          description: Return monitors from offset
+          title: offset
+          type: integer
+      - description: Return only limit number of monitors
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          description: Return only limit number of monitors
+          title: limit
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get monitor list
+      tags:
+      - Monitors
+    post:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                Aggressiveness:
+                  properties:
+                    level:
+                      description: Aggressiveness level, either override or level should be set
+                      maximum: 10
+                      minimum: 1
+                      title: Level
+                      type: integer
+                    override:
+                      description: Aggressiveness override, either override or level should be set
+                      title: Override
+                      type: number
+                  title: Aggressiveness
+                  type: object
+                AlertChannelConfig:
+                  properties:
+                    channelId:
+                      description: UUID of the alert channel
+                      title: Channelid
+                      type: string
+                  required:
+                  - channelId
+                  title: AlertChannelConfig
+                  type: object
+                AlertConfig:
+                  properties:
+                    channels:
+                      default: []
+                      description: List of alertchannels
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelConfig'
+                      title: Channels
+                      type: array
+                    isMuted:
+                      default: true
+                      description: If true, no notifications are sent on this channel
+                      title: Ismuted
+                      type: boolean
+                    mutingSchedules:
+                      default: []
+                      description: If schedule is set, no notifications are sent on this channel during schedule
+                      items:
+                        type: string
+                      title: Mutingschedules
+                      type: array
+                  title: AlertConfig
+                  type: object
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                Bound:
+                  properties:
+                    lower:
+                      description: Lower bound, at least one of upper or lower bound should be set
+                      title: Lower
+                      type: number
+                    upper:
+                      description: Upper bound, at least one of upper or lower bound should be set
+                      title: Upper
+                      type: number
+                  title: Bound
+                  type: object
+                ChangeFeatureConfig:
+                  properties:
+                    type:
+                      default: change
+                      enum:
+                      - change
+                      title: Type
+                      type: string
+                    windowSize:
+                      description: Window size in seconds
+                      minimum: 0
+                      title: Windowsize
+                      type: integer
+                  title: ChangeFeatureConfig
+                  type: object
+                DetectionCriteria:
+                  description: An enumeration.
+                  enum:
+                  - toleranceInterval
+                  title: DetectionCriteria
+                  type: string
+                Direction:
+                  description: An enumeration.
+                  enum:
+                  - both
+                  - up
+                  - down
+                  title: Direction
+                  type: string
+                DoubleDerivativeFeatureConfig:
+                  properties:
+                    type:
+                      default: doubleDerivative
+                      enum:
+                      - doubleDerivative
+                      title: Type
+                      type: string
+                    windowSize:
+                      description: Window size in seconds
+                      minimum: 0
+                      title: Windowsize
+                      type: integer
+                  title: DoubleDerivativeFeatureConfig
+                  type: object
+                ForecastErrorFeatureConfig:
+                  properties:
+                    absoluteScale:
+                      title: Absolutescale
+                      type: boolean
+                    fittingDuration:
+                      exclusiveMinimum: 0
+                      title: Fittingduration
+                      type: integer
+                    forecastDuration:
+                      exclusiveMinimum: 0
+                      title: Forecastduration
+                      type: integer
+                    type:
+                      default: forecastError
+                      enum:
+                      - forecastError
+                      title: Type
+                      type: string
+                  title: ForecastErrorFeatureConfig
+                  type: object
+                IncidentLearning:
+                  properties:
+                    numIncidents:
+                      minimum: 1
+                      title: Numincidents
+                      type: integer
+                  required:
+                  - numIncidents
+                  title: IncidentLearning
+                  type: object
+                JobState:
+                  description: An enumeration.
+                  enum:
+                  - success
+                  - failed
+                  - unknown
+                  - complete_but_not_success
+                  - job_status_not_available_yet
+                  - paused_on_source
+                  title: JobState
+                  type: string
+                ManualThresholdSymptom:
+                  properties:
+                    bound:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Bound'
+                    featureConfig:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueFeatureConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/PercentageChangeFeatureConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ChangeFeatureConfig'
+                      title: Featureconfig
+                    type:
+                      default: manualThreshold
+                      enum:
+                      - manualThreshold
+                      title: Type
+                      type: string
+                  required:
+                  - bound
+                  - featureConfig
+                  title: ManualThresholdSymptom
+                  type: object
+                PercentageChangeFeatureConfig:
+                  properties:
+                    type:
+                      default: percentageChange
+                      enum:
+                      - percentageChange
+                      title: Type
+                      type: string
+                    windowSize:
+                      description: Window size in seconds
+                      minimum: 0
+                      title: Windowsize
+                      type: integer
+                  title: PercentageChangeFeatureConfig
+                  type: object
+                RollingMeanFeatureConfig:
+                  properties:
+                    type:
+                      default: rollingMean
+                      enum:
+                      - rollingMean
+                      title: Type
+                      type: string
+                    windowSize:
+                      description: Rolling mean window in seconds
+                      minimum: 0
+                      title: Windowsize
+                      type: integer
+                  title: RollingMeanFeatureConfig
+                  type: object
+                RuleConfig:
+                  properties:
+                    alertConfig:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/AlertConfig'
+                      description: Alert channel configuration
+                      title: Alertconfig
+                    driftDuration:
+                      description: The duration in seconds after which an anomaly is treated as an incident
+                      title: Driftduration
+                      type: integer
+                    isLive:
+                      default: false
+                      description: If true, the monitor starts evaluating the metric
+                      title: Islive
+                      type: boolean
+                    liveStartTs:
+                      description: This field allows the monitor to start detection from this point in time. This field cannot be modified after it is set. If None, the default is the last 2 weeks of datapoints collected for the corresponding metric
+                      title: Livestartts
+                      type: number
+                    metrics:
+                      description: UUID of the metric that is being monitored
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 1
+                      minItems: 1
+                      title: Metrics
+                      type: array
+                    recoveryDuration:
+                      description: The duration in seconds after an anomaly has ended when the incident is considered closed
+                      minimum: 0
+                      title: Recoveryduration
+                      type: integer
+                    symptom:
+                      description: The anomaly detection symptom
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ManualThresholdSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/SharpChangeSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/SlowBurnTrendChangeSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsBetaSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsWithTrendSymptom'
+                      title: Symptom
+                  required:
+                  - metrics
+                  title: RuleConfig
+                  type: object
+                RuleDisplayStatus:
+                  description: An enumeration.
+                  enum:
+                  - exception
+                  - live
+                  - loading
+                  - partiallyLive
+                  - pausedByUser
+                  - pausedMetric
+                  - pausedTrainingFailure
+                  - pausedTrainingFailureInsufficientData
+                  - trainingInProgress
+                  - pausedSource
+                  - resuming
+                  - unknown
+                  title: RuleDisplayStatus
+                  type: string
+                RuleMetadata:
+                  description: Metadata associated with the monitor
+                  properties:
+                    idSerial:
+                      description: Monitor ID that is set by the system
+                      readOnly: true
+                      title: Idserial
+                      type: integer
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    tags:
+                      default: []
+                      examples:
+                      - - tag_1
+                        - tag_2
+                      items:
+                        maxLength: 90
+                        type: string
+                      title: Tags
+                      type: array
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                    workspaceId:
+                      description: Workspace UUID associated with this monitor
+                      readOnly: true
+                      title: Workspaceid
+                      type: string
+                  required:
+                  - name
+                  - workspaceId
+                  title: RuleMetadata
+                  type: object
+                RuleRunStatus:
+                  description: An enumeration.
+                  enum:
+                  - exception
+                  - ok
+                  - paused
+                  - pausedByUser
+                  - pausedMetric
+                  - pausedTrainingFailure
+                  - pausedTraining
+                  title: RuleRunStatus
+                  type: string
+                RuleStatus:
+                  additionalProperties: false
+                  properties:
+                    configUpdatedTs:
+                      description: Timestamp of last configuration update
+                      title: Configupdatedts
+                      type: number
+                    createdTs:
+                      description: Timestamp when created
+                      title: Createdts
+                      type: number
+                    displayStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuleDisplayStatus'
+                      description: Display status
+                    lastSampleTs:
+                      description: Timestamp for last sample processed
+                      title: Lastsamplets
+                      type: number
+                    runStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuleRunStatus'
+                      description: Status of the last monitor run
+                    runStatusMessage:
+                      description: User friendly message if runStatus indicates an error condition
+                      title: Runstatusmessage
+                      type: string
+                    runtimeConfig:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuntimeRuleConfig'
+                    training:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingStatus'
+                      description: Training status
+                      title: Training
+                  title: RuleStatus
+                  type: object
+                RuntimeRuleConfig:
+                  properties:
+                    lastDiscoveryTs:
+                      title: Lastdiscoveryts
+                      type: integer
+                    symptomConfig:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ManualThresholdSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/SharpChangeSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/SlowBurnTrendChangeSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsBetaSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsSymptom'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueOutsideExpectationsWithTrendSymptom'
+                      title: Symptomconfig
+                  title: RuntimeRuleConfig
+                  type: object
+                SharpChangeSymptom:
+                  properties:
+                    aggressiveness:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Aggressiveness'
+                      description: Aggressiveness, more aggressive results in more incidents
+                      title: Aggressiveness
+                    autoUpdateModel:
+                      description: Enable auto training using incident labels
+                      title: Autoupdatemodel
+                      type: boolean
+                    detectionCriteria:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/DetectionCriteria'
+                      default: toleranceInterval
+                      description: Criteria to use for anomaly detection
+                    direction:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Direction'
+                      description: Capture the direction when the monitor should raise an incident
+                    featureConfig:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/DoubleDerivativeFeatureConfig'
+                      default:
+                        type: doubleDerivative
+                        windowSize: null
+                      title: Featureconfig
+                    trainingPeriods:
+                      description: List of training periods
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingPeriod'
+                      title: Trainingperiods
+                      type: array
+                    type:
+                      default: sharpChange
+                      enum:
+                      - sharpChange
+                      title: Type
+                      type: string
+                  title: SharpChangeSymptom
+                  type: object
+                SlowBurnTrendChangeSymptom:
+                  properties:
+                    aggressiveness:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Aggressiveness'
+                    direction:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Direction'
+                    featureConfig:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrendFeatureConfig'
+                      default:
+                        type: trendCoefficient
+                        windowSize: null
+                      title: Featureconfig
+                    type:
+                      default: slowBurnTrendChange
+                      enum:
+                      - slowBurnTrendChange
+                      title: Type
+                      type: string
+                  title: SlowBurnTrendChangeSymptom
+                  type: object
+                TrainingPeriod:
+                  properties:
+                    endTs:
+                      description: End timestamp of the training period
+                      title: Endts
+                      type: number
+                    startTs:
+                      description: Start timestamp of the training period
+                      title: Startts
+                      type: number
+                  required:
+                  - startTs
+                  - endTs
+                  title: TrainingPeriod
+                  type: object
+                TrainingStatus:
+                  additionalProperties: false
+                  description: This object contains all the status associated with monitor training
+                  properties:
+                    incidentLearning:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/IncidentLearning'
+                      description: If incident learning is enabled, this field contains the incident learning status
+                      title: Incidentlearning
+                    isSlicing:
+                      description: Indicates if the metric has slicing columns
+                      title: Isslicing
+                      type: boolean
+                    isTrained:
+                      description: Indicated whether the monitor has been trained
+                      title: Istrained
+                      type: boolean
+                    status:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingStatusString'
+                      description: Status of training
+                    totalSlice:
+                      description: If isSlicing is true, this field indicates the total number of slices that were seen in training
+                      title: Totalslice
+                      type: integer
+                    trainedSlice:
+                      description: If isSlicing is true, this field indicates the total number of slices that were trained
+                      title: Trainedslice
+                      type: integer
+                    trainingError:
+                      description: error encountered during training
+                      title: Trainingerror
+                      type: string
+                    trainingJobState:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/JobState'
+                      description: Training job status
+                  required:
+                  - isTrained
+                  title: TrainingStatus
+                  type: object
+                TrainingStatusString:
+                  description: An enumeration.
+                  enum:
+                  - pausedSource
+                  - inProgress
+                  - complete
+                  - failed
+                  - notApplicable
+                  title: TrainingStatusString
+                  type: string
+                TrendFeatureConfig:
+                  properties:
+                    type:
+                      default: trendCoefficient
+                      enum:
+                      - trendCoefficient
+                      title: Type
+                      type: string
+                    windowSize:
+                      description: Trend lookback window in seconds
+                      minimum: 0
+                      title: Windowsize
+                      type: integer
+                  title: TrendFeatureConfig
+                  type: object
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+                ValueFeatureConfig:
+                  properties:
+                    type:
+                      default: value
+                      enum:
+                      - value
+                      title: Type
+                      type: string
+                  title: ValueFeatureConfig
+                  type: object
+                ValueOutsideExpectationsBetaSymptom:
+                  properties:
+                    aggressiveness:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Aggressiveness'
+                      description: Aggressiveness, more aggressive results in more incidents
+                      title: Aggressiveness
+                    autoUpdateModel:
+                      description: Enable auto training using incident labels
+                      title: Autoupdatemodel
+                      type: boolean
+                    detectionCriteria:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/DetectionCriteria'
+                      default: toleranceInterval
+                      description: Criteria to use for anomaly detection
+                    direction:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Direction'
+                      description: Capture the direction when the monitor should raise an incident
+                    featureConfig:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ForecastErrorFeatureConfig'
+                    trainingPeriods:
+                      description: List of training periods
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingPeriod'
+                      title: Trainingperiods
+                      type: array
+                    type:
+                      default: valueOutsideExpectationsBeta
+                      enum:
+                      - valueOutsideExpectationsBeta
+                      title: Type
+                      type: string
+                  title: ValueOutsideExpectationsBetaSymptom
+                  type: object
+                ValueOutsideExpectationsSymptom:
+                  properties:
+                    aggressiveness:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Aggressiveness'
+                      description: Aggressiveness, more aggressive results in more incidents
+                      title: Aggressiveness
+                    autoUpdateModel:
+                      description: Enable auto training using incident labels
+                      title: Autoupdatemodel
+                      type: boolean
+                    detectionCriteria:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/DetectionCriteria'
+                      default: toleranceInterval
+                      description: Criteria to use for anomaly detection
+                    direction:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Direction'
+                      description: Capture the direction when the monitor should raise an incident
+                    featureConfig:
+                      default:
+                        type: value
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ValueFeatureConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RollingMeanFeatureConfig'
+                      title: Featureconfig
+                    trainingPeriods:
+                      description: List of training periods
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingPeriod'
+                      title: Trainingperiods
+                      type: array
+                    type:
+                      default: valueOutsideExpectations
+                      enum:
+                      - valueOutsideExpectations
+                      title: Type
+                      type: string
+                  title: ValueOutsideExpectationsSymptom
+                  type: object
+                ValueOutsideExpectationsWithTrendSymptom:
+                  properties:
+                    aggressiveness:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Aggressiveness'
+                      description: Aggressiveness, more aggressive results in more incidents
+                      title: Aggressiveness
+                    autoUpdateModel:
+                      description: Enable auto training using incident labels
+                      title: Autoupdatemodel
+                      type: boolean
+                    detectionCriteria:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/DetectionCriteria'
+                      default: toleranceInterval
+                      description: Criteria to use for anomaly detection
+                    direction:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/Direction'
+                      description: Capture the direction when the monitor should raise an incident
+                    featureConfig:
+                      default:
+                        type: percentageChange
+                        windowSize: null
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/PercentageChangeFeatureConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ChangeFeatureConfig'
+                      title: Featureconfig
+                    trainingPeriods:
+                      description: List of training periods
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/TrainingPeriod'
+                      title: Trainingperiods
+                      type: array
+                    type:
+                      default: valueOutsideExpectationsWithTrend
+                      enum:
+                      - valueOutsideExpectationsWithTrend
+                      title: Type
+                      type: string
+                  title: ValueOutsideExpectationsWithTrendSymptom
+                  type: object
+              example:
+                apiVersion: v1
+                config:
+                  metrics:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  symptom:
+                    type: valueOutsideExpectations
+                metadata:
+                  name: simple-rule
+                  workspaceId: 99e55845-cd4b-4a61-b066-1a23455d7095
+                type: rule
+              examples:
+              - apiVersion: v1
+                config:
+                  metrics:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  symptom:
+                    type: valueOutsideExpectations
+                metadata:
+                  name: simple-rule
+                  workspaceId: 99e55845-cd4b-4a61-b066-1a23455d7095
+                type: rule
+              - apiVersion: v1
+                config:
+                  metrics:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  symptom:
+                    bound:
+                      lower: 5
+                    featureConfig:
+                      type: percentageChange
+                      windowSize: 5
+                    type: manualThreshold
+                metadata:
+                  name: simple-threshold-rule
+                  workspaceId: 99e55845-cd4b-4a61-b066-1a23455d7095
+                type: rule
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuleConfig'
+                metadata:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuleMetadata'
+                status:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema/definitions/RuleStatus'
+                  description: Monitor status
+                  readOnly: true
+                  title: Status
+                type:
+                  default: rule
+                  enum:
+                  - rule
+                  title: Type
+                  type: string
+              required:
+              - metadata
+              - config
+              title: Rule
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create monitor
+      tags:
+      - Monitors
+  /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}:
+    delete:
+      description: "\n        Delete a filter\n        - delete live filter deployment, training job and filter preview jobs, if any\n        "
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ''
+        explode: true
+        in: path
+        name: filter_uuid
+        required: true
+        schema:
+          title: filter_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete monitor
+      tags:
+      - Monitors
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ''
+        explode: true
+        in: path
+        name: filter_uuid
+        required: true
+        schema:
+          title: filter_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get monitor
+      tags:
+      - Monitors
+    put:
+      description: "\n        Update a filter\n        - recreate training job if config has changes that require retraining\n        - delete deployment if not live\n        - recreate deployment if live and config has changes that require redeployment\n        "
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ''
+        explode: true
+        in: path
+        name: filter_uuid
+        required: true
+        schema:
+          title: filter_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1monitors~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Update monitor
+      tags:
+      - Monitors
+  /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}/slices:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: Monitor UUID
+        explode: true
+        in: path
+        name: filter_uuid
+        required: true
+        schema:
+          description: Monitor UUID
+          title: filter_uuid
+          type: string
+      - description: Filter by start time
+        explode: true
+        in: query
+        name: start_ts
+        required: false
+        schema:
+          description: Filter by start time
+          title: start_ts
+          type: number
+      - description: Filter by end time
+        explode: true
+        in: query
+        name: end_ts
+        required: false
+        schema:
+          description: Filter by end time
+          title: end_ts
+          type: number
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                properties:
+                  sliceList:
+                    description: List of slice dictionaries associated with monitor
+                    items:
+                      type: object
+                    title: Slicelist
+                    type: array
+                title: SliceDictList
+                type: object
+          description: ''
+      summary: Get slices associated with monitor
+      tags:
+      - Monitors

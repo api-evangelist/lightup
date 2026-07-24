@@ -1,0 +1,21 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Health check API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Health check
+paths:
+  /api/v0/healthz/:
+    get:
+      description: ''
+      parameters: []
+      summary: HealthzView
+      tags:
+      - Health check

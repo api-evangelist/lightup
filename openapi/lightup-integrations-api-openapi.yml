@@ -1,0 +1,1166 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Integrations API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Integrations
+paths:
+  /api/{api_version}/ws/{workspace_id}/integrations/:
+    get:
+      description: List all integrations
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get the list of integrations
+      tags:
+      - Integrations
+    post:
+      description: Create a new integration
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                AlertChannelMetadata:
+                  properties:
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                    workspaceId:
+                      format: uuid
+                      title: Workspaceid
+                      type: string
+                  required:
+                  - name
+                  title: AlertChannelMetadata
+                  type: object
+                AlertChannelMode:
+                  description: An enumeration.
+                  enum:
+                  - manual
+                  - automatic
+                  title: AlertChannelMode
+                  type: string
+                AlertChannelRunStatus:
+                  description: An enumeration.
+                  enum:
+                  - ok
+                  - partial
+                  - failed
+                  - unknown
+                  title: AlertChannelRunStatus
+                  type: string
+                AlertChannelStatus:
+                  properties:
+                    incidentCountReportFailed:
+                      description: Number of incidents that could not be reported
+                      title: Incidentcountreportfailed
+                      type: integer
+                    incidentCountReportMuted:
+                      description: Number of incidents that were not reported because the alert channel or monitor was muted
+                      title: Incidentcountreportmuted
+                      type: integer
+                    incidentCountReportSuccess:
+                      description: Number of incidents that were successfully reported
+                      title: Incidentcountreportsuccess
+                      type: integer
+                    lastRunTs:
+                      description: Timestamp of the last run
+                      title: Lastrunts
+                      type: number
+                    lastSentTs:
+                      description: Timestamp of the last message sent
+                      title: Lastsentts
+                      type: number
+                    runStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelRunStatus'
+                      default: unknown
+                      description: Status of the last run
+                    runStatusMessage:
+                      description: User friendly message if runStatus indicates any issue
+                      title: Runstatusmessage
+                      type: string
+                  title: AlertChannelStatus
+                  type: object
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                EmailConfig:
+                  properties:
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    emailAddressList:
+                      items:
+                        type: string
+                      title: Emailaddresslist
+                      type: array
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: email
+                      enum:
+                      - email
+                      title: Type
+                      type: string
+                  required:
+                  - domainName
+                  - emailAddressList
+                  title: EmailConfig
+                  type: object
+                JiraBasicAuthConfig:
+                  properties:
+                    authType:
+                      default: basicAuth
+                      enum:
+                      - basicAuth
+                      title: Authtype
+                      type: string
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    key:
+                      title: Key
+                      type: string
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    password:
+                      title: Password
+                      type: string
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    server:
+                      title: Server
+                      type: string
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: jira
+                      enum:
+                      - jira
+                      title: Type
+                      type: string
+                    username:
+                      title: Username
+                      type: string
+                  required:
+                  - domainName
+                  - server
+                  - key
+                  - username
+                  - password
+                  title: JiraBasicAuthConfig
+                  type: object
+                JiraTokenAuthConfig:
+                  properties:
+                    authToken:
+                      title: Authtoken
+                      type: string
+                    authType:
+                      default: tokenAuth
+                      enum:
+                      - tokenAuth
+                      title: Authtype
+                      type: string
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    key:
+                      title: Key
+                      type: string
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    server:
+                      title: Server
+                      type: string
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: jira
+                      enum:
+                      - jira
+                      title: Type
+                      type: string
+                  required:
+                  - domainName
+                  - server
+                  - key
+                  - authToken
+                  title: JiraTokenAuthConfig
+                  type: object
+                MSTeamsConfig:
+                  properties:
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: msteams
+                      enum:
+                      - msteams
+                      title: Type
+                      type: string
+                    webHookUrl:
+                      title: Webhookurl
+                      type: string
+                  required:
+                  - domainName
+                  - webHookUrl
+                  title: MSTeamsConfig
+                  type: object
+                OpsgenieConfig:
+                  properties:
+                    apiKey:
+                      description: API key to authenticate with Opsgenie
+                      title: Apikey
+                      type: string
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    instanceUrl:
+                      default: https://api.opsgenie.com
+                      description: URL of the Opsgenie instance
+                      title: Instanceurl
+                      type: string
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    priority:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/OpsgeniePriority'
+                      default: P3
+                      description: Priority level of the alert
+                    responders:
+                      description: Teams, users, escalations or schedules that should receive notifications for the alert
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/OpsgenieResponder'
+                      maxItems: 50
+                      title: Responders
+                      type: array
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    tags:
+                      description: Tags of the alert
+                      items:
+                        maxLength: 50
+                        type: string
+                      maxItems: 20
+                      title: Tags
+                      type: array
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: opsgenie
+                      enum:
+                      - opsgenie
+                      title: Type
+                      type: string
+                  required:
+                  - domainName
+                  - apiKey
+                  title: OpsgenieConfig
+                  type: object
+                OpsgeniePriority:
+                  description: An enumeration.
+                  enum:
+                  - P1
+                  - P2
+                  - P3
+                  - P4
+                  - P5
+                  title: OpsgeniePriority
+                  type: string
+                OpsgenieResponder:
+                  properties:
+                    name:
+                      description: Name of the responder
+                      title: Name
+                      type: string
+                    type:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/OpsgenieResponderType'
+                      description: Type of the responder
+                  required:
+                  - name
+                  - type
+                  title: OpsgenieResponder
+                  type: object
+                OpsgenieResponderType:
+                  description: An enumeration.
+                  enum:
+                  - team
+                  - user
+                  - escalation
+                  - schedule
+                  title: OpsgenieResponderType
+                  type: string
+                PagerDutyConfig:
+                  properties:
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    routingKey:
+                      title: Routingkey
+                      type: string
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    severity:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/PagerDutySeverity'
+                      default: info
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: pagerduty
+                      enum:
+                      - pagerduty
+                      title: Type
+                      type: string
+                  required:
+                  - domainName
+                  - routingKey
+                  title: PagerDutyConfig
+                  type: object
+                PagerDutySeverity:
+                  description: An enumeration.
+                  enum:
+                  - info
+                  - error
+                  - warning
+                  - critical
+                  title: PagerDutySeverity
+                  type: string
+                ServiceNowConfig:
+                  properties:
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    host:
+                      title: Host
+                      type: string
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    password:
+                      title: Password
+                      type: string
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: servicenow
+                      enum:
+                      - servicenow
+                      title: Type
+                      type: string
+                    username:
+                      title: Username
+                      type: string
+                  required:
+                  - domainName
+                  - host
+                  - username
+                  - password
+                  title: ServiceNowConfig
+                  type: object
+                SlackConfig:
+                  properties:
+                    description:
+                      title: Description
+                      type: string
+                    digestPeriodInSeconds:
+                      default: 0
+                      title: Digestperiodinseconds
+                      type: integer
+                    domainName:
+                      title: Domainname
+                      type: string
+                    enableRecurring:
+                      default: false
+                      title: Enablerecurring
+                      type: boolean
+                    metadata:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Metadata
+                    mode:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMode'
+                      default: automatic
+                    muteResolvedAlerts:
+                      default: false
+                      title: Muteresolvedalerts
+                      type: boolean
+                    sendHealthyDigest:
+                      default: false
+                      title: Sendhealthydigest
+                      type: boolean
+                    timezone:
+                      default: UTC
+                      title: Timezone
+                      type: string
+                    type:
+                      default: slack
+                      enum:
+                      - slack
+                      title: Type
+                      type: string
+                    webHookUrl:
+                      title: Webhookurl
+                      type: string
+                  required:
+                  - domainName
+                  - webHookUrl
+                  title: SlackConfig
+                  type: object
+                TicketingField:
+                  properties:
+                    allowedValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Allowedvalues
+                      type: array
+                    defaultValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Defaultvalues
+                      type: array
+                    fieldId:
+                      title: Fieldid
+                      type: string
+                    fieldName:
+                      title: Fieldname
+                      type: string
+                    isMultiSelect:
+                      default: false
+                      title: Ismultiselect
+                      type: boolean
+                    isRequired:
+                      default: false
+                      title: Isrequired
+                      type: boolean
+                    value:
+                      default: []
+                      description: The selected value (maybe multiple values if the field is multi-select)
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Value
+                      type: array
+                    valueType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValueType'
+                      default: id
+                  title: TicketingField
+                  type: object
+                TicketingLeaf:
+                  examples:
+                    fields:
+                    - fieldId: '12345'
+                      fieldName: description
+                    - fieldId: '23456'
+                      fieldName: summary
+                    type: leaf
+                  properties:
+                    allowedValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Allowedvalues
+                      type: array
+                    defaultValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Defaultvalues
+                      type: array
+                    fieldId:
+                      title: Fieldid
+                      type: string
+                    fieldName:
+                      title: Fieldname
+                      type: string
+                    fields:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingField'
+                      title: Fields
+                      type: array
+                    isMultiSelect:
+                      default: false
+                      title: Ismultiselect
+                      type: boolean
+                    isRequired:
+                      default: false
+                      title: Isrequired
+                      type: boolean
+                    type:
+                      default: leaf
+                      enum:
+                      - leaf
+                      title: Type
+                      type: string
+                    value:
+                      default: []
+                      description: The selected value (maybe multiple values if the field is multi-select)
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Value
+                      type: array
+                    valueType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValueType'
+                      default: id
+                  title: TicketingLeaf
+                  type: object
+                TicketingNode:
+                  examples:
+                    fieldId: project
+                    fieldName: Project
+                    fieldValues:
+                    - fieldId: issuetype
+                      fieldName: Issue Type
+                      fieldValues:
+                      - fields:
+                        - fieldId: '12345'
+                          fieldName: description
+                        - fieldId: '23456'
+                          fieldName: title
+                        type: leaf
+                        value:
+                        - value: Bug
+                          valueId: '10001'
+                      - fields:
+                        - fieldId: '23456'
+                          fieldName: title
+                        type: leaf
+                        value:
+                        - value: Improvement
+                          valueId: '10002'
+                      type: node
+                      value:
+                      - value: Project 123
+                        valueId: '10000'
+                    - fieldId: issuetype
+                      fieldName: Issue Type
+                      fieldValues:
+                      - fields:
+                        - fieldId: '12345'
+                          fieldName: description
+                        - fieldId: '23456'
+                          fieldName: title
+                        type: leaf
+                        value:
+                        - value: Bug
+                          valueId: '10001'
+                      - fields:
+                        - fieldId: '23456'
+                          fieldName: title
+                        type: leaf
+                        value:
+                        - value: Improvement
+                          valueId: '10002'
+                      type: node
+                      value:
+                      - value: Another Project
+                        valueId: '10001'
+                    type: node
+                  properties:
+                    allowedValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Allowedvalues
+                      type: array
+                    defaultValues:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Defaultvalues
+                      type: array
+                    fieldId:
+                      title: Fieldid
+                      type: string
+                    fieldName:
+                      title: Fieldname
+                      type: string
+                    fieldValues:
+                      default: []
+                      items:
+                        oneOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingNode'
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingLeaf'
+                      title: Fieldvalues
+                      type: array
+                    isMultiSelect:
+                      default: false
+                      title: Ismultiselect
+                      type: boolean
+                    isRequired:
+                      default: false
+                      title: Isrequired
+                      type: boolean
+                    type:
+                      default: node
+                      enum:
+                      - node
+                      title: Type
+                      type: string
+                    value:
+                      default: []
+                      description: The selected value (maybe multiple values if the field is multi-select)
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValue'
+                      title: Value
+                      type: array
+                    valueType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/TicketingValueType'
+                      default: id
+                  title: TicketingNode
+                  type: object
+                TicketingValue:
+                  properties:
+                    value:
+                      title: Value
+                    valueId:
+                      title: Valueid
+                      type: string
+                  title: TicketingValue
+                  type: object
+                TicketingValueType:
+                  description: An enumeration.
+                  enum:
+                  - id
+                  - string
+                  - string_textarea
+                  - number
+                  - user
+                  - date
+                  - datetime
+                  - label
+                  - issuelink
+                  title: TicketingValueType
+                  type: string
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  description: Choose one of the alert channel types.
+                  oneOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/EmailConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/SlackConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/MSTeamsConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/PagerDutyConfig'
+                  - oneOf:
+                    - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/JiraBasicAuthConfig'
+                    - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/JiraTokenAuthConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/ServiceNowConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/OpsgenieConfig'
+                  title: Alert channel type
+                metadata:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelMetadata'
+                status:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelStatus'
+              required:
+              - metadata
+              - config
+              title: AlertChannel
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create a new integration
+      tags:
+      - Integrations
+  /api/{api_version}/ws/{workspace_id}/integrations/{pk}:
+    delete:
+      description: Delete an integration
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the integration
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the integration
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete an integration
+      tags:
+      - Integrations
+    get:
+      description: Retrieve an integration
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the integration
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the integration
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get an integration
+      tags:
+      - Integrations
+    put:
+      description: Update an integration
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the integration
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the integration
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1integrations~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Update an integration
+      tags:
+      - Integrations

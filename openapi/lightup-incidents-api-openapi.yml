@@ -1,0 +1,1612 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Incidents API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Incidents
+paths:
+  /api/v0/ws/{workspace_id}/incidents/:
+    get:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: Filter by the data range when the incident was active, this is the start of the range
+        explode: false
+        in: query
+        name: start_ts
+        required: false
+        schema:
+          description: Filter by the data range when the incident was active, this is the start of the range
+          title: start_ts
+          type: number
+      - description: Filter by the data range when the incident was active, this is the end of the range
+        explode: false
+        in: query
+        name: end_ts
+        required: false
+        schema:
+          description: Filter by the data range when the incident was active, this is the end of the range
+          title: end_ts
+          type: number
+      - description: Filter by the data range when the incident was last updated, this is the start of the range
+        explode: false
+        in: query
+        name: start_updated_ts
+        required: false
+        schema:
+          description: Filter by the data range when the incident was last updated, this is the start of the range
+          title: start_updated_ts
+          type: number
+      - description: Filter by the data range when the incident was last updated, this is the end of the range
+        explode: false
+        in: query
+        name: end_updated_ts
+        required: false
+        schema:
+          description: Filter by the data range when the incident was last updated, this is the end of the range
+          title: end_updated_ts
+          type: number
+      - description: 'Filter by status of incident. Available options: UNVIEWED:1 VIEWED:2 REJECTED:3 SUBMITTED:4 CLOSED:5  '
+        explode: false
+        in: query
+        name: status_list
+        required: false
+        schema:
+          description: 'Filter by status of incident. Available options: UNVIEWED:1 VIEWED:2 REJECTED:3 SUBMITTED:4 CLOSED:5  '
+          items:
+            description: An enumeration.
+            enum:
+            - 1
+            - 2
+            - 3
+            - 4
+            - 5
+            title: IncidentStatus
+            type: integer
+          title: status_list
+          type: array
+      - description: If set, response does not contain metadata.
+        explode: false
+        in: query
+        name: data_only
+        required: false
+        schema:
+          description: If set, response does not contain metadata.
+          title: data_only
+          type: boolean
+      - description: If set, response contains monitor information or source/table/column information
+        explode: false
+        in: query
+        name: with_ref
+        required: false
+        schema:
+          description: If set, response contains monitor information or source/table/column information
+          title: with_ref
+          type: boolean
+      - description: If set, incidents of monitor preview are also returned.
+        explode: false
+        in: query
+        name: include_preview
+        required: false
+        schema:
+          description: If set, incidents of monitor preview are also returned.
+          title: include_preview
+          type: boolean
+      - description: Filter by Metric UUIDs
+        explode: false
+        in: query
+        name: metric_uuids
+        required: false
+        schema:
+          description: Filter by Metric UUIDs
+          items:
+            type: string
+          title: metric_uuids
+          type: array
+      - description: Filter by Monitor UUIDs
+        explode: false
+        in: query
+        name: monitor_uuids
+        required: false
+        schema:
+          description: Filter by Monitor UUIDs
+          items:
+            type: string
+          title: monitor_uuids
+          type: array
+      - description: Filter by Source UUIDs
+        explode: false
+        in: query
+        name: source_uuids
+        required: false
+        schema:
+          description: Filter by Source UUIDs
+          items:
+            type: string
+          title: source_uuids
+          type: array
+      - description: Filter by Table UUIDs
+        explode: false
+        in: query
+        name: table_uuids
+        required: false
+        schema:
+          description: Filter by Table UUIDs
+          items:
+            type: string
+          title: table_uuids
+          type: array
+      - description: Filter by Monitor names
+        explode: false
+        in: query
+        name: names
+        required: false
+        schema:
+          description: Filter by Monitor names
+          items:
+            type: string
+          title: names
+          type: array
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                definitions:
+                  IncidentDirection:
+                    description: An enumeration.
+                    enum:
+                    - 0
+                    - 1
+                    - 2
+                    - 3
+                    title: IncidentDirection
+                    type: integer
+                  IncidentListResponseMetadata:
+                    additionalProperties: false
+                    properties:
+                      accepted:
+                        description: Number of viewed incidents
+                        title: Accepted
+                        type: integer
+                      total:
+                        description: Number of incidents
+                        title: Total
+                        type: integer
+                      unread:
+                        description: Number of unviewed incidents
+                        title: Unread
+                        type: integer
+                    required:
+                    - total
+                    - unread
+                    - accepted
+                    title: IncidentListResponseMetadata
+                    type: object
+                  IncidentStatus:
+                    description: An enumeration.
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 5
+                    title: IncidentStatus
+                    type: integer
+                  IncidentType:
+                    description: An enumeration.
+                    enum:
+                    - anomalyIncident
+                    - eventIncident
+                    title: IncidentType
+                    type: string
+                  IncidentValidation:
+                    properties:
+                      errorCount:
+                        default: 0
+                        description: Number of errors in the validation run.
+                        title: Errorcount
+                        type: integer
+                      lastRunTs:
+                        description: Last timestamp (epoch) of the validation run.
+                        title: Lastrunts
+                        type: number
+                      runStatusMessage:
+                        default: ok
+                        description: Status message of the validation run.
+                        title: Runstatusmessage
+                        type: string
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentValidationStatus'
+                        default: running
+                    title: IncidentValidation
+                    type: object
+                  IncidentValidationStatus:
+                    description: An enumeration.
+                    enum:
+                    - running
+                    - error
+                    - resolved
+                    - unresolved
+                    - canceling
+                    title: IncidentValidationStatus
+                    type: string
+                  LegacyIncident:
+                    properties:
+                      close_ts:
+                        description: Close timestamp (epoch) of incident
+                        title: Close Ts
+                        type: number
+                      creation_ts:
+                        description: Timestamp (epoch) when incident was detected by the system
+                        title: Creation Ts
+                        type: number
+                      direction:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentDirection'
+                        description: 'Which direction the metric deviated from expectations. Available options: NULL:0 UP:1 DOWN:2 BOTH:3 '
+                      end_ts:
+                        description: End timestamp (epoch) of incident
+                        title: End Ts
+                        type: number
+                      filter_uuid:
+                        description: This is UUID of the monitor (incident_type = anomalyIncident) or appropriate table, source, column uuid (incident_type = eventIncident) associated with this incident.
+                        title: Filter Uuid
+                        type: string
+                      id:
+                        description: User friendly ID of incident.
+                        title: Id
+                        type: integer
+                      impact:
+                        description: A number of 1 to 10 indicating the incident severity.
+                        title: Impact
+                        type: number
+                      incident_type:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentType'
+                        description: Indicates whether an anomaly or an event caused the incident.
+                      metadata:
+                        anyOf:
+                        - items:
+                            $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/ProfilerEvent'
+                          type: array
+                        - items:
+                            $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/ProfilerColumnEvent'
+                          type: array
+                        description: List containing metadata about the incident. OPTION 1 is for table event; OPTION 2 is for column event.
+                        title: Metadata
+                      ongoing:
+                        description: True if incident is ongoing
+                        title: Ongoing
+                        type: boolean
+                      reason:
+                        description: Internal string
+                        title: Reason
+                        type: string
+                        writeOnly: true
+                      send_reminder:
+                        default: false
+                        description: True if sending recurring notification needed
+                        title: Send Reminder
+                        type: boolean
+                      slice:
+                        description: Slice associated with incident
+                        title: Slice
+                        type: object
+                      start_ts:
+                        description: Start timestamp (epoch) of incident
+                        title: Start Ts
+                        type: number
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentStatus'
+                        default: 1
+                        description: 'Status of incident. Available options: UNVIEWED:1 VIEWED:2 REJECTED:3 SUBMITTED:4 CLOSED:5 '
+                      updated_ts:
+                        description: Last timestamp (epoch) when incident was updated by the system
+                        title: Updated Ts
+                        type: number
+                      uuid:
+                        description: UUID of the incident
+                        title: Uuid
+                        type: string
+                      validation:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentValidation'
+                        description: Status of incident validation.
+                        title: Validation
+                    required:
+                    - uuid
+                    - incident_type
+                    - filter_uuid
+                    - slice
+                    - start_ts
+                    - end_ts
+                    - ongoing
+                    title: LegacyIncident
+                    type: object
+                  ProfilerColumnEvent:
+                    properties:
+                      columnUuid:
+                        description: UUID of the column.
+                        title: Columnuuid
+                        type: string
+                      eventDetail:
+                        description: This is a dictionary giving more information about the event.
+                        title: Eventdetail
+                        type: object
+                      eventTs:
+                        description: Timestamp (epoch) of the event.
+                        title: Eventts
+                        type: number
+                      eventType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/ProfilerColumnEventType'
+                        description: Type of column event.
+                      recordedTs:
+                        description: Timestamp (epoch) when event was recorded.
+                        title: Recordedts
+                        type: number
+                      sourceUuid:
+                        title: Sourceuuid
+                        type: string
+                      tableUuid:
+                        title: Tableuuid
+                        type: string
+                      type:
+                        default: profilerColumnEvent
+                        enum:
+                        - profilerColumnEvent
+                        title: Type
+                        type: string
+                      uuid:
+                        description: UUID of the profiler column event.
+                        title: Uuid
+                        type: string
+                    required:
+                    - uuid
+                    - eventTs
+                    - recordedTs
+                    - eventType
+                    - eventDetail
+                    title: ProfilerColumnEvent
+                    type: object
+                  ProfilerColumnEventType:
+                    description: An enumeration.
+                    enum:
+                    - columnCardinalityChanged
+                    title: ProfilerColumnEventType
+                    type: string
+                  ProfilerEvent:
+                    properties:
+                      eventDetail:
+                        description: This is a dictionary giving more information about the event.
+                        title: Eventdetail
+                        type: object
+                      eventTs:
+                        description: Timestamp (epoch) of the event.
+                        title: Eventts
+                        type: number
+                      eventType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/ProfilerEventType'
+                        description: Type of the profiler event.
+                      schemaUuid:
+                        description: UUID of the schema.
+                        title: Schemauuid
+                        type: string
+                      sourceUuid:
+                        description: UUID of the datasource.
+                        title: Sourceuuid
+                        type: string
+                      tableUuid:
+                        description: UUID of the table.
+                        title: Tableuuid
+                        type: string
+                      type:
+                        default: profilerEvent
+                        enum:
+                        - profilerEvent
+                        title: Type
+                        type: string
+                      uuid:
+                        description: UUID of the profiler event.
+                        title: Uuid
+                        type: string
+                    required:
+                    - uuid
+                    - eventTs
+                    - sourceUuid
+                    - eventType
+                    - eventDetail
+                    title: ProfilerEvent
+                    type: object
+                  ProfilerEventType:
+                    description: An enumeration.
+                    enum:
+                    - schemaAdded
+                    - schemaDeleted
+                    - schemaRecovery
+                    - tableAdded
+                    - tableUpdated
+                    - tableDeleted
+                    - tableRecovery
+                    - columnAdded
+                    - columnUpdated
+                    - columnDeleted
+                    - columnRecovery
+                    title: ProfilerEventType
+                    type: string
+                properties:
+                  data:
+                    description: List of incidents
+                    items:
+                      $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/LegacyIncident'
+                    title: Data
+                    type: array
+                  metadata:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1/get/responses/200/content/application~1json/schema/definitions/IncidentListResponseMetadata'
+                    description: Metadata associated with incident list
+                    title: Metadata
+                  ref:
+                    description: Contains associated monitor or source/table/column information
+                    title: Ref
+                    type: object
+                required:
+                - data
+                title: IncidentListResponse
+                type: object
+          description: ''
+      summary: Get incident list
+      tags:
+      - Incidents
+  /api/v0/ws/{workspace_id}/incidents/{incident_uuid}:
+    get:
+      description: "\n        Return the detail of a single incident.\n        :param request:\n        :param incident_uuid:\n        :return:\n        "
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident to get.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident to get.
+          title: incident_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                definitions:
+                  IncidentDirection:
+                    description: An enumeration.
+                    enum:
+                    - 0
+                    - 1
+                    - 2
+                    - 3
+                    title: IncidentDirection
+                    type: integer
+                  IncidentStatus:
+                    description: An enumeration.
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                    - 4
+                    - 5
+                    title: IncidentStatus
+                    type: integer
+                  IncidentType:
+                    description: An enumeration.
+                    enum:
+                    - anomalyIncident
+                    - eventIncident
+                    title: IncidentType
+                    type: string
+                  IncidentValidation:
+                    properties:
+                      errorCount:
+                        default: 0
+                        description: Number of errors in the validation run.
+                        title: Errorcount
+                        type: integer
+                      lastRunTs:
+                        description: Last timestamp (epoch) of the validation run.
+                        title: Lastrunts
+                        type: number
+                      runStatusMessage:
+                        default: ok
+                        description: Status message of the validation run.
+                        title: Runstatusmessage
+                        type: string
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/IncidentValidationStatus'
+                        default: running
+                    title: IncidentValidation
+                    type: object
+                  IncidentValidationStatus:
+                    description: An enumeration.
+                    enum:
+                    - running
+                    - error
+                    - resolved
+                    - unresolved
+                    - canceling
+                    title: IncidentValidationStatus
+                    type: string
+                  ProfilerColumnEvent:
+                    properties:
+                      columnUuid:
+                        description: UUID of the column.
+                        title: Columnuuid
+                        type: string
+                      eventDetail:
+                        description: This is a dictionary giving more information about the event.
+                        title: Eventdetail
+                        type: object
+                      eventTs:
+                        description: Timestamp (epoch) of the event.
+                        title: Eventts
+                        type: number
+                      eventType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/ProfilerColumnEventType'
+                        description: Type of column event.
+                      recordedTs:
+                        description: Timestamp (epoch) when event was recorded.
+                        title: Recordedts
+                        type: number
+                      sourceUuid:
+                        title: Sourceuuid
+                        type: string
+                      tableUuid:
+                        title: Tableuuid
+                        type: string
+                      type:
+                        default: profilerColumnEvent
+                        enum:
+                        - profilerColumnEvent
+                        title: Type
+                        type: string
+                      uuid:
+                        description: UUID of the profiler column event.
+                        title: Uuid
+                        type: string
+                    required:
+                    - uuid
+                    - eventTs
+                    - recordedTs
+                    - eventType
+                    - eventDetail
+                    title: ProfilerColumnEvent
+                    type: object
+                  ProfilerColumnEventType:
+                    description: An enumeration.
+                    enum:
+                    - columnCardinalityChanged
+                    title: ProfilerColumnEventType
+                    type: string
+                  ProfilerEvent:
+                    properties:
+                      eventDetail:
+                        description: This is a dictionary giving more information about the event.
+                        title: Eventdetail
+                        type: object
+                      eventTs:
+                        description: Timestamp (epoch) of the event.
+                        title: Eventts
+                        type: number
+                      eventType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/ProfilerEventType'
+                        description: Type of the profiler event.
+                      schemaUuid:
+                        description: UUID of the schema.
+                        title: Schemauuid
+                        type: string
+                      sourceUuid:
+                        description: UUID of the datasource.
+                        title: Sourceuuid
+                        type: string
+                      tableUuid:
+                        description: UUID of the table.
+                        title: Tableuuid
+                        type: string
+                      type:
+                        default: profilerEvent
+                        enum:
+                        - profilerEvent
+                        title: Type
+                        type: string
+                      uuid:
+                        description: UUID of the profiler event.
+                        title: Uuid
+                        type: string
+                    required:
+                    - uuid
+                    - eventTs
+                    - sourceUuid
+                    - eventType
+                    - eventDetail
+                    title: ProfilerEvent
+                    type: object
+                  ProfilerEventType:
+                    description: An enumeration.
+                    enum:
+                    - schemaAdded
+                    - schemaDeleted
+                    - schemaRecovery
+                    - tableAdded
+                    - tableUpdated
+                    - tableDeleted
+                    - tableRecovery
+                    - columnAdded
+                    - columnUpdated
+                    - columnDeleted
+                    - columnRecovery
+                    title: ProfilerEventType
+                    type: string
+                properties:
+                  close_ts:
+                    description: Close timestamp (epoch) of incident
+                    title: Close Ts
+                    type: number
+                  creation_ts:
+                    description: Timestamp (epoch) when incident was detected by the system
+                    title: Creation Ts
+                    type: number
+                  direction:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/IncidentDirection'
+                    description: 'Which direction the metric deviated from expectations. Available options: NULL:0 UP:1 DOWN:2 BOTH:3 '
+                  end_ts:
+                    description: End timestamp (epoch) of incident
+                    title: End Ts
+                    type: number
+                  filter_uuid:
+                    description: This is UUID of the monitor (incident_type = anomalyIncident) or appropriate table, source, column uuid (incident_type = eventIncident) associated with this incident.
+                    title: Filter Uuid
+                    type: string
+                  id:
+                    description: User friendly ID of incident.
+                    title: Id
+                    type: integer
+                  impact:
+                    description: A number of 1 to 10 indicating the incident severity.
+                    title: Impact
+                    type: number
+                  incident_type:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/IncidentType'
+                    description: Indicates whether an anomaly or an event caused the incident.
+                  metadata:
+                    anyOf:
+                    - items:
+                        $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/ProfilerEvent'
+                      type: array
+                    - items:
+                        $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/ProfilerColumnEvent'
+                      type: array
+                    description: List containing metadata about the incident. OPTION 1 is for table event; OPTION 2 is for column event.
+                    title: Metadata
+                  ongoing:
+                    description: True if incident is ongoing
+                    title: Ongoing
+                    type: boolean
+                  reason:
+                    description: Internal string
+                    title: Reason
+                    type: string
+                    writeOnly: true
+                  send_reminder:
+                    default: false
+                    description: True if sending recurring notification needed
+                    title: Send Reminder
+                    type: boolean
+                  slice:
+                    description: Slice associated with incident
+                    title: Slice
+                    type: object
+                  start_ts:
+                    description: Start timestamp (epoch) of incident
+                    title: Start Ts
+                    type: number
+                  status:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/IncidentStatus'
+                    default: 1
+                    description: 'Status of incident. Available options: UNVIEWED:1 VIEWED:2 REJECTED:3 SUBMITTED:4 CLOSED:5 '
+                  updated_ts:
+                    description: Last timestamp (epoch) when incident was updated by the system
+                    title: Updated Ts
+                    type: number
+                  uuid:
+                    description: UUID of the incident
+                    title: Uuid
+                    type: string
+                  validation:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D/get/responses/200/content/application~1json/schema/definitions/IncidentValidation'
+                    description: Status of incident validation.
+                    title: Validation
+                required:
+                - uuid
+                - incident_type
+                - filter_uuid
+                - slice
+                - start_ts
+                - end_ts
+                - ongoing
+                title: LegacyIncident
+                type: object
+          description: ''
+      summary: Get the detail of an incident
+      tags:
+      - Incidents
+  /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments:
+    get:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident to get.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident to get.
+          title: incident_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                definitions:
+                  EmailMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      messageId:
+                        title: Messageid
+                        type: string
+                      type:
+                        default: email
+                        enum:
+                        - email
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: EmailMetadata
+                    type: object
+                  IncidentAlertType:
+                    description: An enumeration.
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                    title: IncidentAlertType
+                    type: integer
+                  IncidentCommentLogType:
+                    description: An enumeration.
+                    enum:
+                    - systemGenerated
+                    - userGenerated
+                    title: IncidentCommentLogType
+                    type: string
+                  IncidentCommentResponse:
+                    properties:
+                      comment:
+                        title: Comment
+                        type: string
+                      createdTs:
+                        description: Timestamp when created
+                        title: Createdts
+                        type: number
+                      creatorId:
+                        description: UUID of the creator of the incident
+                        format: uuid
+                        title: Creatorid
+                        type: string
+                      id:
+                        description: ID of the comment
+                        title: Id
+                        type: integer
+                      incidentId:
+                        description: UUID of the incident
+                        format: uuid
+                        title: Incidentid
+                        type: string
+                      metadata:
+                        anyOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/EmailMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/MSTeamsMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/PagerDutyMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/SlackMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/JiraMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/ServiceNowMetadata'
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/OpsgenieMetadata'
+                        readOnly: true
+                        title: Metadata
+                      ownedBy:
+                        $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/User'
+                      slice:
+                        title: Slice
+                        type: object
+                      type:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentCommentLogType'
+                        default: systemGenerated
+                        description: The comment log was generated by the system or by a user action
+                        readOnly: true
+                      workspaceId:
+                        description: UUID of the workspace
+                        format: uuid
+                        title: Workspaceid
+                        type: string
+                    required:
+                    - incidentId
+                    - workspaceId
+                    - comment
+                    title: IncidentCommentResponse
+                    type: object
+                  JiraMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      ticketName:
+                        title: Ticketname
+                        type: string
+                      ticketUrl:
+                        title: Ticketurl
+                        type: string
+                      type:
+                        default: jira
+                        enum:
+                        - jira
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: JiraMetadata
+                    type: object
+                  MSTeamsMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: msteams
+                        enum:
+                        - msteams
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: MSTeamsMetadata
+                    type: object
+                  OpsgenieMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      requestId:
+                        title: Requestid
+                        type: string
+                      type:
+                        default: opsgenie
+                        enum:
+                        - opsgenie
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: OpsgenieMetadata
+                    type: object
+                  PagerDutyMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: pagerduty
+                        enum:
+                        - pagerduty
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: PagerDutyMetadata
+                    type: object
+                  ServiceNowMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      ticketName:
+                        title: Ticketname
+                        type: string
+                      ticketUrl:
+                        title: Ticketurl
+                        type: string
+                      type:
+                        default: servicenow
+                        enum:
+                        - servicenow
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: ServiceNowMetadata
+                    type: object
+                  SlackMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: slack
+                        enum:
+                        - slack
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: SlackMetadata
+                    type: object
+                  User:
+                    properties:
+                      email:
+                        title: Email
+                        type: string
+                      id:
+                        readOnly: true
+                        title: Id
+                        type: integer
+                      username:
+                        description: Email used for Lightup account
+                        readOnly: true
+                        title: Username
+                        type: string
+                    required:
+                    - email
+                    title: User
+                    type: object
+                properties:
+                  comments:
+                    default: []
+                    description: List of comments associated with the incident
+                    items:
+                      $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/get/responses/200/content/application~1json/schema/definitions/IncidentCommentResponse'
+                    title: Comments
+                    type: array
+                title: IncidentCommentListResponse
+                type: object
+          description: ''
+      summary: Get the comments associated with the incident
+      tags:
+      - Incidents
+    post:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident to get.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident to get.
+          title: incident_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                comment:
+                  title: Comment
+                  type: string
+              required:
+              - comment
+              title: IncidentCommentRequest
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                definitions:
+                  EmailMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      messageId:
+                        title: Messageid
+                        type: string
+                      type:
+                        default: email
+                        enum:
+                        - email
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: EmailMetadata
+                    type: object
+                  IncidentAlertType:
+                    description: An enumeration.
+                    enum:
+                    - 1
+                    - 2
+                    - 3
+                    title: IncidentAlertType
+                    type: integer
+                  IncidentCommentLogType:
+                    description: An enumeration.
+                    enum:
+                    - systemGenerated
+                    - userGenerated
+                    title: IncidentCommentLogType
+                    type: string
+                  JiraMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      ticketName:
+                        title: Ticketname
+                        type: string
+                      ticketUrl:
+                        title: Ticketurl
+                        type: string
+                      type:
+                        default: jira
+                        enum:
+                        - jira
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: JiraMetadata
+                    type: object
+                  MSTeamsMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: msteams
+                        enum:
+                        - msteams
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: MSTeamsMetadata
+                    type: object
+                  OpsgenieMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      requestId:
+                        title: Requestid
+                        type: string
+                      type:
+                        default: opsgenie
+                        enum:
+                        - opsgenie
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: OpsgenieMetadata
+                    type: object
+                  PagerDutyMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: pagerduty
+                        enum:
+                        - pagerduty
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: PagerDutyMetadata
+                    type: object
+                  ServiceNowMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      ticketName:
+                        title: Ticketname
+                        type: string
+                      ticketUrl:
+                        title: Ticketurl
+                        type: string
+                      type:
+                        default: servicenow
+                        enum:
+                        - servicenow
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: ServiceNowMetadata
+                    type: object
+                  SlackMetadata:
+                    additionalProperties: false
+                    properties:
+                      detail:
+                        description: 'The detail of the message posted to the channel (eg.: subject, title, summary)'
+                        title: Detail
+                        type: string
+                      id:
+                        format: uuid
+                        title: Id
+                        type: string
+                      incidentAlertType:
+                        allOf:
+                        - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentAlertType'
+                        default: 1
+                      type:
+                        default: slack
+                        enum:
+                        - slack
+                        title: Type
+                        type: string
+                    required:
+                    - id
+                    title: SlackMetadata
+                    type: object
+                  User:
+                    properties:
+                      email:
+                        title: Email
+                        type: string
+                      id:
+                        readOnly: true
+                        title: Id
+                        type: integer
+                      username:
+                        description: Email used for Lightup account
+                        readOnly: true
+                        title: Username
+                        type: string
+                    required:
+                    - email
+                    title: User
+                    type: object
+                properties:
+                  comment:
+                    title: Comment
+                    type: string
+                  createdTs:
+                    description: Timestamp when created
+                    title: Createdts
+                    type: number
+                  creatorId:
+                    description: UUID of the creator of the incident
+                    format: uuid
+                    title: Creatorid
+                    type: string
+                  id:
+                    description: ID of the comment
+                    title: Id
+                    type: integer
+                  incidentId:
+                    description: UUID of the incident
+                    format: uuid
+                    title: Incidentid
+                    type: string
+                  metadata:
+                    anyOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/EmailMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/MSTeamsMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/PagerDutyMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/SlackMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/JiraMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/ServiceNowMetadata'
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/OpsgenieMetadata'
+                    readOnly: true
+                    title: Metadata
+                  ownedBy:
+                    $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/User'
+                  slice:
+                    title: Slice
+                    type: object
+                  type:
+                    allOf:
+                    - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema/definitions/IncidentCommentLogType'
+                    default: systemGenerated
+                    description: The comment log was generated by the system or by a user action
+                    readOnly: true
+                  workspaceId:
+                    description: UUID of the workspace
+                    format: uuid
+                    title: Workspaceid
+                    type: string
+                required:
+                - incidentId
+                - workspaceId
+                - comment
+                title: IncidentCommentResponse
+                type: object
+          description: ''
+      summary: Create comment associated with the incident
+      tags:
+      - Incidents
+  /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments/{comment_id}:
+    delete:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident.
+          title: incident_uuid
+          type: string
+      - description: ID of the comment.
+        explode: true
+        in: path
+        name: comment_id
+        required: true
+        schema:
+          description: ID of the comment.
+          title: comment_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete the comment associated with the incident
+      tags:
+      - Incidents
+    get:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident.
+          title: incident_uuid
+          type: string
+      - description: ID of the comment.
+        explode: true
+        in: path
+        name: comment_id
+        required: true
+        schema:
+          description: ID of the comment.
+          title: comment_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema'
+          description: ''
+      summary: Get a specific comment associated with the incident
+      tags:
+      - Incidents
+    put:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the incident.
+        explode: true
+        in: path
+        name: incident_uuid
+        required: true
+        schema:
+          description: UUID of the incident.
+          title: incident_uuid
+          type: string
+      - description: ID of the comment.
+        explode: true
+        in: path
+        name: comment_id
+        required: true
+        schema:
+          description: ID of the comment.
+          title: comment_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1incidents~1%7Bincident_uuid%7D~1comments/post/responses/201/content/application~1json/schema'
+          description: ''
+      summary: Update the comment associated with the incident
+      tags:
+      - Incidents

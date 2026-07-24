@@ -1,0 +1,416 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Dashboard chart API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Dashboard chart
+paths:
+  /api/{api_version}/ws/{workspace_id}/dashboard/:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get dashboard chart list
+      tags:
+      - Dashboard chart
+    post:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                DashboardChartMetadata:
+                  properties:
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                    workspaceId:
+                      title: Workspaceid
+                      type: string
+                  required:
+                  - name
+                  - workspaceId
+                  title: DashboardChartMetadata
+                  type: object
+                DashboardFilter:
+                  properties:
+                    type:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/DashboardFilterType'
+                    value:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/StringValues'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/IntValues'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/FloatValues'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/DictValues'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TimeDurationValue'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TimeRangeValue'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TagValues'
+                      title: Value
+                  required:
+                  - type
+                  - value
+                  title: DashboardFilter
+                  type: object
+                DashboardFilterType:
+                  description: An enumeration.
+                  enum:
+                  - datasources
+                  - metrics
+                  - monitors
+                  - metricTypes
+                  - tables
+                  - columns
+                  - validationStatus
+                  - slice
+                  - direction
+                  - status
+                  - severity
+                  - timeDuration
+                  - timeRange
+                  - tags
+                  title: DashboardFilterType
+                  type: string
+                DictValues:
+                  properties:
+                    dictList:
+                      items:
+                        type: object
+                      minItems: 1
+                      title: Dictlist
+                      type: array
+                    type:
+                      default: dictValues
+                      enum:
+                      - dictValues
+                      title: Type
+                      type: string
+                  required:
+                  - dictList
+                  title: DictValues
+                  type: object
+                FloatValues:
+                  properties:
+                    floatList:
+                      items:
+                        type: number
+                      minItems: 1
+                      title: Floatlist
+                      type: array
+                    type:
+                      default: floatValues
+                      enum:
+                      - floatValues
+                      title: Type
+                      type: string
+                  required:
+                  - floatList
+                  title: FloatValues
+                  type: object
+                IntValues:
+                  properties:
+                    intList:
+                      items:
+                        type: integer
+                      minItems: 1
+                      title: Intlist
+                      type: array
+                    type:
+                      default: intValues
+                      enum:
+                      - intValues
+                      title: Type
+                      type: string
+                  required:
+                  - intList
+                  title: IntValues
+                  type: object
+                StringValues:
+                  properties:
+                    strList:
+                      items:
+                        type: string
+                      minItems: 1
+                      title: Strlist
+                      type: array
+                    type:
+                      default: stringValues
+                      enum:
+                      - stringValues
+                      title: Type
+                      type: string
+                  required:
+                  - strList
+                  title: StringValues
+                  type: object
+                TableChartConfig:
+                  properties:
+                    aggregationColumns:
+                      default: []
+                      items:
+                        type: string
+                      title: Aggregationcolumns
+                      type: array
+                    filters:
+                      default: []
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/DashboardFilter'
+                      title: Filters
+                      type: array
+                    groupColumns:
+                      default: []
+                      items:
+                        type: string
+                      title: Groupcolumns
+                      type: array
+                    type:
+                      default: table
+                      enum:
+                      - table
+                      title: Type
+                      type: string
+                  title: TableChartConfig
+                  type: object
+                TagValues:
+                  properties:
+                    tagList:
+                      items:
+                        type: string
+                      minItems: 1
+                      title: Taglist
+                      type: array
+                    type:
+                      enum:
+                      - tagValues
+                      title: Type
+                      type: string
+                  required:
+                  - type
+                  - tagList
+                  title: TagValues
+                  type: object
+                TimeDuration:
+                  properties:
+                    unit:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TimeDurationUnit'
+                    value:
+                      exclusiveMinimum: 0
+                      title: Value
+                      type: integer
+                  required:
+                  - unit
+                  - value
+                  title: TimeDuration
+                  type: object
+                TimeDurationUnit:
+                  description: An enumeration.
+                  enum:
+                  - seconds
+                  - minutes
+                  - hours
+                  - days
+                  - weeks
+                  - months
+                  - years
+                  title: TimeDurationUnit
+                  type: string
+                TimeDurationValue:
+                  properties:
+                    duration:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TimeDuration'
+                      description: (now - time) duration
+                      title: Duration
+                    type:
+                      default: timeDurationValue
+                      enum:
+                      - timeDurationValue
+                      title: Type
+                      type: string
+                  required:
+                  - duration
+                  title: TimeDurationValue
+                  type: object
+                TimeRange:
+                  properties:
+                    endTime:
+                      title: Endtime
+                      type: number
+                    startTime:
+                      title: Starttime
+                      type: number
+                  required:
+                  - startTime
+                  - endTime
+                  title: TimeRange
+                  type: object
+                TimeRangeValue:
+                  properties:
+                    range:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TimeRange'
+                    type:
+                      default: timeRangeValue
+                      enum:
+                      - timeRangeValue
+                      title: Type
+                      type: string
+                  required:
+                  - range
+                  title: TimeRangeValue
+                  type: object
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/TableChartConfig'
+                metadata:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema/definitions/DashboardChartMetadata'
+                type:
+                  default: dashboardChart
+                  enum:
+                  - dashboardChart
+                  title: Type
+                  type: string
+              required:
+              - metadata
+              - config
+              title: DashboardChart
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1dashboard~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create new dashboard chart
+      tags:
+      - Dashboard chart

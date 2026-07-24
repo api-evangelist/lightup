@@ -1,0 +1,598 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Workspaces API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Workspaces
+paths:
+  /api/{api_version}/workspaces/:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: Set value to 'true' to include deactivated workspaces in the response. Omit this parameter to exclude
+        explode: true
+        in: query
+        name: include_deactivated
+        required: false
+        schema:
+          default: 'false'
+          description: Set value to 'true' to include deactivated workspaces in the response. Omit this parameter to exclude
+          enum:
+          - 'true'
+          - 'false'
+          title: include_deactivated
+          type: string
+      - description: Set value to 'true' to exclude workspaces where requestor isn't a member. Has no effect unless requestor is an App Admin, as all other users always only see workspaces where they are members.
+        explode: true
+        in: query
+        name: member_only
+        required: false
+        schema:
+          default: 'false'
+          description: Set value to 'true' to exclude workspaces where requestor isn't a member. Has no effect unless requestor is an App Admin, as all other users always only see workspaces where they are members.
+          enum:
+          - 'true'
+          - 'false'
+          title: member_only
+          type: string
+      - description: Filter workspaces by name. Case sensitive. Exact match.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Filter workspaces by name. Case sensitive. Exact match.
+          title: name
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                definitions:
+                  EnableWorkflows:
+                    properties:
+                      metricApproval:
+                        default: false
+                        description: To enable metric approval workflow
+                        title: Metricapproval
+                        type: boolean
+                      monitorApproval:
+                        default: false
+                        description: To enable monitor approval workflow
+                        title: Monitorapproval
+                        type: boolean
+                    title: EnableWorkflows
+                    type: object
+                  WorkspaceConfiguration:
+                    properties:
+                      enableApprovals:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/get/responses/200/content/application~1json/schema/definitions/EnableWorkflows'
+                        default:
+                          metricApproval: false
+                          monitorApproval: false
+                        description: Approval workflow configuration
+                        title: Enableapprovals
+                      saveCompleteFullCompareDiffSamples:
+                        default: false
+                        description: To save complete full compare diff samples
+                        title: Savecompletefullcomparediffsamples
+                        type: boolean
+                    title: WorkspaceConfiguration
+                    type: object
+                  WorkspaceIconId:
+                    description: An enumeration.
+                    enum:
+                    - I1
+                    - I2
+                    - I3
+                    - I4
+                    - I5
+                    - I6
+                    - I7
+                    - I8
+                    - I9
+                    title: WorkspaceIconId
+                    type: string
+                  WorkspaceSchema:
+                    properties:
+                      active:
+                        default: true
+                        description: If false, the workspace is inaccessible via the GUI and will be deleted by the system within a week.
+                        readOnly: true
+                        title: Active
+                        type: boolean
+                      config:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/get/responses/200/content/application~1json/schema/definitions/WorkspaceConfiguration'
+                      created_at:
+                        readOnly: true
+                        title: Created At
+                        type: integer
+                      description:
+                        default: ''
+                        title: Description
+                        type: string
+                      icon_id:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/get/responses/200/content/application~1json/schema/definitions/WorkspaceIconId'
+                        default: I1
+                        description: Corresponds to the icon used to label the workspace in the Lightup App.
+                      name:
+                        description: Up to 256 characters
+                        title: Name
+                        type: string
+                      uuid:
+                        description: Note that the URL for the workspace includes the uuid.
+                        readOnly: true
+                        title: Uuid
+                        type: string
+                    required:
+                    - name
+                    title: WorkspaceSchema
+                    type: object
+                properties:
+                  data:
+                    items:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/get/responses/200/content/application~1json/schema/definitions/WorkspaceSchema'
+                    title: Data
+                    type: array
+                required:
+                - data
+                title: WorkspacesListResponse
+                type: object
+          description: ''
+      summary: Get existing workspaces
+      tags:
+      - Workspaces
+    post:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                EnableWorkflows:
+                  properties:
+                    metricApproval:
+                      default: false
+                      description: To enable metric approval workflow
+                      title: Metricapproval
+                      type: boolean
+                    monitorApproval:
+                      default: false
+                      description: To enable monitor approval workflow
+                      title: Monitorapproval
+                      type: boolean
+                  title: EnableWorkflows
+                  type: object
+                WorkspaceConfiguration:
+                  properties:
+                    enableApprovals:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/requestBody/content/application~1json/schema/definitions/EnableWorkflows'
+                      default:
+                        metricApproval: false
+                        monitorApproval: false
+                      description: Approval workflow configuration
+                      title: Enableapprovals
+                    saveCompleteFullCompareDiffSamples:
+                      default: false
+                      description: To save complete full compare diff samples
+                      title: Savecompletefullcomparediffsamples
+                      type: boolean
+                  title: WorkspaceConfiguration
+                  type: object
+                WorkspaceIconId:
+                  description: An enumeration.
+                  enum:
+                  - I1
+                  - I2
+                  - I3
+                  - I4
+                  - I5
+                  - I6
+                  - I7
+                  - I8
+                  - I9
+                  title: WorkspaceIconId
+                  type: string
+              properties:
+                active:
+                  default: true
+                  description: If false, the workspace is inaccessible via the GUI and will be deleted by the system within a week.
+                  readOnly: true
+                  title: Active
+                  type: boolean
+                config:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/requestBody/content/application~1json/schema/definitions/WorkspaceConfiguration'
+                created_at:
+                  readOnly: true
+                  title: Created At
+                  type: integer
+                description:
+                  default: ''
+                  title: Description
+                  type: string
+                icon_id:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/requestBody/content/application~1json/schema/definitions/WorkspaceIconId'
+                  default: I1
+                  description: Corresponds to the icon used to label the workspace in the Lightup App.
+                name:
+                  description: Up to 256 characters
+                  title: Name
+                  type: string
+                uuid:
+                  description: Note that the URL for the workspace includes the uuid.
+                  readOnly: true
+                  title: Uuid
+                  type: string
+              required:
+              - name
+              title: WorkspaceSchema
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                definitions:
+                  EnableWorkflows:
+                    properties:
+                      metricApproval:
+                        default: false
+                        description: To enable metric approval workflow
+                        title: Metricapproval
+                        type: boolean
+                      monitorApproval:
+                        default: false
+                        description: To enable monitor approval workflow
+                        title: Monitorapproval
+                        type: boolean
+                    title: EnableWorkflows
+                    type: object
+                  WorkspaceConfiguration:
+                    properties:
+                      enableApprovals:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/responses/201/content/application~1json/schema/definitions/EnableWorkflows'
+                        default:
+                          metricApproval: false
+                          monitorApproval: false
+                        description: Approval workflow configuration
+                        title: Enableapprovals
+                      saveCompleteFullCompareDiffSamples:
+                        default: false
+                        description: To save complete full compare diff samples
+                        title: Savecompletefullcomparediffsamples
+                        type: boolean
+                    title: WorkspaceConfiguration
+                    type: object
+                  WorkspaceIconId:
+                    description: An enumeration.
+                    enum:
+                    - I1
+                    - I2
+                    - I3
+                    - I4
+                    - I5
+                    - I6
+                    - I7
+                    - I8
+                    - I9
+                    title: WorkspaceIconId
+                    type: string
+                  WorkspaceSchema:
+                    properties:
+                      active:
+                        default: true
+                        description: If false, the workspace is inaccessible via the GUI and will be deleted by the system within a week.
+                        readOnly: true
+                        title: Active
+                        type: boolean
+                      config:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/responses/201/content/application~1json/schema/definitions/WorkspaceConfiguration'
+                      created_at:
+                        readOnly: true
+                        title: Created At
+                        type: integer
+                      description:
+                        default: ''
+                        title: Description
+                        type: string
+                      icon_id:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/responses/201/content/application~1json/schema/definitions/WorkspaceIconId'
+                        default: I1
+                        description: Corresponds to the icon used to label the workspace in the Lightup App.
+                      name:
+                        description: Up to 256 characters
+                        title: Name
+                        type: string
+                      uuid:
+                        description: Note that the URL for the workspace includes the uuid.
+                        readOnly: true
+                        title: Uuid
+                        type: string
+                    required:
+                    - name
+                    title: WorkspaceSchema
+                    type: object
+                properties:
+                  data:
+                    $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/responses/201/content/application~1json/schema/definitions/WorkspaceSchema'
+                required:
+                - data
+                title: WorkspacesResponse
+                type: object
+          description: ''
+      summary: Create new workspace
+      tags:
+      - Workspaces
+  /api/{api_version}/workspaces/{workspace_id}:
+    delete:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Deactivate existing workspace
+      tags:
+      - Workspaces
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/get/responses/200/content/application~1json/schema'
+          description: ''
+      summary: Get existing workspace
+      tags:
+      - Workspaces
+    patch:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                EnableWorkflows:
+                  properties:
+                    metricApproval:
+                      default: false
+                      description: To enable metric approval workflow
+                      title: Metricapproval
+                      type: boolean
+                    monitorApproval:
+                      default: false
+                      description: To enable monitor approval workflow
+                      title: Monitorapproval
+                      type: boolean
+                  title: EnableWorkflows
+                  type: object
+                WorkspaceConfiguration:
+                  properties:
+                    enableApprovals:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1%7Bworkspace_id%7D/patch/requestBody/content/application~1json/schema/definitions/EnableWorkflows'
+                      default:
+                        metricApproval: false
+                        monitorApproval: false
+                      description: Approval workflow configuration
+                      title: Enableapprovals
+                    saveCompleteFullCompareDiffSamples:
+                      default: false
+                      description: To save complete full compare diff samples
+                      title: Savecompletefullcomparediffsamples
+                      type: boolean
+                  title: WorkspaceConfiguration
+                  type: object
+                WorkspaceIconId:
+                  description: An enumeration.
+                  enum:
+                  - I1
+                  - I2
+                  - I3
+                  - I4
+                  - I5
+                  - I6
+                  - I7
+                  - I8
+                  - I9
+                  title: WorkspaceIconId
+                  type: string
+              properties:
+                config:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1%7Bworkspace_id%7D/patch/requestBody/content/application~1json/schema/definitions/WorkspaceConfiguration'
+                  description: Workspace configuration
+                  title: Config
+                description:
+                  title: Description
+                  type: string
+                icon_id:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1%7Bworkspace_id%7D/patch/requestBody/content/application~1json/schema/definitions/WorkspaceIconId'
+                name:
+                  description: Up to 256 characters
+                  title: Name
+                  type: string
+                uuid:
+                  description: Note that the URL for the workspace includes the uuid.
+                  readOnly: true
+                  title: Uuid
+                  type: string
+              required:
+              - name
+              title: PatchWorkspaceRequest
+              type: object
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1workspaces~1/post/responses/201/content/application~1json/schema'
+          description: ''
+      summary: Modify existing workspace
+      tags:
+      - Workspaces

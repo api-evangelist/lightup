@@ -1,0 +1,532 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Users API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Users
+paths:
+  /api/v0/users/:
+    get:
+      description: ''
+      parameters:
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get existing application users
+      tags:
+      - Users
+    post:
+      description: ''
+      parameters:
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                AppRole:
+                  description: An enumeration.
+                  enum:
+                  - app_admin
+                  - app_editor
+                  - app_viewer
+                  title: AppRole
+                  type: string
+                WorkspaceMembershipSchema:
+                  additionalProperties: false
+                  properties:
+                    name:
+                      description: Workspace name
+                      title: Name
+                      type: string
+                    role:
+                      description: Workspace role. Sets user permissions within the workspace. See also app role.
+                      enum:
+                      - admin
+                      - editor
+                      - viewer
+                      - observer
+                      title: Role
+                      type: string
+                    uuid:
+                      description: Unique ID, visible in the workspace URL.
+                      title: Uuid
+                      type: string
+                  required:
+                  - uuid
+                  - name
+                  - role
+                  title: WorkspaceMembershipSchema
+                  type: object
+              properties:
+                app_role:
+                  allOf:
+                  - $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema/definitions/AppRole'
+                  default: app_editor
+                  description: Application-level role. Sets permissions for app-level actions. See also workspace role
+                created_at:
+                  readOnly: true
+                  title: Created At
+                  type: integer
+                creation_source:
+                  default: none
+                  readOnly: true
+                  title: Creation Source
+                  type: string
+                email:
+                  title: Email
+                  type: string
+                expiration_timestamp:
+                  readOnly: true
+                  title: Expiration Timestamp
+                  type: number
+                external_id:
+                  default: ''
+                  readOnly: true
+                  title: External Id
+                  type: string
+                first_name:
+                  default: ''
+                  readOnly: true
+                  title: First Name
+                  type: string
+                id:
+                  readOnly: true
+                  title: Id
+                  type: integer
+                last_login:
+                  readOnly: true
+                  title: Last Login
+                  type: integer
+                last_name:
+                  default: ''
+                  readOnly: true
+                  title: Last Name
+                  type: string
+                username:
+                  description: Email used for Lightup account
+                  readOnly: true
+                  title: Username
+                  type: string
+                workspaces:
+                  default: []
+                  description: Workspaces the user can access, including their workspace role in each.
+                  items:
+                    $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema/definitions/WorkspaceMembershipSchema'
+                  readOnly: true
+                  title: Workspaces
+                  type: array
+              required:
+              - email
+              title: AppUserSchema
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Invite user to the application
+      tags:
+      - Users
+  /api/v0/users/{user_id}:
+    delete:
+      description: ''
+      parameters:
+      - description: ID of the user
+        explode: true
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: ID of the user
+          title: user_id
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete user from the application
+      tags:
+      - Users
+    get:
+      description: ''
+      parameters:
+      - description: ID of the user
+        explode: true
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: ID of the user
+          title: user_id
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get user data
+      tags:
+      - Users
+    patch:
+      description: ''
+      parameters:
+      - description: ID of the user
+        explode: true
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: ID of the user
+          title: user_id
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              definitions:
+                AppRole:
+                  description: An enumeration.
+                  enum:
+                  - app_admin
+                  - app_editor
+                  - app_viewer
+                  title: AppRole
+                  type: string
+                CreationSource:
+                  description: An enumeration.
+                  enum:
+                  - none
+                  - cloud_trial
+                  - invited
+                  - dpc
+                  title: CreationSource
+                  type: string
+              properties:
+                creationSource:
+                  allOf:
+                  - $ref: '#/paths/~1api~1v0~1users~1%7Buser_id%7D/patch/requestBody/content/application~1json/schema/definitions/CreationSource'
+                  description: The source indicates where the user is created from
+                expirationTimestamp:
+                  description: Timestamp to set when the user registration will expire or `null` to remove the expiration
+                  title: Expirationtimestamp
+                  type: number
+                role:
+                  allOf:
+                  - $ref: '#/paths/~1api~1v0~1users~1%7Buser_id%7D/patch/requestBody/content/application~1json/schema/definitions/AppRole'
+                  description: App role to assign to user
+              title: PatchAppUserRequest
+              type: object
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1users~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Change user's application role and/or expiration time
+      tags:
+      - Users
+  /api/v0/ws/{workspace_id}/users/:
+    get:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1users~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get existing workspace users
+      tags:
+      - Users
+    post:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                WorkspaceRole:
+                  description: An enumeration.
+                  enum:
+                  - admin
+                  - editor
+                  - viewer
+                  - observer
+                  title: WorkspaceRole
+                  type: string
+              properties:
+                created_at:
+                  readOnly: true
+                  title: Created At
+                  type: integer
+                creation_source:
+                  default: none
+                  readOnly: true
+                  title: Creation Source
+                  type: string
+                email:
+                  title: Email
+                  type: string
+                expiration_timestamp:
+                  readOnly: true
+                  title: Expiration Timestamp
+                  type: number
+                external_id:
+                  default: ''
+                  readOnly: true
+                  title: External Id
+                  type: string
+                first_name:
+                  default: ''
+                  readOnly: true
+                  title: First Name
+                  type: string
+                id:
+                  readOnly: true
+                  title: Id
+                  type: integer
+                last_login:
+                  readOnly: true
+                  title: Last Login
+                  type: integer
+                last_name:
+                  default: ''
+                  readOnly: true
+                  title: Last Name
+                  type: string
+                role:
+                  allOf:
+                  - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1users~1/post/requestBody/content/application~1json/schema/definitions/WorkspaceRole'
+                  default: viewer
+                  description: Workspace-level role
+                username:
+                  description: Email used for Lightup account
+                  readOnly: true
+                  title: Username
+                  type: string
+              required:
+              - email
+              title: WorkspaceUserSchema
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1users~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Add user to the workspace
+      tags:
+      - Users
+  /api/v0/ws/{workspace_id}/users/{user_id}:
+    delete:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ID of the user
+        explode: true
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: ID of the user
+          title: user_id
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Remove user from the workspace
+      tags:
+      - Users
+    patch:
+      description: ''
+      parameters:
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ID of the user
+        explode: true
+        in: path
+        name: user_id
+        required: true
+        schema:
+          description: ID of the user
+          title: user_id
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              definitions:
+                WorkspaceRole:
+                  description: An enumeration.
+                  enum:
+                  - admin
+                  - editor
+                  - viewer
+                  - observer
+                  title: WorkspaceRole
+                  type: string
+              properties:
+                role:
+                  allOf:
+                  - $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1users~1%7Buser_id%7D/patch/requestBody/content/application~1json/schema/definitions/WorkspaceRole'
+                  description: Workspace role to assign to user
+              required:
+              - role
+              title: PatchWorkspaceUserRequest
+              type: object
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1v0~1ws~1%7Bworkspace_id%7D~1users~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Change user's workspace role
+      tags:
+      - Users

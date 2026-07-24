@@ -1,0 +1,1741 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Datasources API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Datasources
+paths:
+  /api/{api_version}/ws/{workspace_id}/sources/:
+    get:
+      description: List all datasources
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: Return sources from offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          description: Return sources from offset
+          title: offset
+          type: integer
+      - description: Return only limit number of datasources
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          description: Return only limit number of datasources
+          title: limit
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get datasource list
+      tags:
+      - Datasources
+    post:
+      description: Create a new datasource
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                AlertChannelConfig:
+                  properties:
+                    channelId:
+                      description: UUID of the alert channel
+                      title: Channelid
+                      type: string
+                  required:
+                  - channelId
+                  title: AlertChannelConfig
+                  type: object
+                AlertConfig:
+                  properties:
+                    channels:
+                      default: []
+                      description: List of alertchannels
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/AlertChannelConfig'
+                      title: Channels
+                      type: array
+                    isMuted:
+                      default: true
+                      description: If true, no notifications are sent on this channel
+                      title: Ismuted
+                      type: boolean
+                    mutingSchedules:
+                      default: []
+                      description: If schedule is set, no notifications are sent on this channel during schedule
+                      items:
+                        type: string
+                      title: Mutingschedules
+                      type: array
+                  title: AlertConfig
+                  type: object
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                AthenaConfig:
+                  examples:
+                  - awsAccessKeyId: ABC123
+                    awsSecretAccessKey: '********'
+                    regionName: us-west-2
+                    s3StagingDir: s3://abc/123
+                    type: athena
+                  properties:
+                    awsAccessKeyId:
+                      title: Awsaccesskeyid
+                      type: string
+                    awsSecretAccessKey:
+                      title: Awssecretaccesskey
+                      type: string
+                    regionName:
+                      title: Regionname
+                      type: string
+                    s3StagingDir:
+                      title: S3Stagingdir
+                      type: string
+                    type:
+                      default: athena
+                      enum:
+                      - athena
+                      title: Type
+                      type: string
+                    workgroup:
+                      title: Workgroup
+                      type: string
+                  required:
+                  - regionName
+                  - s3StagingDir
+                  - awsAccessKeyId
+                  - awsSecretAccessKey
+                  title: AthenaConfig
+                  type: object
+                AzureBlobStorageConfig:
+                  examples:
+                  - accountKey: '******'
+                    accountName: lightup_test
+                  properties:
+                    accountKey:
+                      title: Accountkey
+                      type: string
+                    accountName:
+                      title: Accountname
+                      type: string
+                    type:
+                      default: azureblobstorage
+                      enum:
+                      - azureblobstorage
+                      title: Type
+                      type: string
+                  required:
+                  - accountName
+                  title: AzureBlobStorageConfig
+                  type: object
+                BigqueryConfig:
+                  examples:
+                  - serviceAccountInfo: '********'
+                    type: bigquery
+                  properties:
+                    serviceAccountInfo:
+                      title: Serviceaccountinfo
+                      type: string
+                    type:
+                      default: bigquery
+                      enum:
+                      - bigquery
+                      title: Type
+                      type: string
+                  required:
+                  - serviceAccountInfo
+                  title: BigqueryConfig
+                  type: object
+                DatabricksConfig:
+                  examples:
+                  - apiPort: 15001
+                    clusterId: cluster-id
+                    dbfsPrefix: dbfs://vendors/lightupdata/
+                    httpPath: sql/protocolv1/o/xxx/xxx
+                    token: '********'
+                    type: databricks
+                    workspaceUrl: example.com
+                  properties:
+                    apiPort:
+                      default: 15001
+                      title: Apiport
+                      type: integer
+                    catalog:
+                      description: Specify catalog to scan
+                      title: Catalog
+                      type: string
+                    clusterId:
+                      title: Clusterid
+                      type: string
+                    dbfsPrefix:
+                      title: Dbfsprefix
+                      type: string
+                    httpPath:
+                      title: Httppath
+                      type: string
+                    token:
+                      title: Token
+                      type: string
+                    type:
+                      default: databricks
+                      enum:
+                      - databricks
+                      title: Type
+                      type: string
+                    workspaceUrl:
+                      title: Workspaceurl
+                      type: string
+                  required:
+                  - token
+                  - workspaceUrl
+                  - httpPath
+                  title: DatabricksConfig
+                  type: object
+                DremioConfig:
+                  examples:
+                  - dbname: Default
+                    disable_certificate_verification: false
+                    host: 35.226.49.39
+                    password: '********'
+                    port: 32010
+                    type: dremio
+                    use_encryption: false
+                    user: root
+                  properties:
+                    disableCertificateVerification:
+                      default: false
+                      title: Disablecertificateverification
+                      type: boolean
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 32010
+                      title: Port
+                      type: integer
+                    type:
+                      default: dremio
+                      enum:
+                      - dremio
+                      title: Type
+                      type: string
+                    useEncryption:
+                      default: true
+                      title: Useencryption
+                      type: boolean
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - password
+                  title: DremioConfig
+                  type: object
+                EventRuleConfig:
+                  properties:
+                    alertConfig:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/AlertConfig'
+                      default:
+                        channels: []
+                        isMuted: true
+                        mutingSchedules: []
+                      title: Alertconfig
+                    enabled:
+                      default: false
+                      title: Enabled
+                      type: boolean
+                  title: EventRuleConfig
+                  type: object
+                GreenplumConfig:
+                  examples:
+                  - dbname: cdb
+                    host: cdb.demo.lightup.ai
+                    password: '********'
+                    port: 5432
+                    type: greenplum
+                    user: postgres
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 5432
+                      title: Port
+                      type: integer
+                    type:
+                      default: greenplum
+                      enum:
+                      - greenplum
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: GreenplumConfig
+                  type: object
+                HanaConfig:
+                  examples:
+                  - host: dd10a0a2-52b4-464a-9983-71cc47a718dd.hana.trial-us10.hanacloud.ondemand.com
+                    password: '********'
+                    port: 443
+                    sslValidateCertificate: false
+                    type: hana
+                    user: DBADMIN
+                  properties:
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 443
+                      title: Port
+                      type: integer
+                    sslValidateCertificate:
+                      default: true
+                      description: Whether to allow validation of the host's certificate
+                      title: Sslvalidatecertificate
+                      type: boolean
+                    type:
+                      default: hana
+                      enum:
+                      - hana
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - password
+                  title: HanaConfig
+                  type: object
+                HiveAuthType:
+                  description: An enumeration.
+                  enum:
+                  - noAuth
+                  - kerberos
+                  - ldap
+                  title: HiveAuthType
+                  type: string
+                HiveConfig:
+                  examples:
+                  - authType: kerberos
+                    host: localhost
+                    krbAuthenticationServerDomains:
+                    - .ad-domain.internal
+                    krbAuthenticationServerHostname: active-directory-service.ad-domain.internal
+                    krbAuthenticationServerIp: 1.2.3.4
+                    krbAuthenticationServerRealm: AD-REALM
+                    krbHiveDomains:
+                    - .hive-domain.internal
+                    krbHiveHostname: hive-cluster-m.hive-domain.internal
+                    krbHiveRealm: HIVE-REALM
+                    krbKeytabFileBase64String: QUJDREUxMjM0NWFiY2RlCg==
+                    krbPrincipal: test-user@AD-REALM
+                    port: 11000
+                    type: hive
+                  properties:
+                    authType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/HiveAuthType'
+                      default: noAuth
+                    host:
+                      title: Host
+                      type: string
+                    krbAuthenticationServerDomains:
+                      items:
+                        type: string
+                      title: Krbauthenticationserverdomains
+                      type: array
+                    krbAuthenticationServerHostname:
+                      title: Krbauthenticationserverhostname
+                      type: string
+                    krbAuthenticationServerIp:
+                      title: Krbauthenticationserverip
+                      type: string
+                    krbAuthenticationServerRealm:
+                      title: Krbauthenticationserverrealm
+                      type: string
+                    krbHiveDomains:
+                      items:
+                        type: string
+                      title: Krbhivedomains
+                      type: array
+                    krbHiveHostname:
+                      title: Krbhivehostname
+                      type: string
+                    krbHiveRealm:
+                      title: Krbhiverealm
+                      type: string
+                    krbKeytabFileBase64String:
+                      title: Krbkeytabfilebase64String
+                      type: string
+                    krbPrincipal:
+                      title: Krbprincipal
+                      type: string
+                    password:
+                      default: default
+                      title: Password
+                      type: string
+                    port:
+                      default: 10000
+                      title: Port
+                      type: integer
+                    serviceName:
+                      title: Servicename
+                      type: string
+                    type:
+                      default: hive
+                      enum:
+                      - hive
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  title: HiveConfig
+                  type: object
+                IncortaConfig:
+                  examples:
+                  - dbname: Default
+                    host: partner-lightup.sqli.cloud4.incorta.com
+                    password: '********'
+                    port: 6526
+                    type: incorta
+                    user: yi@lightup.ai
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 6526
+                      title: Port
+                      type: integer
+                    type:
+                      default: incorta
+                      enum:
+                      - incorta
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: IncortaConfig
+                  type: object
+                MicrosoftSqlConfig:
+                  examples:
+                  - dbname: cdb
+                    host: demo.microsoftsql.lightup.ai
+                    password: '********'
+                    port: 1433
+                    type: microsoftsql
+                    user: test
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 1433
+                      title: Port
+                      type: integer
+                    type:
+                      default: microsoftsql
+                      enum:
+                      - microsoftsql
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: MicrosoftSqlConfig
+                  type: object
+                MySqlConfig:
+                  examples:
+                  - dbname: cdb
+                    host: demo.mysql.lightup.ai
+                    password: '********'
+                    port: 3306
+                    type: mysql
+                    user: test
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 3306
+                      title: Port
+                      type: integer
+                    type:
+                      default: mysql
+                      enum:
+                      - mysql
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: MySqlConfig
+                  type: object
+                OracleConfig:
+                  examples:
+                  - dbname: database
+                    host: oracledb.lightup.ai
+                    password: '********'
+                    port: 1521
+                    type: oracle
+                    user: test
+                  - host: oracledb.lightup.ai
+                    password: '********'
+                    port: 1521
+                    service: serviceSoon
+                    type: oracle
+                    user: test
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 1521
+                      title: Port
+                      type: integer
+                    service:
+                      title: Service
+                      type: string
+                    type:
+                      default: oracle
+                      enum:
+                      - oracle
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - password
+                  title: OracleConfig
+                  type: object
+                PostgresConfig:
+                  examples:
+                  - dbname: cdb
+                    host: cdb.demo.lightup.ai
+                    password: '********'
+                    port: 5432
+                    type: postgres
+                    user: postgres
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 5432
+                      title: Port
+                      type: integer
+                    type:
+                      default: postgres
+                      enum:
+                      - postgres
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: PostgresConfig
+                  type: object
+                ProfilerEventConfig:
+                  properties:
+                    enabled:
+                      default: false
+                      description: Enable generation of event
+                      title: Enabled
+                      type: boolean
+                    monitoring:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/EventRuleConfig'
+                      default:
+                        alertConfig:
+                          channels: []
+                          isMuted: true
+                          mutingSchedules: []
+                        enabled: false
+                      description: Enable generation of incidents and notifications
+                      title: Monitoring
+                  title: ProfilerEventConfig
+                  type: object
+                RedshiftConfig:
+                  examples:
+                  - dbname: lightup
+                    host: lightup-data.chtomx8ijp4o.us-west-2.redshift.amazonaws.com
+                    password: '********'
+                    port: 5439
+                    type: redshift
+                    user: awsuser
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 5439
+                      title: Port
+                      type: integer
+                    serverless:
+                      default: false
+                      title: Serverless
+                      type: boolean
+                    type:
+                      default: redshift
+                      enum:
+                      - redshift
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: RedshiftConfig
+                  type: object
+                S3BucketConfig:
+                  examples:
+                  - awsAccessKeyId: XPTO123
+                    awsSecretAccessKey: '********'
+                    regionName: us-west-2
+                  properties:
+                    awsAccessKeyId:
+                      title: Awsaccesskeyid
+                      type: string
+                    awsSecretAccessKey:
+                      title: Awssecretaccesskey
+                      type: string
+                    regionName:
+                      title: Regionname
+                      type: string
+                    type:
+                      default: s3bucket
+                      enum:
+                      - s3bucket
+                      title: Type
+                      type: string
+                  title: S3BucketConfig
+                  type: object
+                SnowflakeConfig:
+                  examples:
+                  - dbname: demo_db
+                    host: nna54042
+                    password: '********'
+                    type: snowflake
+                    user: lightup_test
+                  properties:
+                    dbname:
+                      title: Dbname
+                      type: string
+                    host:
+                      title: Host
+                      type: string
+                    password:
+                      title: Password
+                      type: string
+                    role:
+                      title: Role
+                      type: string
+                    type:
+                      default: snowflake
+                      enum:
+                      - snowflake
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                    warehouse:
+                      title: Warehouse
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - dbname
+                  - password
+                  title: SnowflakeConfig
+                  type: object
+                SourceConfig:
+                  properties:
+                    alationDatasourceId:
+                      description: Configured Alation datasource id
+                      exclusiveMinimum: 0
+                      title: Alationdatasourceid
+                      type: integer
+                    atlanDatasourceId:
+                      description: Configured Atlan datasource guid
+                      title: Atlandatasourceid
+                      type: string
+                    connection:
+                      description: Connection parameters for the datasource
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/AthenaConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/BigqueryConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/DatabricksConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/DremioConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/HanaConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/HiveConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/IncortaConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/MicrosoftSqlConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/MySqlConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/OracleConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/PostgresConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/RedshiftConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SnowflakeConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/TeradataConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/GreenplumConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/AzureBlobStorageConfig'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/S3BucketConfig'
+                      title: Connection
+                    governance:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceQueryGovernance'
+                      default:
+                        allowPreviewsWhenPaused: false
+                        allowRawDataSamples: true
+                        allowRecordStorage: true
+                        allowScheduleUuids: []
+                        cacheFailingRecordsCount: false
+                        denyScheduleUuids: []
+                        indexedTimestampColumnsOnly: false
+                        maxBackfillDurationInSeconds: 63244800
+                        maxCategoricalDistinctCount: 50000
+                        maxCategoricalDistinctPercent: 50
+                        maxQueryDurationInSeconds: null
+                        maxQueryPeriodInSeconds: null
+                        maxQueryRetries: 3
+                        saveCompleteFullCompareDiffSamples: false
+                      title: Governance
+                    isLive:
+                      default: true
+                      description: Pause the datasource to avoid any data access, it will overwrite query governance policy
+                      title: Islive
+                      type: boolean
+                    pollingInterval:
+                      default: 300
+                      description: Frequency at which the metric collector and profiler will run
+                      maximum: 3600
+                      minimum: 60
+                      title: Pollinginterval
+                      type: integer
+                    profiler:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceProfilerConfig'
+                      default:
+                        activateSchemas: false
+                        enabled: true
+                        forceScan: false
+                        scanInterval: 3600
+                        schemaListChange:
+                          enabled: false
+                          monitoring:
+                            alertConfig:
+                              channels: []
+                              isMuted: true
+                              mutingSchedules: []
+                            enabled: false
+                      title: Profiler
+                  required:
+                  - connection
+                  title: SourceConfig
+                  type: object
+                SourceMetadata:
+                  properties:
+                    idSerial:
+                      title: Idserial
+                      type: integer
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    tags:
+                      default: []
+                      examples:
+                      - - tag_1
+                        - tag_2
+                      items:
+                        maxLength: 90
+                        type: string
+                      title: Tags
+                      type: array
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                    workspaceId:
+                      title: Workspaceid
+                      type: string
+                  required:
+                  - name
+                  - workspaceId
+                  title: SourceMetadata
+                  type: object
+                SourceProfilerConfig:
+                  properties:
+                    activateSchemas:
+                      default: false
+                      description: set to True to activate schemas by default. This could cause additional load on the datasource
+                      readOnly: true
+                      title: Activateschemas
+                      type: boolean
+                    enabled:
+                      title: Enabled
+                      type: boolean
+                    forceScan:
+                      default: false
+                      description: set to True to force scanning of data assets bypassing scan interval restrictions
+                      title: Forcescan
+                      type: boolean
+                    scanInterval:
+                      default: 3600
+                      description: interval between 2 consecutive data asset scans
+                      maximum: 604800
+                      minimum: 60
+                      title: Scaninterval
+                      type: integer
+                    schemaListChange:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/ProfilerEventConfig'
+                      default:
+                        enabled: false
+                        monitoring:
+                          alertConfig:
+                            channels: []
+                            isMuted: true
+                            mutingSchedules: []
+                          enabled: false
+                      title: Schemalistchange
+                  required:
+                  - enabled
+                  title: SourceProfilerConfig
+                  type: object
+                SourceQueryGovernance:
+                  properties:
+                    allowPreviewsWhenPaused:
+                      default: false
+                      description: Allow interactive queries (e.g. metric previews, failing records of incident) even if datasource is paused
+                      title: Allowpreviewswhenpaused
+                      type: boolean
+                    allowRawDataSamples:
+                      default: true
+                      description: Allow raw data samples to be shown on the UI
+                      title: Allowrawdatasamples
+                      type: boolean
+                    allowRecordStorage:
+                      default: true
+                      description: Allow storage of data records for incidents
+                      title: Allowrecordstorage
+                      type: boolean
+                    allowScheduleUuids:
+                      default: []
+                      description: The list of allow schedule UUIDs, empty list means no limit
+                      items:
+                        type: string
+                      title: Allowscheduleuuids
+                      type: array
+                    cacheFailingRecordsCount:
+                      default: false
+                      description: Allow failing records count to be fetched and cached automatically
+                      title: Cachefailingrecordscount
+                      type: boolean
+                    denyScheduleUuids:
+                      default: []
+                      description: The list of deny schedule UUIDs, empty list means no limit
+                      items:
+                        type: string
+                      title: Denyscheduleuuids
+                      type: array
+                    indexedTimestampColumnsOnly:
+                      default: false
+                      description: If set, do not allow configuration of metrics which don't use an indexed timestamp column.
+                      title: Indexedtimestampcolumnsonly
+                      type: boolean
+                    maxBackfillDurationInSeconds:
+                      default: 63244800
+                      description: Maximum backfill duration for metrics
+                      maximum: 158112000
+                      minimum: 1209600
+                      title: Maxbackfilldurationinseconds
+                      type: integer
+                    maxCategoricalDistinctCount:
+                      default: 50000
+                      description: Allow categorical distributions to run if number of distinct values is below this value
+                      maximum: 75000
+                      minimum: 100
+                      title: Maxcategoricaldistinctcount
+                      type: integer
+                    maxCategoricalDistinctPercent:
+                      default: 50
+                      description: Allow categorical distributions to run if percentage of distinct values is below this value. This is only used if number of distinct values is greater than 100
+                      exclusiveMaximum: 70
+                      exclusiveMinimum: 0
+                      title: Maxcategoricaldistinctpercent
+                      type: number
+                    maxQueryDurationInSeconds:
+                      description: The timeout duration for any query after which the query will be canceled.
+                      title: Maxquerydurationinseconds
+                      type: integer
+                    maxQueryPeriodInSeconds:
+                      description: The maximum query period that can be used for previewing a metric
+                      title: Maxqueryperiodinseconds
+                      type: integer
+                    maxQueryRetries:
+                      default: 3
+                      description: The maximum number of continuous retries for a failing metric after which the metric will be paused.
+                      title: Maxqueryretries
+                      type: integer
+                    saveCompleteFullCompareDiffSamples:
+                      default: false
+                      description: To save complete full compare diff samples
+                      title: Savecompletefullcomparediffsamples
+                      type: boolean
+                  title: SourceQueryGovernance
+                  type: object
+                SourceScannedStatus:
+                  description: An enumeration.
+                  enum:
+                  - success
+                  - failed
+                  - userPaused
+                  - schedulePaused
+                  title: SourceScannedStatus
+                  type: string
+                SourceStatus:
+                  properties:
+                    configUpdatedTs:
+                      description: Timestamp when updated
+                      title: Configupdatedts
+                      type: number
+                    createdTs:
+                      description: Timestamp when created
+                      title: Createdts
+                      type: number
+                    lastScannedFailedReason:
+                      title: Lastscannedfailedreason
+                      type: string
+                    lastScannedStatus:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceScannedStatus'
+                    lastScannedTs:
+                      description: Timestamp when last scanned by profiler
+                      title: Lastscannedts
+                      type: number
+                    scanErrorCount:
+                      default: 0
+                      description: Number of scan errors
+                      title: Scanerrorcount
+                      type: integer
+                  title: SourceStatus
+                  type: object
+                TeradataConfig:
+                  examples:
+                  - host: 34.27.210.45
+                    password: '********'
+                    port: 1025
+                    type: teradata
+                    user: dbc
+                  properties:
+                    host:
+                      title: Host
+                      type: string
+                    includeDatabases:
+                      default: true
+                      title: Includedatabases
+                      type: boolean
+                    includeUsers:
+                      default: false
+                      title: Includeusers
+                      type: boolean
+                    logMech:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/TeradataLogMech'
+                      default: database
+                    password:
+                      title: Password
+                      type: string
+                    port:
+                      default: 1025
+                      title: Port
+                      type: integer
+                    type:
+                      default: teradata
+                      enum:
+                      - teradata
+                      title: Type
+                      type: string
+                    user:
+                      title: User
+                      type: string
+                  required:
+                  - host
+                  - user
+                  - password
+                  title: TeradataConfig
+                  type: object
+                TeradataLogMech:
+                  description: An enumeration.
+                  enum:
+                  - database
+                  - ldap
+                  title: TeradataLogMech
+                  type: string
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+              example:
+                apiVersion: v1
+                config:
+                  connection:
+                    awsAccessKeyId: ABC123
+                    awsSecretAccessKey: '********'
+                    regionName: us-west-2
+                    s3StagingDir: s3://abc/123
+                    type: athena
+                metadata:
+                  name: Athena DemoDB
+                  ownedBy:
+                    email: abc@example.com
+                    id: 1
+                    username: ABC
+                  tags:
+                  - color
+                  - value
+                  updatedBy:
+                    email: xyz@example.com
+                    id: 2
+                    username: XYZ
+                  uuid: 435bc80e-9835-45c7-ade6-39f990d83fa6
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: source
+              examples:
+              - apiVersion: v1
+                config:
+                  connection:
+                    awsAccessKeyId: ABC123
+                    awsSecretAccessKey: '********'
+                    regionName: us-west-2
+                    s3StagingDir: s3://abc/123
+                    type: athena
+                metadata:
+                  name: Athena DemoDB
+                  ownedBy:
+                    email: abc@example.com
+                    id: 1
+                    username: ABC
+                  tags:
+                  - color
+                  - value
+                  updatedBy:
+                    email: xyz@example.com
+                    id: 2
+                    username: XYZ
+                  uuid: 435bc80e-9835-45c7-ade6-39f990d83fa6
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: source
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceConfig'
+                  description: Config of the datasource
+                  title: Config
+                metadata:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceMetadata'
+                  description: Metadata of the datasource
+                  title: Metadata
+                status:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema/definitions/SourceStatus'
+                  default:
+                    configUpdatedTs: null
+                    createdTs: null
+                    lastScannedFailedReason: null
+                    lastScannedStatus: null
+                    lastScannedTs: null
+                    scanErrorCount: 0
+                  readOnly: true
+                  title: Status
+                type:
+                  default: source
+                  enum:
+                  - source
+                  title: Type
+                  type: string
+              required:
+              - metadata
+              - config
+              title: Datasource
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create datasource
+      tags:
+      - Datasources
+  /api/{api_version}/ws/{workspace_id}/sources/{pk}/trigger:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: pk
+          type: string
+      - description: Trigger UUID to get
+        explode: false
+        in: query
+        name: triggerUuid
+        required: false
+        schema:
+          description: Trigger UUID to get
+          title: triggerUuid
+          type: string
+      - description: User defined ID to get
+        explode: false
+        in: query
+        name: userDefinedId
+        required: false
+        schema:
+          description: User defined ID to get
+          title: userDefinedId
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                additionalProperties: false
+                definitions:
+                  TriggerMetricStatus:
+                    additionalProperties: false
+                    properties:
+                      incidentsCount:
+                        description: The number of incidents from this metric (sum from all underlying monitors) since trigger request time to GET call time
+                        title: Incidentscount
+                        type: integer
+                      metricUuid:
+                        description: the UUID of the metric to trigger.
+                        title: Metricuuid
+                        type: string
+                      monitorStatuses:
+                        default: []
+                        description: The detailed status for each monitor
+                        items:
+                          $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerMonitorStatus'
+                        title: Monitorstatuses
+                        type: array
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerRunStatus'
+                        description: The metric status. Metric’s status only reflects the status for the metric itself. It doesn’t reflect any monitor status of monitors associated with that metric. For example, if a metric has been processed up-to-date but its monitors are still being processed, the metric’s status would be COMPLETED (instead of PENDING), and its monitors’ statuses would be PENDING.
+                      summary:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerSummary'
+                        description: The summary of the metric
+                        title: Summary
+                    required:
+                    - metricUuid
+                    title: TriggerMetricStatus
+                    type: object
+                  TriggerMonitorStatus:
+                    additionalProperties: false
+                    properties:
+                      incidentsCount:
+                        description: The number of incidents from this monitor since trigger request time to GET call time
+                        title: Incidentscount
+                        type: integer
+                      monitorUuid:
+                        description: the UUID of the monitor to the metric associated with a trigger.
+                        title: Monitoruuid
+                        type: string
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerRunStatus'
+                        description: The monitor status
+                    required:
+                    - monitorUuid
+                    title: TriggerMonitorStatus
+                    type: object
+                  TriggerRunStatus:
+                    description: An enumeration.
+                    enum:
+                    - completed
+                    - paused
+                    - pending
+                    title: TriggerRunStatus
+                    type: string
+                  TriggerStatus:
+                    additionalProperties: false
+                    properties:
+                      incidentsCount:
+                        description: The number of incidents for this trigger (sum from all underlying metrics) since trigger request time to GET call time
+                        title: Incidentscount
+                        type: integer
+                      metricStatuses:
+                        default: []
+                        description: The detailed status for each metric.
+                        items:
+                          $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerMetricStatus'
+                        title: Metricstatuses
+                        type: array
+                      status:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerRunStatus'
+                        description: The trigger overall status. If any metric/monitor associated with this trigger is paused, the status is paused; otherwise, if any metric/monitor is pending, the status is pending; finally, all metrics/monitors are completed processing, the status is completed.
+                      summary:
+                        allOf:
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerSummary'
+                        description: The summary of the trigger
+                        title: Summary
+                    title: TriggerStatus
+                    type: object
+                  TriggerSummary:
+                    additionalProperties: false
+                    properties:
+                      numMonitorsFailed:
+                        description: the number of monitors failed
+                        title: Nummonitorsfailed
+                        type: integer
+                      numMonitorsPassed:
+                        description: the number of monitors passed
+                        title: Nummonitorspassed
+                        type: integer
+                      numMonitorsPaused:
+                        description: the number of monitors paused
+                        title: Nummonitorspaused
+                        type: integer
+                      numMonitorsPending:
+                        description: the number of monitors pending
+                        title: Nummonitorspending
+                        type: integer
+                    title: TriggerSummary
+                    type: object
+                properties:
+                  config:
+                    default: {}
+                    description: The original request content
+                    title: Config
+                    type: object
+                  metricUuids:
+                    description: Add the UUID of each metric to trigger.
+                    items:
+                      type: string
+                    title: Metric UUIDs
+                    type: array
+                  tableUuids:
+                    description: Add the UUID of each table to trigger. This triggers all trigger metrics for the table.
+                    items:
+                      type: string
+                    title: Table UUIDs
+                    type: array
+                  triggerStatus:
+                    allOf:
+                    - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema/definitions/TriggerStatus'
+                    description: The trigger detailed status
+                    title: Triggerstatus
+                  triggerUuid:
+                    description: Trigger UUID generated by Lightup
+                    title: Triggeruuid
+                    type: string
+                  userDefinedId:
+                    description: User defined ID to identify a trigger
+                    title: Userdefinedid
+                    type: string
+                required:
+                - triggerUuid
+                title: CollectionTriggerResponse
+                type: object
+          description: ''
+      summary: Get details about a specific trigger
+      tags:
+      - Datasources
+    post:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: false
+              properties:
+                metricUuids:
+                  description: Add the UUID of each metric to trigger.
+                  items:
+                    type: string
+                  title: Metric UUIDs
+                  type: array
+                tableUuids:
+                  description: Add the UUID of each table to trigger. This triggers all trigger metrics for the table.
+                  items:
+                    type: string
+                  title: Table UUIDs
+                  type: array
+                userDefinedId:
+                  description: User defined ID to identify a trigger
+                  title: Userdefinedid
+                  type: string
+              title: CollectionTriggerRequest
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1%7Bpk%7D~1trigger/get/responses/200/content/application~1json/schema'
+          description: ''
+      summary: Trigger metric collection
+      tags:
+      - Datasources
+  /api/{api_version}/ws/{workspace_id}/sources/{source_uuid}:
+    delete:
+      description: Delete a datasource
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: source_uuid
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: source_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete datasource
+      tags:
+      - Datasources
+    get:
+      description: Retrieve a datasource
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: source_uuid
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: source_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get datasource
+      tags:
+      - Datasources
+    put:
+      description: Update a datasource
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: source_uuid
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: source_uuid
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1sources~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Update datasource
+      tags:
+      - Datasources

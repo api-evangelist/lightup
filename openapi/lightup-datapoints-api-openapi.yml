@@ -1,0 +1,141 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Datapoints API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Datapoints
+paths:
+  /api/{api_version}/ws/{workspace_id}/metrics/{metric_uuid}/datapoints:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: ''
+        explode: true
+        in: path
+        name: metric_uuid
+        required: true
+        schema:
+          title: metric_uuid
+          type: string
+      - description: Start timestamp of range
+        explode: true
+        in: query
+        name: start_ts
+        required: false
+        schema:
+          description: Start timestamp of range
+          title: start_ts
+          type: number
+      - description: End timestamp of range
+        explode: true
+        in: query
+        name: end_ts
+        required: false
+        schema:
+          description: End timestamp of range
+          title: end_ts
+          type: number
+      - description: Slice to filter query by
+        explode: true
+        in: query
+        name: slice
+        required: false
+        schema:
+          description: Slice to filter query by
+          title: slice
+          type: object
+      - description: Start recorded timestamp of range
+        explode: true
+        in: query
+        name: start_recorded_ts
+        required: false
+        schema:
+          description: Start recorded timestamp of range
+          title: start_recorded_ts
+          type: number
+      - description: End recorded timestamp of range
+        explode: true
+        in: query
+        name: end_recorded_ts
+        required: false
+        schema:
+          description: End recorded timestamp of range
+          title: end_recorded_ts
+          type: number
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  properties:
+                    eventTs:
+                      description: Time associated with the datapoint
+                      title: Event timestamp
+                      type: number
+                    metricUuid:
+                      description: Metric UUID for the datapoint
+                      title: Metric UUID
+                      type: string
+                    recordedTs:
+                      description: Time when metric was computed
+                      title: Recorded timestamp
+                      type: number
+                    slice:
+                      description: Slice of metric if present
+                      title: Slice
+                      type: object
+                    value:
+                      description: Metric value
+                      title: Value
+                      type: number
+                  required:
+                  - eventTs
+                  - slice
+                  - recordedTs
+                  title: MetricDatapoint
+                  type: object
+                type: array
+          description: ''
+      summary: Get datapoints for metric
+      tags:
+      - Datapoints

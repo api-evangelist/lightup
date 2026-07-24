@@ -1,0 +1,2485 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Metrics API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Metrics
+paths:
+  /api/{api_version}/ws/{workspace_id}/metrics/:
+    get:
+      description: List all metrics based on query parameters
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: Filter by type of metric
+        explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - auto
+            - custom
+            title: MetricCreationType
+            type: string
+          description: Filter by type of metric
+          title: type
+      - description: Filter by name of the metric
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          description: Filter by name of the metric
+          title: name
+          type: string
+      - description: Filter by whether metric is live or not
+        explode: true
+        in: query
+        name: is_live
+        required: false
+        schema:
+          description: Filter by whether metric is live or not
+          title: is_live
+          type: boolean
+      - description: Filter by list of source uuids
+        explode: true
+        in: query
+        name: source_uuids
+        required: false
+        schema:
+          description: Filter by list of source uuids
+          items:
+            type: string
+          title: source_uuids
+          type: array
+      - description: Filter by schema_uuid
+        explode: true
+        in: query
+        name: schema_uuid
+        required: false
+        schema:
+          description: Filter by schema_uuid
+          title: schema_uuid
+          type: string
+      - description: Filter by list of table uuids
+        explode: true
+        in: query
+        name: table_uuids
+        required: false
+        schema:
+          description: Filter by list of table uuids
+          items:
+            type: string
+          title: table_uuids
+          type: array
+      - description: Filter by list of column uuids
+        explode: true
+        in: query
+        name: column_uuids
+        required: false
+        schema:
+          description: Filter by list of column uuids
+          items:
+            type: string
+          title: column_uuids
+          type: array
+      - description: Filter by list of monitor uuids
+        explode: true
+        in: query
+        name: monitor_uuids
+        required: false
+        schema:
+          description: Filter by list of monitor uuids
+          items:
+            type: string
+          title: monitor_uuids
+          type: array
+      - description: Filter by list of metric uuids
+        explode: true
+        in: query
+        name: metric_uuids
+        required: false
+        schema:
+          description: Filter by list of metric uuids
+          items:
+            type: string
+          title: metric_uuids
+          type: array
+      - description: Return metrics from offset
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          description: Return metrics from offset
+          title: offset
+          type: integer
+      - description: Return only limit number of metrics
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          description: Return only limit number of metrics
+          title: limit
+          type: integer
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get metrics list
+      tags:
+      - Metrics
+    post:
+      description: Create a new metric
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                AggregateCompareTable:
+                  properties:
+                    sourceUuid:
+                      description: UUID of the datasource
+                      title: Sourceuuid
+                      type: string
+                    table:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                      description: Table associated with the metrics to compare
+                      title: Table
+                  required:
+                  - sourceUuid
+                  - table
+                  title: AggregateCompareTable
+                  type: object
+                AggregationCompareMetricConfig:
+                  description: 'Aggregate metric comparison
+
+                    This object is used to configure metrics that compare other metrics. This allows
+
+                    the user to be able to validate that metrics across 2 tables or datasources haven''t
+
+                    deviated.'
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: This field is set by the system based on the metrics configured. All metrics should have the same aggregation window
+                      readOnly: true
+                    backfillDuration:
+                      description: Backfill duration in seconds
+                      minimum: 0
+                      title: Backfillduration
+                      type: integer
+                    collectionMode:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionCustomScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionTriggered'
+                      default:
+                        type: scheduled
+                      title: Collectionmode
+                    compares:
+                      description: Map of metrics to compare
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricMapping'
+                      minItems: 1
+                      title: Compares
+                      type: array
+                    configType:
+                      default: aggregationCompareMetricConfig
+                      enum:
+                      - aggregationCompareMetricConfig
+                      title: Configtype
+                      type: string
+                    dimension:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DimensionType'
+                      description: User classification of metric dimension. System has defaults based on type of metric
+                    failingRecordsSql:
+                      description: sql for retrieving failing records associated with an incident on this metric
+                      title: Failingrecordssql
+                      type: string
+                    isLive:
+                      default: true
+                      description: start or resume collecting metric if isLive
+                      title: Islive
+                      type: boolean
+                    missingValueFilling:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MissingValueFilling'
+                      description: 'missing value filling on this metric '
+                    queryTimezone:
+                      default: UTC
+                      description: This field is set by the system
+                      readOnly: true
+                      title: Querytimezone
+                      type: string
+                    relatedMetrics:
+                      default: []
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 10
+                      minItems: 0
+                      title: Relatedmetrics
+                      type: array
+                    seasonality:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Seasonality'
+                      default:
+                        customSchedules: null
+                        periodInSeconds: 0
+                        seasonInSeconds: 0
+                      description: Seasonality defaults to no seasonality for this metric type. It cannot be overridden
+                      readOnly: true
+                      title: Seasonality
+                    sourceTable:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregateCompareTable'
+                      description: Source table for metrics to compare
+                      title: Sourcetable
+                    sources:
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 1
+                      minItems: 1
+                      title: Sources
+                      type: array
+                    synchronizationDelay:
+                      default: 3600
+                      description: The evaluation delay when the table is considered materialized and ready for evaluation
+                      maximum: 63244800
+                      minimum: 0
+                      title: Synchronizationdelay
+                      type: integer
+                    targetTable:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregateCompareTable'
+                      description: Target table for metrics to compare
+                      title: Targettable
+                  required:
+                  - sources
+                  - sourceTable
+                  - targetTable
+                  - compares
+                  title: AggregationCompareMetricConfig
+                  type: object
+                AggregationWindow:
+                  description: An enumeration.
+                  enum:
+                  - 'null'
+                  - second
+                  - minute
+                  - hour
+                  - day
+                  - week
+                  - month
+                  - quarter
+                  - year
+                  - 5min
+                  - 10min
+                  - 15min
+                  title: AggregationWindow
+                  type: string
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                ApproverNote:
+                  properties:
+                    note:
+                      description: Note from approver
+                      title: Note
+                      type: string
+                    noteAt:
+                      description: Timestamp of note
+                      title: Noteat
+                      type: number
+                  required:
+                  - note
+                  - noteAt
+                  title: ApproverNote
+                  type: object
+                ApproverNotes:
+                  properties:
+                    notes:
+                      description: Notes from approver
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ApproverNote'
+                      title: Notes
+                      type: array
+                  required:
+                  - notes
+                  title: ApproverNotes
+                  type: object
+                AverageAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: avg
+                      enum:
+                      - avg
+                      title: Type
+                      type: string
+                  title: AverageAggregation
+                  type: object
+                ByteCountAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: byteCount
+                      enum:
+                      - byteCount
+                      title: Type
+                      type: string
+                  title: ByteCountAggregation
+                  type: object
+                CategoricalDistributionAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: categoricalDistribution
+                      enum:
+                      - categoricalDistribution
+                      title: Type
+                      type: string
+                  title: CategoricalDistributionAggregation
+                  type: object
+                CategoryActivityAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: categoryActivity
+                      enum:
+                      - categoryActivity
+                      title: Type
+                      type: string
+                  title: CategoryActivityAggregation
+                  type: object
+                CollectionCustomScheduled:
+                  properties:
+                    crontabExpression:
+                      description: Crontab expression to define the collection schedule of the metrics
+                      title: Crontabexpression
+                      type: string
+                    timezone:
+                      default: UTC
+                      description: Timezone of the custom schedule
+                      title: Timezone
+                      type: string
+                    type:
+                      default: customScheduled
+                      enum:
+                      - customScheduled
+                      title: Type
+                      type: string
+                  required:
+                  - crontabExpression
+                  title: CollectionCustomScheduled
+                  type: object
+                CollectionScheduled:
+                  properties:
+                    type:
+                      default: scheduled
+                      enum:
+                      - scheduled
+                      title: Type
+                      type: string
+                  title: CollectionScheduled
+                  type: object
+                CollectionTriggered:
+                  properties:
+                    type:
+                      default: triggered
+                      enum:
+                      - triggered
+                      title: Type
+                      type: string
+                  title: CollectionTriggered
+                  type: object
+                CollectionWindow:
+                  description: An enumeration.
+                  enum:
+                  - partial
+                  - complete
+                  title: CollectionWindow
+                  type: string
+                Column:
+                  properties:
+                    columnName:
+                      description: Name of the column
+                      title: Columnname
+                      type: string
+                    columnUuid:
+                      description: UUID for the column. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Columnuuid
+                      type: string
+                    type:
+                      default: column
+                      enum:
+                      - column
+                      title: Type
+                      type: string
+                  required:
+                  - columnName
+                  title: Column
+                  type: object
+                ColumnActivityAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: columnActivity
+                      enum:
+                      - columnActivity
+                      title: Type
+                      type: string
+                  title: ColumnActivityAggregation
+                  type: object
+                ColumnMissingValueType:
+                  description: An enumeration.
+                  enum:
+                  - 'null'
+                  - zero
+                  - nan
+                  title: ColumnMissingValueType
+                  type: string
+                ConditionType:
+                  description: An enumeration.
+                  enum:
+                  - equal
+                  - notEqual
+                  - 'null'
+                  - notNull
+                  - isUnique
+                  - in
+                  - notIn
+                  - inColumn
+                  - notInColumn
+                  - isIncreasing
+                  - isDecreasing
+                  - lessThan
+                  - lessEqualThan
+                  - greaterThan
+                  - greaterEqualThan
+                  - lengthEqual
+                  - lengthGreaterThan
+                  - lengthLessThan
+                  - lengthGreaterEqualThan
+                  - lengthLessEqualThan
+                  - containString
+                  - notContainString
+                  - matchPattern
+                  - notMatchPattern
+                  - matchPatternCaseInsensitive
+                  - notMatchPatternCaseInsensitive
+                  - matchRegex
+                  - notMatchRegex
+                  title: ConditionType
+                  type: string
+                ConformityCountAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    conditions:
+                      description: List of conditions to check
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountCondition'
+                      minItems: 1
+                      title: Conditions
+                      type: array
+                    type:
+                      default: conformityCount
+                      enum:
+                      - conformityCount
+                      title: Type
+                      type: string
+                  required:
+                  - conditions
+                  title: ConformityCountAggregation
+                  type: object
+                CountAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: count
+                      enum:
+                      - count
+                      title: Type
+                      type: string
+                  title: CountAggregation
+                  type: object
+                CountCondition:
+                  properties:
+                    type:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ConditionType'
+                    values:
+                      default: []
+                      items:
+                        anyOf:
+                        - type: integer
+                        - type: number
+                        - type: string
+                        - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TargetColumn'
+                      title: Values
+                      type: array
+                  required:
+                  - type
+                  title: CountCondition
+                  type: object
+                CountUniqueAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: countUnique
+                      enum:
+                      - countUnique
+                      title: Type
+                      type: string
+                  title: CountUniqueAggregation
+                  type: object
+                CustomSql:
+                  examples:
+                  - aggregationWindow: day
+                    sql: select date_trunc('second', timestamp) as ts, value as value from lightup_test_all_filters.robustrollingstones_v1 where timestamp > {start_ts} and timestamp <= {end_ts}
+                    type: customSql
+                  properties:
+                    aggregationWindow:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                    columnName:
+                      title: Columnname
+                      type: string
+                    columnUuid:
+                      title: Columnuuid
+                      type: string
+                    schemaName:
+                      title: Schemaname
+                      type: string
+                    schemaUuid:
+                      title: Schemauuid
+                      type: string
+                    sql:
+                      title: Sql
+                      type: string
+                    tableName:
+                      title: Tablename
+                      type: string
+                    tableUuid:
+                      title: Tableuuid
+                      type: string
+                    type:
+                      default: customSql
+                      enum:
+                      - customSql
+                      title: Type
+                      type: string
+                  required:
+                  - sql
+                  title: CustomSql
+                  type: object
+                DataAsset:
+                  properties:
+                    schemaName:
+                      description: Schema name associated with the table
+                      title: Schemaname
+                      type: string
+                    schemaUuid:
+                      description: Schema UUID associated with the schema. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Schemauuid
+                      type: string
+                    tableName:
+                      description: Name of the table
+                      title: Tablename
+                      type: string
+                    tableUuid:
+                      description: Table UUID associated with the table. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Tableuuid
+                      type: string
+                    type:
+                      default: dataAsset
+                      enum:
+                      - dataAsset
+                      title: Type
+                      type: string
+                  title: DataAsset
+                  type: object
+                DataDelayAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: dataDelay
+                      enum:
+                      - dataDelay
+                      title: Type
+                      type: string
+                  title: DataDelayAggregation
+                  type: object
+                DimensionType:
+                  description: An enumeration.
+                  enum:
+                  - timeliness
+                  - completeness
+                  - accuracy
+                  - custom
+                  title: DimensionType
+                  type: string
+                DraftMetadata:
+                  properties:
+                    approvedAt:
+                      description: Timestamp of approval
+                      title: Approvedat
+                      type: number
+                    approvedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User who approved the draft, id and username
+                      title: Approvedby
+                    approverNotes:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ApproverNotes'
+                      description: Notes from approver
+                      title: Approvernotes
+                    description:
+                      description: Description of the draft
+                      maxLength: 2000
+                      title: Description
+                      type: string
+                    name:
+                      description: Draft name
+                      maxLength: 400
+                      minLength: 1
+                      title: Name
+                      type: string
+                    notificationChannelUuids:
+                      description: Notification channel uuids
+                      items:
+                        type: string
+                      title: Notificationchanneluuids
+                      type: array
+                    parentMetricUuid:
+                      description: Draft's parent metric uuid
+                      title: Parentmetricuuid
+                      type: string
+                    parentStreamIdSerial:
+                      description: Draft's parent metric idSerial
+                      title: Parentstreamidserial
+                      type: integer
+                    state:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DraftState'
+                      description: The state of the draft
+                    type:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DraftType'
+                      description: Type of draft
+                  title: DraftMetadata
+                  type: object
+                DraftState:
+                  description: An enumeration.
+                  enum:
+                  - draft
+                  - approvalPending
+                  - approved
+                  - rejected
+                  title: DraftState
+                  type: string
+                DraftType:
+                  description: An enumeration.
+                  enum:
+                  - new
+                  - update
+                  - delete
+                  title: DraftType
+                  type: string
+                FullCompareApproximateRowSize:
+                  additionalProperties: false
+                  properties:
+                    source:
+                      description: Approximate row rize of the source table of a full compare metric
+                      title: Source
+                      type: integer
+                    sourceCapturedTs:
+                      description: Timestamp when source row size was captured.
+                      title: Sourcecapturedts
+                      type: number
+                    target:
+                      description: Approximate row rize of the target table of a full compare metric
+                      title: Target
+                      type: integer
+                    targetCapturedTs:
+                      description: Timestamp when target row size was captured.
+                      title: Targetcapturedts
+                      type: number
+                  title: FullCompareApproximateRowSize
+                  type: object
+                FullCompareMetricConfig:
+                  description: 'Row by row comparison metric.
+
+                    This object is used to configure metrics that compare two tables. This allows
+
+                    the user to be able to validate the differences between tables.'
+                  properties:
+                    aggregationWindow:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                    collectionMode:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionCustomScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionTriggered'
+                      default:
+                        type: scheduled
+                      title: Collectionmode
+                    collectionWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionWindow'
+                      default: complete
+                    configType:
+                      default: fullCompareMetricConfig
+                      enum:
+                      - fullCompareMetricConfig
+                      title: Configtype
+                      type: string
+                    dimension:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DimensionType'
+                      description: User classification of metric dimension. System has defaults based on type of metric
+                    failingRecordsSql:
+                      description: sql for retrieving failing records associated with an incident on this metric
+                      title: Failingrecordssql
+                      type: string
+                    isLive:
+                      default: true
+                      description: start or resume collecting metric if isLive
+                      title: Islive
+                      type: boolean
+                    missingValueFilling:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MissingValueFilling'
+                      description: 'missing value filling on this metric '
+                    pollingDelay:
+                      description: Time after window boundary when to schedule collection
+                      title: Polling delay
+                      type: integer
+                    pollingTimezone:
+                      description: The timezone for full table metric polling to align with
+                      title: Polling timezone
+                      type: string
+                    pollingWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: The interval for full table metric polling
+                      title: Polling interval
+                    queryScope:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/QueryScope'
+                      default: timeRange
+                    relatedMetrics:
+                      default: []
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 10
+                      minItems: 0
+                      title: Relatedmetrics
+                      type: array
+                    seasonality:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Seasonality'
+                      default:
+                        customSchedules: null
+                        periodInSeconds: 0
+                        seasonInSeconds: 0
+                      description: This metric has no seasonality
+                      readOnly: true
+                      title: Seasonality
+                    sourceTable:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimeRangeFullCompareTable'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/FullTableFullCompareTable'
+                      title: Sourcetable
+                    sources:
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 1
+                      minItems: 1
+                      title: Sources
+                      type: array
+                    synchronizationDelay:
+                      default: 3600
+                      description: The evaluation delay when the table is considered materialized and ready for evaluation
+                      maximum: 63244800
+                      minimum: 0
+                      title: Synchronizationdelay
+                      type: integer
+                    targetTable:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimeRangeFullCompareTable'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/FullTableFullCompareTable'
+                      title: Targettable
+                  required:
+                  - sources
+                  - sourceTable
+                  - targetTable
+                  title: FullCompareMetricConfig
+                  type: object
+                FullTableFullCompareTable:
+                  description: This object defines the various attributes which are needed for full table full compare metric
+                  properties:
+                    attributeColumns:
+                      default: []
+                      description: List of columns to compare across tables
+                      items:
+                        type: string
+                      title: Attributecolumns
+                      type: array
+                    sliceByColumns:
+                      default: []
+                      description: List of columns to slice by
+                      items:
+                        type: string
+                      maxItems: 5
+                      title: Slicebycolumns
+                      type: array
+                    sourceUuid:
+                      description: UUID of the datasource
+                      title: Sourceuuid
+                      type: string
+                    table:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UserDefinedView'
+                      title: Table
+                    valueColumns:
+                      description: List of columns that serve as keys to compare across tables
+                      items:
+                        type: string
+                      title: Valuecolumns
+                      type: array
+                    whereClause:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/WhereClause'
+                      description: Where conditions allow filtering of the data used for comparison
+                      title: Whereclause
+                  required:
+                  - sourceUuid
+                  - valueColumns
+                  title: FullTableFullCompareTable
+                  type: object
+                FullTableMetricConfig:
+                  description: 'Full table metric configuration
+
+                    This object is used to configure metrics that will run queries on the datasource
+
+                    that will scan the entire table. This is particularly useful for dimension tables
+
+                    This metric will run efficiently on smaller tables and columnar datasources.'
+                  properties:
+                    aggregation:
+                      description: The aggregation function as well as window for the aggregation
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/SumAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountUniqueAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AverageAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MaxAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MinAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/NullFractionAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/StdDevAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MedianAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/PercentileAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MultiPercentileAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CategoricalDistributionAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/VolumeAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DataDelayAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ConformityCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ByteCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/RowCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UpdateDelayAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ColumnActivityAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TableActivityAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CategoryActivityAggregation'
+                      title: Aggregation
+                    alignPollingTs:
+                      default: true
+                      description: Enable alignment of eventTs of full table metric to the scheduled time
+                      title: Align polling timestamp
+                      type: boolean
+                    collectionMode:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionCustomScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionTriggered'
+                      default:
+                        type: scheduled
+                      title: Collectionmode
+                    configType:
+                      default: fullTableMetricConfig
+                      enum:
+                      - fullTableMetricConfig
+                      title: Configtype
+                      type: string
+                    dimension:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DimensionType'
+                      description: User classification of metric dimension. System has defaults based on type of metric
+                    failingRecordsSql:
+                      description: sql for retrieving failing records associated with an incident on this metric
+                      title: Failingrecordssql
+                      type: string
+                    inheritTableSettings:
+                      default: true
+                      description: Inherit common settings from the table configuration
+                      title: Inherit table settings
+                      type: boolean
+                    isLive:
+                      default: true
+                      description: start or resume collecting metric if isLive
+                      title: Islive
+                      type: boolean
+                    isStreaming:
+                      default: false
+                      description: (Beta) Start the metric in streaming mode
+                      readOnly: true
+                      title: Isstreaming
+                      type: boolean
+                    missingValueFilling:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MissingValueFilling'
+                      description: 'missing value filling on this metric '
+                    pollingDelay:
+                      default: 0
+                      description: Time after window boundary when to schedule collection
+                      title: Polling delay
+                      type: integer
+                    pollingTimezone:
+                      default: UTC
+                      description: The timezone for full table metric polling to align with
+                      title: Polling timezone
+                      type: string
+                    pollingWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      default: day
+                      description: The interval for full table metric polling
+                      title: Polling interval
+                    relatedMetrics:
+                      default: []
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 10
+                      minItems: 0
+                      title: Relatedmetrics
+                      type: array
+                    seasonality:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Seasonality'
+                      description: Seasonality associated with the metric. If unset, the system will use historical data to learn the seasonality
+                      title: Seasonality
+                    sliceByColumns:
+                      description: Columns to slice on
+                      items:
+                        type: string
+                      maxItems: 5
+                      title: Slice columns
+                      type: array
+                    sources:
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 1
+                      minItems: 1
+                      title: Sources
+                      type: array
+                    synchronizationDelay:
+                      default: 3600
+                      description: The evaluation delay when the table is considered materialized and ready for evaluation
+                      maximum: 63244800
+                      minimum: 0
+                      title: Synchronizationdelay
+                      type: integer
+                    table:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CustomSql'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DataAsset'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UserDefinedView'
+                      title: Table
+                    valueColumns:
+                      description: Column on which metric will be computed
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Column'
+                      title: Value column
+                      type: array
+                    whereClause:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/WhereClause'
+                      description: Where conditions to limit the scope of rows to run the aggregation
+                      title: Whereclause
+                  required:
+                  - sources
+                  - table
+                  title: FullTableMetricConfig
+                  type: object
+                MaxAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: max
+                      enum:
+                      - max
+                      title: Type
+                      type: string
+                  title: MaxAggregation
+                  type: object
+                MedianAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: median
+                      enum:
+                      - median
+                      title: Type
+                      type: string
+                  title: MedianAggregation
+                  type: object
+                Metadata:
+                  properties:
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                  required:
+                  - name
+                  title: Metadata
+                  type: object
+                MetricCreationType:
+                  description: An enumeration.
+                  enum:
+                  - auto
+                  - custom
+                  title: MetricCreationType
+                  type: string
+                MetricMapping:
+                  description: 'This object provides a map of metrics to compare. The system will compare the
+
+                    values computed by source metric with those values computed by the target
+
+                    metric.'
+                  properties:
+                    sourceMetricUuid:
+                      description: UUID of the source metric
+                      title: Source metric
+                      type: string
+                    targetMetricUuid:
+                      description: UUID of the target metric
+                      title: Target metric
+                      type: string
+                  required:
+                  - sourceMetricUuid
+                  - targetMetricUuid
+                  title: MetricMapping
+                  type: object
+                MetricMetadata:
+                  description: Metadata associated with the metric
+                  properties:
+                    creationType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricCreationType'
+                      default: custom
+                      description: Set by the system to custom if user configured metric or auto if auto metric
+                      readOnly: true
+                      title: Creation type
+                    description:
+                      default: ''
+                      description: Description field for the metric
+                      maxLength: 2000
+                      title: Description
+                      type: string
+                    draftUuid:
+                      description: UUID of the draft
+                      title: Draftuuid
+                      type: string
+                    hasDraft:
+                      default: false
+                      description: Whether the metric has a draft
+                      title: Hasdraft
+                      type: boolean
+                    idSerial:
+                      description: Unique ID assigned by the system
+                      readOnly: true
+                      title: Serial ID
+                      type: integer
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    tags:
+                      default: []
+                      examples:
+                      - - tag_1
+                        - tag_2
+                      items:
+                        maxLength: 90
+                        type: string
+                      title: Tags
+                      type: array
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                    workspaceId:
+                      description: Workspace UUID extracted from the URL path, set by the system
+                      readOnly: true
+                      title: Workspace ID
+                      type: string
+                  required:
+                  - name
+                  title: MetricMetadata
+                  type: object
+                MetricMode:
+                  description: An enumeration.
+                  enum:
+                  - published
+                  - draft
+                  title: MetricMode
+                  type: string
+                MetricRunStatus:
+                  description: An enumeration.
+                  enum:
+                  - exception
+                  - ok
+                  - pausedByUser
+                  - pausedException
+                  - pausedExcessUniqueCategories
+                  - pausedExcessUniqueSlices
+                  - pausedFullCompareDataGreaterThanAllowed
+                  - pausedSource
+                  - pausedTimeouts
+                  - timeout
+                  title: MetricRunStatus
+                  type: string
+                MetricStatus:
+                  properties:
+                    actualRunConfigVersion:
+                      default: 0
+                      description: Internal field
+                      title: Actualrunconfigversion
+                      type: integer
+                    configUpdatedTs:
+                      description: Timestamp of last configuration update
+                      title: Configupdatedts
+                      type: number
+                    createdTs:
+                      description: Timestamp when created
+                      title: Createdts
+                      type: integer
+                    desiredRunConfigVersion:
+                      default: 0
+                      description: Internal field
+                      title: Desiredrunconfigversion
+                      type: integer
+                    hasDraft:
+                      default: false
+                      description: Indicates if the metric has a draft version
+                      title: Hasdraft
+                      type: boolean
+                    lastSampleTs:
+                      description: Timestamp of the last computed datapoint
+                      title: Lastsamplets
+                      type: number
+                    lastScannedTs:
+                      description: Timestamp when the system checked this metric
+                      title: Lastscannedts
+                      type: number
+                    queryExceptionCount:
+                      default: 0
+                      description: Number of consecutive query exceptions. Will get reset when collection is successful
+                      title: Queryexceptioncount
+                      type: integer
+                    queryTimeoutCount:
+                      default: 0
+                      description: Count of consecutive query timeouts. Will get reset when collection is successful
+                      title: Querytimeoutcount
+                      type: integer
+                    runStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricRunStatus'
+                      default: ok
+                      description: Status of the last metric collection
+                    runStatusMessage:
+                      description: User friendly message if runStatus indicates any issue
+                      title: Runstatusmessage
+                      type: string
+                    runtimeConfig:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/RuntimeMetricConfig'
+                      description: Internal field
+                      title: Runtimeconfig
+                    streamStartedTs:
+                      description: Internal field that is used for streaming metrics
+                      title: Streamstartedts
+                      type: number
+                    triggered:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricTriggerStatus'
+                      description: Internal fields associated with triggered metrics
+                      title: Triggered
+                  title: MetricStatus
+                  type: object
+                MetricTriggerStatus:
+                  properties:
+                    maxTriggeredTs:
+                      description: The maximum triggered timestamp for data to be processed
+                      title: Maxtriggeredts
+                      type: integer
+                    triggerRunStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TriggerRunStatus'
+                      description: The trigger status for the metric
+                    triggerUuidForMaxTriggeredTs:
+                      description: The trigger uuid associated with the maximum triggered timestamp
+                      title: Triggeruuidformaxtriggeredts
+                      type: string
+                  title: MetricTriggerStatus
+                  type: object
+                MinAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: min
+                      enum:
+                      - min
+                      title: Type
+                      type: string
+                  title: MinAggregation
+                  type: object
+                MissingValueFilling:
+                  description: An enumeration.
+                  enum:
+                  - 'null'
+                  - zero
+                  title: MissingValueFilling
+                  type: string
+                MultiPercentileAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    fractions:
+                      items:
+                        type: number
+                      title: Fractions
+                      type: array
+                    type:
+                      default: multiPercentile
+                      enum:
+                      - multiPercentile
+                      title: Type
+                      type: string
+                  required:
+                  - fractions
+                  title: MultiPercentileAggregation
+                  type: object
+                NullFractionAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    missingValueType:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ColumnMissingValueType'
+                      default: 'null'
+                    type:
+                      default: nullFraction
+                      enum:
+                      - nullFraction
+                      title: Type
+                      type: string
+                  title: NullFractionAggregation
+                  type: object
+                Partition:
+                  properties:
+                    columnName:
+                      description: Partition column name
+                      title: Columnname
+                      type: string
+                    columnType:
+                      description: Type associated with the partition, set by the system
+                      title: Columntype
+                      type: string
+                    format:
+                      description: Format of the partition expressed in C-format
+                      title: Format
+                      type: string
+                  required:
+                  - columnName
+                  - format
+                  title: Partition
+                  type: object
+                PartitionOffsets:
+                  properties:
+                    includeFutureSeconds:
+                      default: 0
+                      description: Future seconds to be included for partition offset
+                      minimum: 0
+                      title: Includefutureseconds
+                      type: integer
+                    includePastSeconds:
+                      default: 0
+                      description: Past seconds to be included for partition offset
+                      minimum: 0
+                      title: Includepastseconds
+                      type: integer
+                  title: PartitionOffsets
+                  type: object
+                PercentileAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    fraction:
+                      title: Fraction
+                      type: number
+                    type:
+                      default: percentile
+                      enum:
+                      - percentile
+                      title: Type
+                      type: string
+                  required:
+                  - fraction
+                  title: PercentileAggregation
+                  type: object
+                QueryScope:
+                  description: An enumeration.
+                  enum:
+                  - timeRange
+                  - fullTable
+                  title: QueryScope
+                  type: string
+                RowCountAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: rowCount
+                      enum:
+                      - rowCount
+                      title: Type
+                      type: string
+                  title: RowCountAggregation
+                  type: object
+                RuntimeMetricConfig:
+                  properties:
+                    fullCompareApproximateRowSize:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/FullCompareApproximateRowSize'
+                    seasonality:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Seasonality'
+                    seasonalityDiscoveryStatus:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/SeasonalityDiscoveryStatus'
+                  title: RuntimeMetricConfig
+                  type: object
+                Schedule:
+                  properties:
+                    config:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ScheduleConfig'
+                    metadata:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Metadata'
+                  required:
+                  - metadata
+                  - config
+                  title: Schedule
+                  type: object
+                ScheduleConfig:
+                  properties:
+                    repeatCount:
+                      default: 0
+                      minimum: 0
+                      title: Repeatcount
+                      type: integer
+                    repeatIntervalInSeconds:
+                      default: 0
+                      minimum: 0
+                      title: Repeatintervalinseconds
+                      type: integer
+                    timeRanges:
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimeRange'
+                      title: Timeranges
+                      type: array
+                  title: ScheduleConfig
+                  type: object
+                Seasonality:
+                  properties:
+                    customSchedules:
+                      description: Custom seasonality
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Schedule'
+                      title: Customschedules
+                      type: array
+                    periodInSeconds:
+                      description: Defines the periodicity of season, set to zero to indicate no seasonality
+                      minimum: 0
+                      title: Periodinseconds
+                      type: integer
+                    seasonInSeconds:
+                      description: Length of season
+                      minimum: 0
+                      title: Seasoninseconds
+                      type: integer
+                  title: Seasonality
+                  type: object
+                SeasonalityDiscoveryStatus:
+                  description: An enumeration.
+                  enum:
+                  - Number of samples less than three
+                  - Time span of data available is less than three days
+                  - No data to discover seasonality
+                  - Last metric collection resulted in an exception
+                  title: SeasonalityDiscoveryStatus
+                  type: string
+                StdDevAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: stddev
+                      enum:
+                      - stddev
+                      title: Type
+                      type: string
+                  title: StdDevAggregation
+                  type: object
+                SumAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: sum
+                      enum:
+                      - sum
+                      title: Type
+                      type: string
+                  title: SumAggregation
+                  type: object
+                Table:
+                  examples:
+                  - schemaName: public
+                    tableName: test
+                    type: table
+                  properties:
+                    schemaName:
+                      description: Schema name associated with the table
+                      title: Schemaname
+                      type: string
+                    schemaUuid:
+                      description: Schema UUID associated with the schema. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Schemauuid
+                      type: string
+                    tableName:
+                      description: Name of the table
+                      title: Tablename
+                      type: string
+                    tableUuid:
+                      description: Table UUID associated with the table. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Tableuuid
+                      type: string
+                    type:
+                      default: table
+                      enum:
+                      - table
+                      title: Type
+                      type: string
+                  required:
+                  - tableName
+                  title: Table
+                  type: object
+                TableActivityAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: tableActivity
+                      enum:
+                      - tableActivity
+                      title: Type
+                      type: string
+                  title: TableActivityAggregation
+                  type: object
+                TargetColumn:
+                  properties:
+                    columnName:
+                      title: Columnname
+                      type: string
+                    table:
+                      $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                  required:
+                  - table
+                  - columnName
+                  title: TargetColumn
+                  type: object
+                TimeRange:
+                  properties:
+                    endTime:
+                      title: Endtime
+                      type: number
+                    startTime:
+                      title: Starttime
+                      type: number
+                  required:
+                  - startTime
+                  - endTime
+                  title: TimeRange
+                  type: object
+                TimeRangeFullCompareTable:
+                  description: This object defines the various attributes which are needed for time range full compare metric
+                  properties:
+                    attributeColumns:
+                      default: []
+                      description: List of columns to compare across tables
+                      items:
+                        type: string
+                      title: Attributecolumns
+                      type: array
+                    dataTimezone:
+                      description: Timezone for the data if the timestamp column is timezone less. Currently only UTC is supported
+                      title: Datatimezone
+                      type: string
+                    partitionOffsets:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/PartitionOffsets'
+                      default:
+                        includeFutureSeconds: 0
+                        includePastSeconds: 0
+                      description: timestamp offsets for before and after to map to partitions
+                      title: Partitionoffsets
+                    partitionTimezone:
+                      default: UTC
+                      description: Timezone for the partition if the partition timestamp column is timezone less.
+                      title: Partitiontimezone
+                      type: string
+                    partitions:
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Partition'
+                      title: Partitions
+                      type: array
+                    queryTimezone:
+                      default: UTC
+                      description: Timezone associated with the aggregation queries. Currently only UTC is supported
+                      title: Querytimezone
+                      type: string
+                    sliceByColumns:
+                      default: []
+                      description: List of columns to slice by
+                      items:
+                        type: string
+                      maxItems: 5
+                      title: Slicebycolumns
+                      type: array
+                    sourceUuid:
+                      description: UUID of the datasource
+                      title: Sourceuuid
+                      type: string
+                    table:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UserDefinedView'
+                      title: Table
+                    timestampColumn:
+                      description: Timestamp column to use for time range queries
+                      title: Timestamp column
+                      type: string
+                    timestampColumnFunctions:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimestampColumnFunctions'
+                      description: Functions to define translation of column to timestamp and vice versa
+                      title: Virtual timestamp column
+                    valueColumns:
+                      description: List of columns that serve as keys to compare across tables
+                      items:
+                        type: string
+                      title: Valuecolumns
+                      type: array
+                    whereClause:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/WhereClause'
+                      description: Where conditions allow filtering of the data used for comparison
+                      title: Whereclause
+                  required:
+                  - sourceUuid
+                  - valueColumns
+                  - timestampColumn
+                  title: TimeRangeFullCompareTable
+                  type: object
+                TimeRangeMetricConfig:
+                  description: 'Incremental or time range metric configuration
+
+                    This object is used to configure metrics that will run incremental queries on the
+
+                    datasource that are restricted to a time range (ie. will not scan the full table).
+
+                    This metric will run most efficiently if the tables has an indexed timestamp
+
+                    column. For partitioned datasources, this implies that the data is organized by
+
+                    time in partitions.'
+                  properties:
+                    aggregation:
+                      description: The aggregation function as well as window for the aggregation
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/SumAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountUniqueAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AverageAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MaxAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MinAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/NullFractionAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/StdDevAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MedianAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/PercentileAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MultiPercentileAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CategoricalDistributionAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/VolumeAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DataDelayAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ConformityCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ByteCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/RowCountAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UpdateDelayAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ColumnActivityAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TableActivityAggregation'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CategoryActivityAggregation'
+                      title: Aggregation
+                    backfillDuration:
+                      description: Backfill duration in seconds
+                      minimum: 0
+                      title: Backfillduration
+                      type: integer
+                    collectionMode:
+                      anyOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionCustomScheduled'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionTriggered'
+                      default:
+                        type: scheduled
+                      title: Collectionmode
+                    collectionWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CollectionWindow'
+                      default: complete
+                    configType:
+                      default: metricConfig
+                      enum:
+                      - metricConfig
+                      title: Configtype
+                      type: string
+                    dataTimezone:
+                      description: Timezone for the data if the timestamp column is timezone less. If not specified, it will be the same as query timezone
+                      title: Datatimezone
+                      type: string
+                    dimension:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DimensionType'
+                      description: User classification of metric dimension. System has defaults based on type of metric
+                    failingRecordsSql:
+                      description: sql for retrieving failing records associated with an incident on this metric
+                      title: Failingrecordssql
+                      type: string
+                    inheritTableSettings:
+                      default: true
+                      description: Inherit common settings from the table configuration
+                      title: Inherit table settings
+                      type: boolean
+                    isLive:
+                      default: true
+                      description: start or resume collecting metric if isLive
+                      title: Islive
+                      type: boolean
+                    isStreaming:
+                      default: false
+                      description: (Beta) Start the metric in streaming mode
+                      readOnly: true
+                      title: Isstreaming
+                      type: boolean
+                    missingValueFilling:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MissingValueFilling'
+                      description: 'missing value filling on this metric '
+                    partitionOffsets:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/PartitionOffsets'
+                      default:
+                        includeFutureSeconds: 0
+                        includePastSeconds: 0
+                      description: timestamp offsets for before and after to map to partitions
+                      title: Partitionoffsets
+                    partitionTimezone:
+                      default: UTC
+                      description: Timezone associated with the partition
+                      title: Partitiontimezone
+                      type: string
+                    partitions:
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Partition'
+                      title: Partitions
+                      type: array
+                    pollingInterval:
+                      default: 300
+                      title: Pollinginterval
+                      type: integer
+                    queryTimezone:
+                      default: UTC
+                      description: Timezone associated with the aggregation queries
+                      title: Querytimezone
+                      type: string
+                    relatedMetrics:
+                      default: []
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 10
+                      minItems: 0
+                      title: Relatedmetrics
+                      type: array
+                    seasonality:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Seasonality'
+                      description: Seasonality associated with the metric. If unset, the system will use historical data to learn the seasonality
+                      title: Seasonality
+                    sliceByColumns:
+                      description: Columns to slice on
+                      items:
+                        type: string
+                      maxItems: 5
+                      title: Slice columns
+                      type: array
+                    sources:
+                      examples:
+                      - - 2cc34698-5a25-4e4e-bd01-5664660f22b7
+                      items:
+                        type: string
+                      maxItems: 1
+                      minItems: 1
+                      title: Sources
+                      type: array
+                    synchronizationDelay:
+                      default: 3600
+                      description: The evaluation delay when the table is considered materialized and ready for evaluation
+                      maximum: 63244800
+                      minimum: 0
+                      title: Synchronizationdelay
+                      type: integer
+                    table:
+                      oneOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Table'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CustomSql'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DataAsset'
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/UserDefinedView'
+                      title: Table
+                    timestampColumn:
+                      description: Timestamp column to use for the time range queries
+                      title: Timestamp column
+                      type: string
+                    timestampColumnFunctions:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimestampColumnFunctions'
+                      description: Functions to define translation of column to timestamp and vice versa
+                      title: Virtual timestamp column
+                    valueColumns:
+                      description: Column on which metric will be computed
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Column'
+                      title: Value column
+                      type: array
+                    whereClause:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/WhereClause'
+                      description: Where conditions to limit the scope of rows to run the aggregation
+                      title: Whereclause
+                  required:
+                  - sources
+                  - table
+                  title: TimeRangeMetricConfig
+                  type: object
+                TimestampColumnFunctions:
+                  description: 'Virtual timestamp functions for converting from column type to timestamp and
+
+                    vice versa.'
+                  properties:
+                    columnToTimestampFunction:
+                      description: SQL to convert from column type to timestamp
+                      title: Columntotimestampfunction
+                      type: string
+                    timestampToColumnFunction:
+                      description: SQL to convert from timestamp to column type
+                      title: Timestamptocolumnfunction
+                      type: string
+                  required:
+                  - columnToTimestampFunction
+                  - timestampToColumnFunction
+                  title: TimestampColumnFunctions
+                  type: object
+                TriggerRunStatus:
+                  description: An enumeration.
+                  enum:
+                  - completed
+                  - pending
+                  title: TriggerRunStatus
+                  type: string
+                UpdateDelayAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: updateDelay
+                      enum:
+                      - updateDelay
+                      title: Type
+                      type: string
+                  title: UpdateDelayAggregation
+                  type: object
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+                UserDefinedView:
+                  examples:
+                  - schemaName: public
+                    tableName: test
+                    type: table
+                  properties:
+                    schemaName:
+                      description: Schema name associated with the table
+                      title: Schemaname
+                      type: string
+                    schemaUuid:
+                      description: Schema UUID associated with the schema. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Schemauuid
+                      type: string
+                    sql:
+                      description: SQL for the view
+                      title: Sql
+                      type: string
+                    tableName:
+                      description: Name of the table
+                      title: Tablename
+                      type: string
+                    tableUuid:
+                      description: Table UUID associated with the table. Will be filled out by the system if not filled or filled incorrectly
+                      readOnly: true
+                      title: Tableuuid
+                      type: string
+                    type:
+                      default: userDefinedView
+                      enum:
+                      - userDefinedView
+                      title: Type
+                      type: string
+                  required:
+                  - tableName
+                  - sql
+                  title: UserDefinedView
+                  type: object
+                VolumeAggregation:
+                  properties:
+                    aggregationWindow:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationWindow'
+                      description: Aggregation window for the metric
+                    type:
+                      default: volume
+                      enum:
+                      - volume
+                      title: Type
+                      type: string
+                  title: VolumeAggregation
+                  type: object
+                WhereClause:
+                  properties:
+                    clauseLogic:
+                      default: AND
+                      description: Expression logic to combine where conditions. Possible choices are 'AND', 'OR' or a valid boolean expression referring to indices of where conditions e.g. '1 AND 2', '1 OR 2', etc.
+                      title: Clauselogic
+                      type: string
+                    whereConditions:
+                      description: List of where conditions
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/WhereConditions'
+                      minItems: 1
+                      title: Whereconditions
+                      type: array
+                  required:
+                  - whereConditions
+                  title: WhereClause
+                  type: object
+                WhereConditions:
+                  properties:
+                    column:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/Column'
+                      description: Target column for the where conditions
+                      title: Column
+                    conditions:
+                      description: List of where conditions
+                      items:
+                        $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/CountCondition'
+                      maxItems: 1
+                      minItems: 1
+                      title: Conditions
+                      type: array
+                  required:
+                  - column
+                  - conditions
+                  title: WhereConditions
+                  type: object
+              example:
+                apiVersion: v1
+                config:
+                  configType: metricConfig
+                  dataTimezone: America/New_York
+                  dimension: custom
+                  isLive: false
+                  missingValueFilling: 'null'
+                  partitionTimezone: America/Los_Angeles
+                  partitions:
+                  - columnName: datehour
+                    format: '%Y/%m/%d/%H'
+                  pollingInterval: 300
+                  queryTimezone: America/Los_Angeles
+                  sources:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  synchronizationDelay: 1800
+                  table:
+                    aggregationWindow: day
+                    sql: select date_trunc('second', timestamp) as ts, value as value from lightup_test_all_filters.robustrollingstones_v1 where timestamp > {start_ts} and timestamp <= {end_ts} and datehour >= {start_partition} and datehour <= {end_partition}
+                    type: customSql
+                  timestampColumn: ts
+                  valueColumns:
+                  - columnName: value
+                    type: column
+                metadata:
+                  name: Metric in DemoDB with custom SQL
+                  ownedBy:
+                    email: abc@example.com
+                    id: 1
+                    username: ABC
+                  tags:
+                  - apple
+                  - green
+                  updatedBy:
+                    email: xyz@example.com
+                    id: 2
+                    username: XYZ
+                  uuid: 435bc80e-9835-45c7-ade6-39f990d83fa6
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: metric
+              examples:
+              - apiVersion: v1
+                config:
+                  configType: metricConfig
+                  dataTimezone: America/New_York
+                  dimension: custom
+                  isLive: false
+                  missingValueFilling: 'null'
+                  partitionTimezone: America/Los_Angeles
+                  partitions:
+                  - columnName: datehour
+                    format: '%Y/%m/%d/%H'
+                  pollingInterval: 300
+                  queryTimezone: America/Los_Angeles
+                  sources:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  synchronizationDelay: 1800
+                  table:
+                    aggregationWindow: day
+                    sql: select date_trunc('second', timestamp) as ts, value as value from lightup_test_all_filters.robustrollingstones_v1 where timestamp > {start_ts} and timestamp <= {end_ts} and datehour >= {start_partition} and datehour <= {end_partition}
+                    type: customSql
+                  timestampColumn: ts
+                  valueColumns:
+                  - columnName: value
+                    type: column
+                metadata:
+                  name: Metric in DemoDB with custom SQL
+                  ownedBy:
+                    email: abc@example.com
+                    id: 1
+                    username: ABC
+                  tags:
+                  - apple
+                  - green
+                  updatedBy:
+                    email: xyz@example.com
+                    id: 2
+                    username: XYZ
+                  uuid: 435bc80e-9835-45c7-ade6-39f990d83fa6
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: metric
+              - apiVersion: v1
+                config:
+                  aggregation:
+                    aggregationWindow: day
+                    type: sum
+                  configType: metricConfig
+                  dimension: custom
+                  isLive: false
+                  missingValueFilling: 'null'
+                  sources:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  table:
+                    tableName: some-table
+                    type: table
+                  timestampColumn: ts
+                  valueColumns:
+                  - columnName: value_1
+                    type: column
+                  - columnName: value_2
+                    type: column
+                metadata:
+                  name: athena2
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: metric
+              - apiVersion: v1
+                config:
+                  configType: fullTableMetricConfig
+                  dimension: custom
+                  isLive: false
+                  missingValueFilling: 'null'
+                  pollingDelay: 7200
+                  pollingTimezone: UTC
+                  pollingWindow: day
+                  sources:
+                  - 99e55845-cd4b-4a61-b066-3a23455d7095
+                  table:
+                    aggregationWindow: day
+                    sql: select date_trunc('second', timestamp) as ts, value as value from lightup_test_all_filters.robustrollingstones_v1 where timestamp > {start_ts} and timestamp <= {end_ts} and datehour >= {start_partition} and datehour <= {end_partition}
+                    type: customSql
+                  valueColumns:
+                  - columnName: value
+                    type: column
+                metadata:
+                  name: Metric in DemoDB with custom SQL
+                  ownedBy:
+                    email: abc@example.com
+                    id: 1
+                    username: ABC
+                  tags:
+                  - apple
+                  - green
+                  updatedBy:
+                    email: xyz@example.com
+                    id: 2
+                    username: XYZ
+                  uuid: 435bc80e-9835-45c7-ade6-39f990d83fa6
+                  workspaceId: 435bc80e-9835-45c7-ade6-39f990d83fa5
+                type: metric
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  description: Choose one of the metric configuration types. Each type has a different payload
+                  oneOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/TimeRangeMetricConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/FullTableMetricConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/AggregationCompareMetricConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/FullCompareMetricConfig'
+                  title: Metric configuration
+                draftMetadata:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/DraftMetadata'
+                  description: Metadata of the draft
+                  title: Draftmetadata
+                metadata:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricMetadata'
+                mode:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricMode'
+                  default: published
+                  description: Mode of the metric
+                status:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema/definitions/MetricStatus'
+                  description: This field is not user settable and describes the current status for the metric
+                  readOnly: true
+                  title: Metric status
+                type:
+                  default: metric
+                  enum:
+                  - metric
+                  title: Type
+                  type: string
+              required:
+              - metadata
+              - config
+              title: Metric
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create metric
+      tags:
+      - Metrics
+  /api/{api_version}/ws/{workspace_id}/metrics/{pk}:
+    delete:
+      description: Delete a stream
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete metric
+      tags:
+      - Metrics
+    get:
+      description: Retrieve a metric
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get metric
+      tags:
+      - Metrics
+    put:
+      description: Update a metric
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the workspace; visible in the workspace URL.
+        explode: true
+        in: path
+        name: workspace_id
+        required: true
+        schema:
+          description: UUID of the workspace; visible in the workspace URL.
+          title: workspace_id
+          type: string
+      - description: UUID of the datasource.
+        explode: true
+        in: path
+        name: pk
+        required: true
+        schema:
+          description: UUID of the datasource.
+          title: pk
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1ws~1%7Bworkspace_id%7D~1metrics~1/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Update metric
+      tags:
+      - Metrics

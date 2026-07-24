@@ -1,0 +1,421 @@
+openapi: 3.1.0
+info:
+  description: Lightup Metrics API provides CRUD interface to Dashboard objects.
+  title: Lightup Dashboard API Credentials Catalogs API
+  version: 1.0.0
+servers:
+- description: Enter your Lightup subdomain
+  url: https://app.{clusterId}.lightup.ai
+  variables:
+    clusterId:
+      default: demo
+tags:
+- name: Catalogs
+paths:
+  /api/{api_version}/system/integrations:
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema'
+                type: array
+          description: ''
+      summary: Get the list of catalogs
+      tags:
+      - Catalogs
+    post:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              definitions:
+                AlationConfig:
+                  properties:
+                    baseUrl:
+                      title: Baseurl
+                      type: string
+                    disableCertificateCheck:
+                      default: false
+                      description: Set to true if using self-signed certificates
+                      title: Disablecertificatecheck
+                      type: boolean
+                    incidentWindow:
+                      default: 86400
+                      description: Consider incidents logged in the last window
+                      exclusiveMinimum: 0
+                      title: Incidentwindow
+                      type: integer
+                    type:
+                      default: alation
+                      enum:
+                      - alation
+                      title: Type
+                      type: string
+                    userId:
+                      description: Alation user ID
+                      title: Userid
+                      type: integer
+                    userRefreshToken:
+                      description: Refresh token
+                      title: Userrefreshtoken
+                      type: string
+                  required:
+                  - baseUrl
+                  - userId
+                  - userRefreshToken
+                  title: AlationConfig
+                  type: object
+                ApiVersion:
+                  description: An enumeration.
+                  enum:
+                  - v1
+                  title: ApiVersion
+                  type: string
+                AtlanConfig:
+                  properties:
+                    baseUrl:
+                      title: Baseurl
+                      type: string
+                    bearerToken:
+                      description: Bearer token
+                      title: Bearertoken
+                      type: string
+                    disableAnnouncements:
+                      default: false
+                      title: Disableannouncements
+                      type: boolean
+                    incidentWindow:
+                      default: 86400
+                      description: Consider incidents logged in the last window
+                      exclusiveMinimum: 0
+                      title: Incidentwindow
+                      type: integer
+                    type:
+                      default: atlan
+                      enum:
+                      - atlan
+                      title: Type
+                      type: string
+                  required:
+                  - baseUrl
+                  - bearerToken
+                  title: AtlanConfig
+                  type: object
+                CatalogRunStatus:
+                  description: An enumeration.
+                  enum:
+                  - ok
+                  - exception
+                  title: CatalogRunStatus
+                  type: string
+                CatalogStatus:
+                  properties:
+                    lastScannedTs:
+                      description: Timestamp of the last run
+                      title: Lastscannedts
+                      type: number
+                    runStatus:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/CatalogRunStatus'
+                      default: ok
+                      description: Status of the last run
+                    runStatusMessage:
+                      description: User friendly message if runStatus indicates any issue
+                      title: Runstatusmessage
+                      type: string
+                  title: CatalogStatus
+                  type: object
+                Metadata:
+                  properties:
+                    name:
+                      description: User defined name
+                      maxLength: 400
+                      title: Name
+                      type: string
+                    ownedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that created this object
+                      readOnly: true
+                      title: Ownedby
+                    updatedBy:
+                      allOf:
+                      - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/User'
+                      description: User that updated this object
+                      readOnly: true
+                      title: Updatedby
+                    uuid:
+                      description: System defined UUID
+                      readOnly: true
+                      title: Uuid
+                      type: string
+                  required:
+                  - name
+                  title: Metadata
+                  type: object
+                User:
+                  properties:
+                    email:
+                      title: Email
+                      type: string
+                    id:
+                      readOnly: true
+                      title: Id
+                      type: integer
+                    username:
+                      description: Email used for Lightup account
+                      readOnly: true
+                      title: Username
+                      type: string
+                  required:
+                  - email
+                  title: User
+                  type: object
+              example:
+                config:
+                  baseUrl: https://lightup-partner.atlan.com
+                  bearerToken: token
+                  disableAnnouncements: true
+                  type: atlan
+                metadata:
+                  name: Atlan
+              examples:
+              - config:
+                  baseUrl: https://lightup-partner.atlan.com
+                  bearerToken: token
+                  disableAnnouncements: true
+                  type: atlan
+                metadata:
+                  name: Atlan
+              - config:
+                  baseUrl: https://lightup.alationcatalog.com
+                  type: alation
+                  userId: 10
+                  userRefreshToken: token
+                metadata:
+                  name: Alation
+              properties:
+                apiVersion:
+                  allOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/ApiVersion'
+                  default: v1
+                  readOnly: true
+                config:
+                  description: Choose one of the catalog types
+                  oneOf:
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/AlationConfig'
+                  - $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/AtlanConfig'
+                  title: Catalog type
+                metadata:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/Metadata'
+                status:
+                  $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema/definitions/CatalogStatus'
+              required:
+              - metadata
+              - config
+              title: Catalog
+              type: object
+        description: ''
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Create a new catalog
+      tags:
+      - Catalogs
+  /api/{api_version}/system/integrations/{integration_id}:
+    delete:
+      description: Delete a catalog
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the catalog
+        explode: true
+        in: path
+        name: integration_id
+        required: true
+        schema:
+          description: UUID of the catalog
+          title: integration_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '204':
+          description: ''
+      summary: Delete a catalog
+      tags:
+      - Catalogs
+    get:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the catalog
+        explode: true
+        in: path
+        name: integration_id
+        required: true
+        schema:
+          description: UUID of the catalog
+          title: integration_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Get a catalog
+      tags:
+      - Catalogs
+    put:
+      description: ''
+      parameters:
+      - description: ''
+        explode: true
+        in: path
+        name: api_version
+        required: true
+        schema:
+          allOf:
+          - description: An enumeration.
+            enum:
+            - v1
+            title: ApiVersion
+            type: string
+          default: v1
+          title: api_version
+      - description: UUID of the catalog
+        explode: true
+        in: path
+        name: integration_id
+        required: true
+        schema:
+          description: UUID of the catalog
+          title: integration_id
+          type: string
+      - description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+        explode: true
+        in: header
+        name: authorization
+        required: true
+        schema:
+          description: 'Input ''Bearer _access-token_''. To obtain access token, see API, API Credentials: Get access token.'
+          title: authorization
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema'
+        description: ''
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/paths/~1api~1%7Bapi_version%7D~1system~1integrations/post/requestBody/content/application~1json/schema'
+          description: ''
+      summary: Update a catalog
+      tags:
+      - Catalogs
