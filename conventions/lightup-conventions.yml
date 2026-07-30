@@ -1,0 +1,112 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/lightup-dashboard-openapi.json + https://docs.lightup.ai/reference
+description: Cross-cutting request/response semantics for the Lightup Dashboard API,
+  derived from the published OpenAPI 3.1.0 description and the ReadMe-hosted API reference.
+authentication:
+  style: bearer-jwt
+  header: authorization
+  format: Bearer <access-token>
+  detail: authentication/lightup-authentication.yml
+base_url:
+  template: https://app.{clusterId}.lightup.ai
+  variable: clusterId
+  default: demo
+  note: Every customer runs on their own Lightup cluster subdomain; the API host is
+    per-tenant rather than a single shared endpoint.
+versioning:
+  style: uri-path
+  observed:
+  - segment: /api/v0/
+    note: Fixed v0 path used by the users, incidents and healthz operations.
+  - segment: /api/v1/
+    note: Fixed v1 path used by the token refresh operation.
+  - segment: /api/{api_version}/
+    note: Templated version segment used by workspaces, metrics, monitors, datasources,
+      integrations, catalogs, dashboard and datapoints operations (36 of 54 operations).
+  product_version: Documented separately as a platform release train (4.x) in the release
+    notes.
+  detail: lifecycle/lightup-lifecycle.yml
+resource_scoping:
+  primary: workspace
+  pattern: /api/{api_version}/ws/{workspace_id}/<resource>
+  note: Metrics, monitors, datasources, integrations, dashboard charts, incidents and
+    workspace users are all nested under a workspace. Workspaces, application users
+    and data catalogs are instance-level.
+  identifiers: UUIDs (metric_uuid, filter_uuid for monitors, source_uuid, incident_uuid);
+    some operations use a generic {pk} path parameter.
+pagination:
+  style: offset-limit
+  params:
+  - name: limit
+    in: query
+  - name: offset
+    in: query
+  applies_to: List operations for metrics, monitors and datasources.
+  note: The spec does not document response envelope fields for total counts or next
+    links, and no cursor pagination is exposed.
+filtering:
+  style: repeated query parameters of ids and names
+  params:
+  - name: metric_uuids
+    in: query
+  - name: monitor_uuids
+    in: query
+  - name: source_uuids
+    in: query
+  - name: table_uuids
+    in: query
+  - name: names
+    in: query
+  - name: name
+    in: query
+time_ranges:
+  params:
+  - name: start_ts
+    in: query
+  - name: end_ts
+    in: query
+  applies_to: Datapoint and incident queries.
+  note: Timestamp-bounded windows rather than page tokens.
+content_type:
+  request: application/json
+  response: application/json
+status_codes:
+  success:
+  - code: 200
+    count: 33
+  - code: 201
+    count: 11
+    note: Returned by create operations.
+  - code: 204
+    count: 9
+    note: Returned by delete operations.
+  errors_documented: false
+  errors_note: The published OpenAPI documents no 4xx or 5xx responses. The only error
+    semantics Lightup publishes are HTTP 403 for a user lacking workspace access and
+    token-refresh failure, both described in the MCP server troubleshooting guide.
+    No error catalog artifact was created because there is no published error reference
+    to capture.
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or equivalent parameter appears in the OpenAPI, and
+    the documentation describes no idempotent retry contract. No Idempotency pointer
+    is wired in apis.yml.
+rate_limiting:
+  documented: false
+  note: No rate limit headers, quotas or throttling policy are published. Plan limits
+    on the pricing page are seat/workspace/datasource limits, not API request limits.
+field_expansion:
+  supported: false
+  note: Not documented.
+metadata:
+  supported: false
+  note: No generic customer-defined metadata field is documented on API objects.
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation header is documented.
+cross_references:
+  authentication: authentication/lightup-authentication.yml
+  lifecycle: lifecycle/lightup-lifecycle.yml
+  data_model: data-model/lightup-data-model.yml
+  conformance: conformance/lightup-conformance.yml

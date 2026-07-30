@@ -1,0 +1,142 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://github.com/lightup-data/lightup
+server:
+  name: lightup
+  product_name: Lightup Agentic
+  transport: sse
+  url: null
+  url_note: The MCP server URL is provisioned per customer and supplied by the Lightup
+    team; it is not a single public endpoint. Clients connect as /sse?host=<your Lightup
+    instance URL>&refresh_token=<your JWT refresh token>.
+  stateless: true
+  credentials: Each connection carries its own credentials in the URL; nothing is stored
+    server-side and sessions are fully isolated.
+  backend: Calls through to the Lightup REST API on the customer's own instance.
+install:
+  setup_script: 'curl -sL https://raw.githubusercontent.com/lightup-data/lightup/main/setup.sh
+    | bash -s -- claude'
+  clients:
+  - name: Claude Code
+    status: available
+    method: setup.sh, or Claude Code plugin
+    plugin_marketplace: claude plugin marketplace add lightup-data/lightup
+    plugin_install: claude plugin install lightup-ai@lightup
+  - name: Gemini CLI
+    status: available
+    method: setup.sh, or Gemini CLI extension
+    extension_install: gemini extensions install https://github.com/lightup-data/lightup
+  - name: Codex CLI
+    status: coming soon
+  credential_file: lightup-api-credential*.json downloaded from the Lightup UI (Profile
+    -> API Credentials -> Download); setup auto-discovers it in ~/Downloads, ~/Desktop
+    or ~.
+prerequisites:
+- An active Lightup instance with at least Viewer access, or a 30-day free trial at
+  https://my.lightup.ai
+- Network access from the client machine to the Lightup MCP server URL
+tool_count: 41
+tools:
+- group: Summary
+  members:
+  - name: count_all_metrics
+    description: Total metric count across all workspaces
+  - name: count_all_monitors
+    description: Monitor count with live / training / paused / error breakdown
+  - name: count_all_incidents
+    description: Total incident count (configurable lookback window)
+  - name: get_workspace_health
+    description: Compact health summary for one workspace
+  - name: get_platform_summary
+    description: Cross-workspace rollup for the entire Lightup instance
+- group: Workspace & Datasource
+  members:
+  - name: list_workspaces
+    description: List all workspaces
+  - name: get_workspace
+    description: Get workspace details
+  - name: create_workspace
+    description: Create a new workspace
+  - name: list_datasources
+    description: List datasources in a workspace
+  - name: get_datasource
+    description: Get datasource details
+  - name: create_datasource
+    description: Create a new datasource
+  - name: test_datasource_connection
+    description: Test a datasource connection before creating
+- group: Metrics
+  members:
+  - name: list_metrics
+    description: List metrics in a workspace
+  - name: get_metric
+    description: Get metric details
+  - name: search_metric
+    description: Search for a metric by name across workspaces
+  - name: create_metric
+    description: Create a new metric
+  - name: create_metrics_batch
+    description: Create multiple metrics at once
+  - name: update_metric
+    description: Update an existing metric
+  - name: delete_metric
+    description: Delete a metric
+  - name: explore_metric_target
+    description: Explore available tables and columns for a metric
+  - name: analyze_table
+    description: Analyze a table's structure and data profile
+  - name: suggest_metrics
+    description: Get AI-generated metric suggestions for a table
+  - name: preview_metric
+    description: Preview metric results before creating
+  - name: validate_custom_sql
+    description: Validate custom SQL before using in a metric
+- group: Monitors
+  members:
+  - name: list_monitors
+    description: List monitors in a workspace
+  - name: get_monitor
+    description: Get monitor details
+  - name: create_monitor
+    description: Create a threshold or anomaly detection monitor
+  - name: update_monitor
+    description: Update an existing monitor
+  - name: delete_monitor
+    description: Delete a monitor
+  - name: diagnose_monitor
+    description: Explain why a monitor is not working
+- group: Incidents & Events
+  members:
+  - name: list_incidents
+    description: List recent incidents in a workspace
+  - name: get_incident
+    description: Get incident details
+  - name: list_events
+    description: List system events (errors, warnings)
+  - name: list_recommendations
+    description: AI-generated metric/monitor recommendations
+- group: Integrations & Users
+  members:
+  - name: list_integrations
+    description: List integrations (Slack, PagerDuty, email, etc.)
+  - name: list_users
+    description: List all users with roles and workspace memberships
+  - name: list_llm_connections
+    description: List LLM connections configured in the instance
+  - name: list_catalog_integrations
+    description: List catalog integrations (Atlan, Alation)
+- group: Documentation
+  members:
+  - name: get_documentation
+    description: Fetch Lightup product documentation by topic
+  - name: list_documentation_topics
+    description: List all available documentation topics
+related_repositories:
+- name: lightup
+  url: https://github.com/lightup-data/lightup
+  description: Connect Lightup to AI agents via MCP (entry point, setup.sh, client
+    guides)
+- name: lightup-claude-setup
+  url: https://github.com/lightup-data/lightup-claude-setup
+  description: Connect Lightup to Claude Code via MCP - one-line setup

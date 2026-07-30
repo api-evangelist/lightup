@@ -1,0 +1,55 @@
+generated: '2026-07-19'
+method: searched
+source: https://my.lightup.ai + https://www.lightup.ai/pricing + https://docs.lightup.ai/reference
+description: Lightup does not operate a shared public sandbox with published test credentials.
+  Evaluation is done against a real, provisioned Lightup instance obtained through
+  a 30-day free trial, and the API reference ships an in-browser "Try It" console that
+  executes against whichever cluster you point it at.
+model: trial-instance
+test_vs_live:
+  separation: none
+  note: There is no test-mode / live-mode key prefix split. A trial instance is a real
+    instance with a time limit; API credentials are the same shape in trial and paid
+    deployments.
+free_trial:
+  available: true
+  url: https://my.lightup.ai
+  duration: 30 days
+  plan: Cloud
+  source: https://www.lightup.ai/pricing
+  note: The MCP setup script offers to walk you through trial signup when no credential
+    file is found.
+console:
+  available: true
+  url: https://docs.lightup.ai/reference
+  type: ReadMe "Try It" interactive API console
+  usage: Paste the `refresh` value from your downloaded API credential file into the
+    token refresh operation to mint an access token, then set the cluster URL in the
+    reference page's host selector before calling other operations.
+  docs: https://docs.lightup.ai/reference/post_api-v1-token-refresh
+host_template:
+  pattern: https://app.{clusterId}.lightup.ai
+  spec_default_clusterId: demo
+  note: The OpenAPI servers[] entry defaults clusterId to "demo" and is described as
+    "Enter your Lightup subdomain". This is a spec placeholder to be replaced with
+    your own cluster, not a shared open demo environment.
+test_values:
+  published: false
+  note: Lightup publishes no magic test identifiers, test cards, fixture values or
+    time-simulation tooling. Nothing has been invented here.
+preview_and_validation:
+  note: In place of sandbox fixtures, Lightup provides non-destructive preview and validation
+    affordances against real data.
+  capabilities:
+  - name: Preview a metric
+    docs: https://docs.lightup.ai/docs/preview-a-metric
+    description: Preview metric results before creating the metric.
+  - name: Validate custom SQL
+    surface: MCP tool validate_custom_sql
+    description: Validate custom SQL before using it in a metric.
+  - name: Test datasource connection
+    surface: MCP tool test_datasource_connection
+    description: Test a datasource connection before creating it.
+  - name: Data profiling
+    docs: https://docs.lightup.ai/docs/set-up-data-profiling
+    description: Profile data to understand a table before authoring checks.

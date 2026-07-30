@@ -1,0 +1,127 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.lightup.ai/docs/release-notes
+url: https://docs.lightup.ai/docs/release-notes
+scheme: platform release train, major.minor (4.x)
+current_version: '4.23'
+cadence: roughly every 2-6 weeks
+date_note: Release-note dates are published in mixed and ambiguous formats (both DD/MM/YYYY
+  and MM/DD/YYYY appear across entries, and the ordering of 4.16 vs 4.17 is inconsistent
+  with either reading). The `published_date` values below are recorded verbatim as
+  the provider prints them; they have deliberately not been normalized to ISO.
+scope_note: The release notes are product release notes covering the platform as a
+  whole (UI, engine, connectors), not an API-only changelog. API-affecting entries
+  are flagged with api_affecting below. Recent window only; the live page is the source
+  of truth.
+entries:
+- version: '4.23'
+  published_date: 22/09/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Genie response improvements
+  - Query history cleanup improvement
+  - 'Bug fixes: compare aggregate metrics percentage error round off, UI crash fix'
+- version: '4.22'
+  published_date: 08/09/2025
+  breaking: false
+  api_affecting: true
+  highlights:
+  - New bulk API to update incident status
+  - Fetch deleted metrics via API
+  - Optimised incident listing, incident details and monitor details
+  - Virtual tables enabled for Redshift
+  - Row count and update delay auto metrics for Incorta materialized views
+- version: '4.21'
+  published_date: 17/07/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Snowflake key pair authentication
+  - Metrics and monitors page counters moved from frontend to backend
+  - Pagination added to monitor lists
+  - Observer role permissions for table sample previews
+- version: '4.20'
+  published_date: 10/06/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Email integrations with Hourly, Daily or Weekly digest schedules
+  - CSV download of metrics data from the dashboard
+  - Faster Metrics and Monitors listing pages
+  - Snowflake key pair authentication support
+  - Reduced application boot time
+- version: '4.19'
+  published_date: 05/05/2025
+  breaking: false
+  api_affecting: true
+  highlights:
+  - Auto configuration available via the Query governance option
+  - General API latency improvements
+- version: '4.18'
+  published_date: 04/01/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Monitors can discard outlier data and train only on periods without outliers
+  - Fixed slow Explorer page load with large numbers of metrics
+- version: '4.17'
+  published_date: 03/06/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Left and right outer joins for row-by-row metrics (previously full outer join only)
+  - Monitor approval — workspace admins can require approval for metric and monitor
+    changes
+- version: '4.16'
+  published_date: 01/09/2025
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Additional metric types on Virtual Tables
+  - Fixed hourly summary alerts not being received with Microsoft Teams integration
+- version: '4.15'
+  published_date: 12/05/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Slice-specific training periods and alerts
+  - Navigation changes — action menu items moved to an overflow column
+  - Fixed digest alerts not being sent
+- version: '4.12'
+  published_date: 10/16/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Virtual Tables support for Snowflake and Databricks with row-by-row metrics
+  - Custom seasonality for custom SQL metrics
+  - Failing records count column on the incidents list page
+- version: '4.11'
+  published_date: 10/04/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - New home page UI and navigation
+  - Audit logs extended to tables and views
+  - Incident validation for full table metrics
+- version: '4.10'
+  published_date: 9/11/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Audit logs for Virtual Tables
+  - Virtual Tables for Incorta with row-by-row metrics
+- version: '4.9'
+  published_date: 9/3/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Admin approval governance for changes to metrics
+  - Redesigned workspace and query governance tabs
+- version: '4.8'
+  published_date: 8/15/2024
+  breaking: false
+  api_affecting: false
+  highlights:
+  - Data Profiling for Virtual Tables
+  - Memory allocation improvements during schema scans

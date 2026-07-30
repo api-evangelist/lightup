@@ -1,0 +1,98 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for the Lightup Dashboard API
+  version: 1.0.0
+extends: openapi/lightup-dashboard-openapi.json
+x-generated: '2026-07-19'
+x-method: generated
+x-source: openapi/lightup-dashboard-openapi.json
+x-note: >-
+  Captures API Evangelist enhancements to the harvested Lightup OpenAPI without mutating
+  the original. The upstream description declares no components.securitySchemes (auth
+  is modelled as a plain `authorization` header parameter), no components.schemas,
+  no operationIds, and no 4xx/5xx responses. This overlay adds a bearer securityScheme
+  and applies it, records the auth/convention documentation links, and flags the gaps
+  for a follow-up with the provider. It deliberately does not invent operationIds,
+  schemas or error responses.
+actions:
+- target: $.info
+  update:
+    x-apievangelist-slug: lightup
+    x-apievangelist-api-key: dashboard
+    x-apievangelist-provider: https://www.lightup.ai/
+    x-apievangelist-docs: https://docs.lightup.ai/docs
+    x-apievangelist-reference: https://docs.lightup.ai/reference
+    x-apievangelist-source: https://dash.readme.com/api/v1/api-registry/d5clddolyq6px33
+    x-apievangelist-conventions: conventions/lightup-conventions.yml
+    x-apievangelist-authentication: authentication/lightup-authentication.yml
+    x-apievangelist-data-model: data-model/lightup-data-model.yml
+    x-apievangelist-mcp: mcp/lightup-mcp.yml
+    x-apievangelist-spec-gaps:
+    - No components.securitySchemes; authorization is a raw header parameter.
+    - No operationIds on any of the 54 operations.
+    - No components.schemas; request and response bodies are untyped.
+    - No 4xx or 5xx responses documented.
+    - No examples in-spec.
+- target: $.info
+  update:
+    contact:
+      name: Lightup Data support
+      url: https://www.lightup.ai/contact
+      email: info@lightup.ai
+- target: $.servers
+  update:
+  - description: Your Lightup cluster. Replace clusterId with your own Lightup subdomain.
+    url: https://app.{clusterId}.lightup.ai
+    variables:
+      clusterId:
+        default: demo
+        description: The Lightup cluster subdomain your API credential was generated
+          against.
+- target: $
+  update:
+    components:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+          description: >-
+            JWT access token obtained by POSTing the `refresh` value from a downloaded
+            Lightup API credential file to /api/v1/token/refresh/. Send as
+            `Authorization: Bearer <access-token>`. Documented at
+            https://docs.lightup.ai/docs/api-credentials
+- target: $
+  update:
+    security:
+    - bearerAuth: []
+- target: $.tags
+  update:
+  - name: Health check
+    description: Service liveness probe.
+  - name: API Credentials
+    description: Exchange a refresh token for a short-lived access token.
+  - name: Workspaces
+    description: Top-level containers that scope datasources, metrics, monitors and
+      incidents.
+  - name: Users
+    description: Application users and workspace memberships, with app and workspace
+      roles.
+  - name: Datasources
+    description: Connected data systems that data quality checks are pushed down to.
+  - name: Metrics
+    description: Data quality indicators (DQIs) computed against a datasource.
+  - name: Datapoints
+    description: Time-series values produced by a metric.
+  - name: Monitors
+    description: Threshold and anomaly-detection rules that watch metrics and raise
+      incidents.
+  - name: Incidents
+    description: Detected data quality issues, with collaboration comments.
+  - name: Integrations
+    description: Workspace-scoped notification targets such as Slack, PagerDuty and
+      Jira.
+  - name: Catalogs
+    description: Instance-level data catalog integrations such as Alation, Collibra
+      and Atlan.
+  - name: Dashboard chart
+    description: Saved charts on a workspace dashboard.

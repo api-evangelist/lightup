@@ -1,0 +1,59 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/lightup-dashboard-openapi.json + https://docs.lightup.ai/docs/release-notes
+versioning:
+  scheme: uri-path
+  api_versions_observed:
+  - v0
+  - v1
+  templated_segment: '{api_version}'
+  templated_note: 36 of 54 operations take the API version as a path variable rather
+    than pinning it, so the deployed cluster determines the served version.
+  product_version: '4.23'
+  product_scheme: major.minor release train
+  docs: https://docs.lightup.ai/docs/release-notes
+deployment_model:
+  note: Lightup is deployed per customer (Cloud single-tenant VPC, or Hybrid/on-prem
+    for Enterprise), so API availability tracks the customer's own cluster and upgrade
+    cadence rather than a single shared multi-tenant service.
+  models:
+  - Cloud
+  - Hybrid (Enterprise)
+  scalability:
+  - Single-node
+  - Clustered (Kubernetes)
+  data_retention:
+    cloud: 30 days
+    enterprise: 6+ months
+  source: https://www.lightup.ai/pricing
+deprecation:
+  policy_url: null
+  sunset_header: false
+  published: false
+  note: No public deprecation or sunset policy, and no RFC 8594 Sunset/Deprecation
+    header support, is documented. No Deprecation pointer is wired in apis.yml.
+deprecated_operations: []
+deprecated_operations_note: >-
+  No operation in the published OpenAPI is flagged deprecated.
+status_page:
+  url: null
+  published: false
+  note: No public status page. status.lightup.ai does not resolve. Because deployments
+    are per-customer clusters there is no shared uptime surface to publish. No StatusPage
+    pointer is wired in apis.yml.
+sla:
+  url: null
+  uptime_target: null
+  tiers:
+  - plan: Cloud
+    sla: Standard
+  - plan: Enterprise
+    sla: Custom
+  note: The pricing page states SLA tiers exist (Standard for Cloud, Custom for Enterprise)
+    but publishes no uptime target or SLA document.
+  source: https://www.lightup.ai/pricing
+support:
+  contact: https://www.lightup.ai/contact
+  email: info@lightup.ai
+  security_email: security@lightup.ai
+  trial: https://my.lightup.ai

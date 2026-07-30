@@ -1,0 +1,86 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/lightup-data/lightctl
+name: lightctl
+description: lightctl is Lightup's official CLI tool. It wraps the Lightup REST API
+  and operates on data objects within the context of a workspace. It also ships importable
+  Python client classes, each documented as its own page in the Lightup docs.
+docs: https://docs.lightup.ai/docs/lightctl-installation
+repository: https://github.com/lightup-data/lightctl
+package: https://pypi.org/project/lightctl/
+version: 1.2.0
+license: Proprietary License
+language: python
+install:
+- method: pip
+  command: pip install lightctl
+  preferred: true
+- method: pip-pinned
+  command: pip install lightctl==1.0.0
+  note: Version-pinned form shown in the project README.
+- method: virtualenv
+  command: python3 -m venv .lightctl && source .lightctl/bin/activate && pip install
+    lightctl
+  note: Recommended by Lightup to isolate lightctl from other system dependencies.
+- method: source
+  command: python3 setup.py build && python3 setup.py install
+  note: Documented as a rare fallback.
+verify:
+- lightctl version
+- lightctl --help
+authentication:
+  model: API credential file associated with a specific Lightup cluster, downloaded
+    from the Lightup UI.
+  default_path: ~/.lightup/credential
+  env:
+  - name: LIGHTCTL_CREDENTIAL_PATH
+    description: Path to the credential file when it is not at the default location.
+  docs: https://docs.lightup.ai/docs/api-credentials
+workspace_context:
+  description: lightctl operates within a workspace. Commands take a workspace id;
+    without one lightctl falls back to a default workspace.
+  flag: --workspace <workspace id>
+  env:
+  - name: LIGHTCTL_DEFAULT_WORKSPACE
+    description: Sets the base workspace used when --workspace is not supplied.
+commands:
+- group: workspace
+  source_module: lightctl/command/workspace_command.py
+  description: Manage workspaces.
+- group: source
+  source_module: lightctl/command/source_command.py
+  description: Manage datasources (connections to Snowflake, Databricks, Redshift,
+    BigQuery, Postgres, Athena and the other supported datasources).
+- group: metric
+  source_module: lightctl/command/metric_command.py
+  description: Manage metrics / data quality indicators.
+- group: monitor
+  source_module: lightctl/command/monitor_command.py
+  description: Manage monitors (threshold and anomaly detection).
+- group: version
+  source_module: lightctl/command/version_command.py
+  description: Print the installed lightctl version.
+commands_note: Command groups are enumerated from the published module layout of the
+  lightctl repository; run `lightctl --help` for the authoritative flag-level surface,
+  which the project does not publish as static docs.
+python_clients:
+- name: HealthzClient
+  docs: https://docs.lightup.ai/docs/healthzclient
+- name: IncidentClient
+  docs: https://docs.lightup.ai/docs/incidentclient
+- name: MetricClient
+  docs: https://docs.lightup.ai/docs/metricclient
+- name: MonitorClient
+  docs: https://docs.lightup.ai/docs/monitorclient
+- name: ProfilerClient
+  docs: https://docs.lightup.ai/docs/profilerclient
+- name: SourceClient
+  docs: https://docs.lightup.ai/docs/sourceclient
+- name: UserClient
+  docs: https://docs.lightup.ai/docs/userclient
+- name: WorkspaceClient
+  docs: https://docs.lightup.ai/docs/workspaceclient
+- name: DatapointClient
+  docs: null
+  note: Present in the repository (lightctl/client/datapoint_client.py) but not documented
+    as its own docs page.

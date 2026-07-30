@@ -1,0 +1,51 @@
+generated: '2026-07-19'
+method: searched
+probe: false
+source: https://docs.lightup.ai/docs/key-security-features
+url: https://docs.lightup.ai/docs/key-security-features
+note: Lightup does not operate a dedicated trust-center subdomain (trust.lightup.ai
+  and security.lightup.ai do not resolve). Its published security and compliance posture
+  lives on the "Key security features" documentation page, supplemented by the legal
+  pages on the marketing site.
+certifications:
+- SOC 2 Type 2
+- ISAE 3000
+audits:
+  third_party_pen_tests: true
+  cadence: regular
+  report_availability: recent pen-test reports available upon request
+  static_analysis: performed as part of the CI/CD pipeline
+data_protection:
+  data_in_transit: TLS 1.2 minimum with AES-256; latest recommended secure cipher suites
+    enforced
+  data_at_rest: AES-256 via AWS-managed RDS and Redshift, encryption and periodic backup
+    snapshots always enabled (Cloud deployments)
+  source_data_copied: false
+  source_data_note: No customer source data is copied into the Lightup environment,
+    irrespective of deployment model; checks are pushed down to the customer datasource.
+  tenancy: Single-tenant dedicated VPC per customer (Cloud deployments)
+  access_logging: All data access activity for querying DQIs, metadata or results is
+    logged.
+access_control:
+  sso:
+  - Google SSO
+  - Okta
+  - SAML (Enterprise)
+  - Microsoft AD (Enterprise)
+  rbac: true
+  rbac_docs: https://docs.lightup.ai/docs/roles
+legal:
+  terms_of_service: https://www.lightup.ai/terms-of-service
+  privacy_policy: https://www.lightup.ai/privacy-policy
+  dpa: https://www.lightup.ai/dpa
+  subprocessors: https://www.lightup.ai/subprocessors
+  cookie_policy: https://www.lightup.ai/cookie-policy
+  disclosure: https://www.lightup.ai/disclosure
+evidence:
+- source: https://docs.lightup.ai/docs/key-security-features
+  keywords:
+  - SOC2 Type 2
+  - ISAE 3000
+  - pen-test
+  - encryption
+  - single tenant VPC

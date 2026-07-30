@@ -1,0 +1,88 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.lightup.ai/docs/key-security-features + openapi/lightup-dashboard-openapi.json
+compliance_program:
+  published: true
+  url: https://docs.lightup.ai/docs/key-security-features
+  certifications:
+  - SOC 2 Type 2
+  - ISAE 3000
+  third_party_pen_tests: true
+  detail: security/lightup-trust-center.yml
+standards:
+- id: soc2-type2
+  conforms: true
+  evidence: 'Key security features doc: "Regular third-party audits and pen-tests ensure
+    SOC2 Type 2 and ISAE 3000 compliance."'
+  source: https://docs.lightup.ai/docs/key-security-features
+- id: isae-3000
+  conforms: true
+  evidence: 'Key security features doc: "SOC2 Type 2 and ISAE 3000 compliance."'
+  source: https://docs.lightup.ai/docs/key-security-features
+- id: openapi-3.1
+  conforms: true
+  evidence: Published API description declares openapi 3.1.0.
+  source: openapi/lightup-dashboard-openapi.json
+- id: tls-1.2-minimum
+  conforms: true
+  evidence: 'Key security features doc: minimum requirement during connection negotiation
+    is TLS 1.2 with AES-256; live probe of docs.lightup.ai and app.demo.lightup.ai
+    negotiated TLS 1.3.'
+  source: security/lightup-domain-security.yml
+- id: jwt-bearer-auth
+  conforms: true
+  evidence: >-
+    Access tokens are JWTs presented in the Authorization header as "Bearer
+    <access-token>"; refresh tokens are exchanged at POST /api/v1/token/refresh/.
+  source: authentication/lightup-authentication.yml
+- id: saml-sso
+  conforms: true
+  evidence: SAML and Microsoft AD single sign-on listed for the Enterprise plan.
+  source: https://www.lightup.ai/pricing
+- id: rbac
+  conforms: true
+  evidence: App roles (Admin/Editor/Viewer) and workspace roles (Admin/Editor/Viewer/Observer)
+    documented.
+  source: https://docs.lightup.ai/docs/roles
+- id: offset-limit-pagination
+  conforms: true
+  evidence: List operations expose `limit` and `offset` query parameters.
+  source: openapi/lightup-dashboard-openapi.json
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 securityScheme in the OpenAPI and no OAuth authorization flow
+    documented; authentication is a refresh-token/access-token exchange.
+- id: oidc
+  conforms: false
+  evidence: No /.well-known/openid-configuration served (404 on all public hosts);
+    SSO is configured in-product rather than exposed as an OIDC provider surface.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: No 4xx/5xx responses are documented in the OpenAPI and no application/problem+json
+    content type appears.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on all public hosts, though a disclosure
+    policy is published at https://www.lightup.ai/disclosure.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No deprecation or sunset policy published.
+- id: asyncapi
+  conforms: false
+  evidence: No AsyncAPI document and no webhook catalog; event delivery is via outbound
+    notification connectors (Slack, PagerDuty, Jira, ServiceNow, Microsoft Teams, OpsGenie,
+    email) configured in-product.
+- id: json-api
+  conforms: false
+  evidence: Responses are plain application/json without a JSON:API envelope.
+- id: fhir-r4
+  conforms: false
+- id: scim2
+  conforms: false
+  evidence: User management is a proprietary /api/v0/users surface, not SCIM.
+- id: odata
+  conforms: false
+- id: psd2
+  conforms: false
+- id: fapi
+  conforms: false

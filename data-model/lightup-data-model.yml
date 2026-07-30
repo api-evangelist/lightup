@@ -1,0 +1,221 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/lightup-dashboard-openapi.json
+derive_note: The published OpenAPI declares no components.schemas, so entities and
+  relationships were derived from the path hierarchy, path parameters and tag grouping
+  rather than from $ref links. Field-level shapes are therefore not modelled here.
+identifier_convention: UUIDs, exposed as metric_uuid, filter_uuid (monitors), source_uuid,
+  incident_uuid; several operations use a generic {pk} path parameter for the same
+  resources.
+entities:
+- name: Workspace
+  tag: Workspaces
+  id_param: workspace_id
+  base_path: /api/{api_version}/workspaces/
+  description: Top-level container. Almost every data-quality object is scoped to a
+    workspace; users hold a per-workspace role.
+  operations:
+  - GET /api/{api_version}/workspaces/
+  - POST /api/{api_version}/workspaces/
+  - GET /api/{api_version}/workspaces/{workspace_id}
+  - PATCH /api/{api_version}/workspaces/{workspace_id}
+  - DELETE /api/{api_version}/workspaces/{workspace_id}
+- name: User
+  tag: Users
+  id_param: user_id
+  base_path: /api/v0/users/
+  description: Application user. Has an app-level role and a role in each workspace
+    joined.
+  operations:
+  - GET /api/v0/users/
+  - POST /api/v0/users/
+  - GET /api/v0/users/{user_id}
+  - PATCH /api/v0/users/{user_id}
+  - DELETE /api/v0/users/{user_id}
+- name: WorkspaceMembership
+  tag: Users
+  base_path: /api/v0/ws/{workspace_id}/users/
+  description: Join entity binding a User to a Workspace with a workspace role.
+  operations:
+  - GET /api/v0/ws/{workspace_id}/users/
+  - POST /api/v0/ws/{workspace_id}/users/
+  - PATCH /api/v0/ws/{workspace_id}/users/{user_id}
+  - DELETE /api/v0/ws/{workspace_id}/users/{user_id}
+- name: Datasource
+  tag: Datasources
+  id_param: source_uuid
+  base_path: /api/{api_version}/ws/{workspace_id}/sources/
+  description: A connected data system (Snowflake, Databricks, Redshift, BigQuery,
+    Postgres, Athena, Oracle, Teradata, SAP HANA, Dremio, Incorta, ksqlDB, S3, Azure
+    blob) that metrics are collected against.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/sources/
+  - POST /api/{api_version}/ws/{workspace_id}/sources/
+  - GET /api/{api_version}/ws/{workspace_id}/sources/{source_uuid}
+  - PUT /api/{api_version}/ws/{workspace_id}/sources/{source_uuid}
+  - DELETE /api/{api_version}/ws/{workspace_id}/sources/{source_uuid}
+- name: Trigger
+  tag: Datasources
+  base_path: /api/{api_version}/ws/{workspace_id}/sources/{pk}/trigger
+  description: Metric-collection trigger on a datasource.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/sources/{pk}/trigger
+  - POST /api/{api_version}/ws/{workspace_id}/sources/{pk}/trigger
+- name: Metric
+  tag: Metrics
+  id_param: metric_uuid
+  base_path: /api/{api_version}/ws/{workspace_id}/metrics/
+  description: A data quality indicator (DQI) computed against a datasource — aggregation,
+    conformity, data delay, data volume, distribution, null percent, row-by-row or
+    custom SQL.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/
+  - POST /api/{api_version}/ws/{workspace_id}/metrics/
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/{pk}
+  - PUT /api/{api_version}/ws/{workspace_id}/metrics/{pk}
+  - DELETE /api/{api_version}/ws/{workspace_id}/metrics/{pk}
+- name: Datapoint
+  tag: Datapoints
+  base_path: /api/{api_version}/ws/{workspace_id}/metrics/{metric_uuid}/datapoints
+  description: Time-series values produced by a metric, queried over a start_ts/end_ts
+    window.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/{metric_uuid}/datapoints
+- name: Monitor
+  tag: Monitors
+  id_param: filter_uuid
+  base_path: /api/{api_version}/ws/{workspace_id}/monitors/
+  description: A threshold or anomaly-detection rule that watches a metric and raises
+    incidents. Referred to as a filter in the API path and in operation descriptions.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/
+  - POST /api/{api_version}/ws/{workspace_id}/monitors/
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}
+  - PUT /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}
+  - DELETE /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}
+- name: Slice
+  tag: Monitors
+  base_path: /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}/slices
+  description: Dimensional slices of a monitored metric, each independently trained
+    and alerted.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}/slices
+- name: Incident
+  tag: Incidents
+  id_param: incident_uuid
+  base_path: /api/v0/ws/{workspace_id}/incidents/
+  description: A detected data quality issue raised by a monitor.
+  operations:
+  - GET /api/v0/ws/{workspace_id}/incidents/
+  - GET /api/v0/ws/{workspace_id}/incidents/{incident_uuid}
+- name: IncidentComment
+  tag: Incidents
+  id_param: comment_id
+  base_path: /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments
+  description: Collaboration thread on an incident.
+  operations:
+  - GET /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments
+  - POST /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments
+  - GET /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments/{comment_id}
+  - PUT /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments/{comment_id}
+  - DELETE /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments/{comment_id}
+- name: Integration
+  tag: Integrations
+  base_path: /api/{api_version}/ws/{workspace_id}/integrations/
+  description: Workspace-scoped notification target — Slack, PagerDuty, Jira, ServiceNow,
+    Microsoft Teams, OpsGenie or email list.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/integrations/
+  - POST /api/{api_version}/ws/{workspace_id}/integrations/
+  - GET /api/{api_version}/ws/{workspace_id}/integrations/{pk}
+  - PUT /api/{api_version}/ws/{workspace_id}/integrations/{pk}
+  - DELETE /api/{api_version}/ws/{workspace_id}/integrations/{pk}
+- name: Catalog
+  tag: Catalogs
+  id_param: integration_id
+  base_path: /api/{api_version}/system/integrations
+  description: Instance-level data catalog integration (Alation, Collibra, Atlan).
+    Configured at the app level, not per workspace.
+  operations:
+  - GET /api/{api_version}/system/integrations
+  - POST /api/{api_version}/system/integrations
+  - GET /api/{api_version}/system/integrations/{integration_id}
+  - PUT /api/{api_version}/system/integrations/{integration_id}
+  - DELETE /api/{api_version}/system/integrations/{integration_id}
+- name: DashboardChart
+  tag: Dashboard chart
+  base_path: /api/{api_version}/ws/{workspace_id}/dashboard/
+  description: Saved chart on a workspace dashboard.
+  operations:
+  - GET /api/{api_version}/ws/{workspace_id}/dashboard/
+  - POST /api/{api_version}/ws/{workspace_id}/dashboard/
+relationships:
+- from: Workspace
+  to: Datasource
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: Metric
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: Monitor
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: Incident
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: Integration
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: DashboardChart
+  kind: has_many
+  via: workspace_id
+- from: Workspace
+  to: WorkspaceMembership
+  kind: has_many
+  via: workspace_id
+- from: WorkspaceMembership
+  to: User
+  kind: belongs_to
+  via: user_id
+- from: WorkspaceMembership
+  to: Workspace
+  kind: belongs_to
+  via: workspace_id
+- from: Metric
+  to: Datasource
+  kind: belongs_to
+  via: source_uuid
+  evidence: Metric list operations filter by source_uuids.
+- from: Metric
+  to: Datapoint
+  kind: has_many
+  via: metric_uuid
+- from: Monitor
+  to: Metric
+  kind: belongs_to
+  via: metric_uuid
+  evidence: Monitor list operations filter by metric_uuids.
+- from: Monitor
+  to: Slice
+  kind: has_many
+  via: filter_uuid
+- from: Monitor
+  to: Incident
+  kind: has_many
+  via: monitor_uuids
+  evidence: Incident list operations filter by monitor_uuids.
+- from: Incident
+  to: IncidentComment
+  kind: has_many
+  via: incident_uuid
+- from: Datasource
+  to: Trigger
+  kind: has_many
+  via: pk
+render: null
+render_note: No subway/ visual exists in this repo yet.

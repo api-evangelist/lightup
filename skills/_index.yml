@@ -1,0 +1,53 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/lightup-dashboard-openapi.json + https://docs.lightup.ai/docs
+note: The Lightup OpenAPI declares no operationId values, so each skill grounds its
+  steps in the HTTP method + path exactly as published in the spec. No operation, path
+  or parameter below was invented. Lightup publishes no AGENTS.md or first-party agent
+  skills; its agent surface is the MCP server catalogued in mcp/lightup-mcp.yml.
+skills:
+- file: lightup-authenticate-and-explore.md
+  name: Authenticate to Lightup and explore data quality state
+  api: openapi/lightup-dashboard-openapi.json
+  operations:
+  - POST /api/v1/token/refresh/
+  - GET /api/{api_version}/workspaces/
+  - GET /api/{api_version}/ws/{workspace_id}/sources/
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/
+- file: lightup-create-metric-and-monitor.md
+  name: Create a Lightup metric and attach a monitor
+  api: openapi/lightup-dashboard-openapi.json
+  operations:
+  - POST /api/v1/token/refresh/
+  - GET /api/{api_version}/ws/{workspace_id}/sources/
+  - POST /api/{api_version}/ws/{workspace_id}/metrics/
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/{pk}
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/{metric_uuid}/datapoints
+  - POST /api/{api_version}/ws/{workspace_id}/monitors/
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}
+  - POST /api/{api_version}/ws/{workspace_id}/sources/{pk}/trigger
+- file: lightup-triage-incidents.md
+  name: Triage a Lightup data quality incident
+  api: openapi/lightup-dashboard-openapi.json
+  operations:
+  - GET /api/v0/ws/{workspace_id}/incidents/
+  - GET /api/v0/ws/{workspace_id}/incidents/{incident_uuid}
+  - GET /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments
+  - POST /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}
+  - GET /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}/slices
+  - GET /api/{api_version}/ws/{workspace_id}/metrics/{metric_uuid}/datapoints
+- file: lightup-manage-access-and-notifications.md
+  name: Manage Lightup workspace access and alert routing
+  api: openapi/lightup-dashboard-openapi.json
+  operations:
+  - GET /api/v0/users/
+  - POST /api/v0/users/
+  - PATCH /api/v0/users/{user_id}
+  - GET /api/v0/ws/{workspace_id}/users/
+  - POST /api/v0/ws/{workspace_id}/users/
+  - PATCH /api/v0/ws/{workspace_id}/users/{user_id}
+  - DELETE /api/v0/ws/{workspace_id}/users/{user_id}
+  - GET /api/{api_version}/ws/{workspace_id}/integrations/
+  - POST /api/{api_version}/ws/{workspace_id}/integrations/

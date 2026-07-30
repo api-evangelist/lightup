@@ -1,0 +1,74 @@
+generated: '2026-07-19'
+method: searched
+source: https://pypi.org/ + https://github.com/lightup-data
+note: Lightup publishes Python tooling only. No first-party client libraries were found
+  on npm, Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or crates.io.
+packages:
+- language: python
+  registry: pypi
+  name: lightctl
+  version: 1.2.0
+  url: https://pypi.org/project/lightctl/
+  install: pip install lightctl
+  source: https://github.com/lightup-data/lightctl
+  license: Proprietary License
+  homepage: https://www.lightup.ai/
+  official: true
+  kind: cli
+  description: Lightup's official CLI tool. Ships Python client classes (SourceClient,
+    MetricClient, MonitorClient, IncidentClient, ProfilerClient, UserClient, WorkspaceClient,
+    HealthzClient) that wrap the Lightup REST API, documented at https://docs.lightup.ai/docs/lightctl-installation.
+- language: python
+  registry: pypi
+  name: lightup-airflow-provider
+  version: 1.0.2
+  url: https://pypi.org/project/lightup-airflow-provider/
+  install: pip install lightup-airflow-provider
+  source: https://github.com/lightup-data/lightup-airflow-provider
+  license: Apache License 2.0
+  homepage: https://www.lightup.ai/
+  requires_python: '~=3.9'
+  official: true
+  kind: integration
+  description: Apache Airflow provider for Lightup, for orchestrating data quality
+    checks inside Airflow DAGs. Usage examples at https://github.com/lightup-data/airflow-lightup-examples.
+- language: python
+  registry: pypi
+  name: lightudq
+  version: 0.1.4
+  url: https://pypi.org/project/lightudq/
+  install: pip install lightudq
+  source: https://github.com/lightup-data/lightudq
+  requires_python: '>=3.9'
+  official: true
+  kind: library
+  description: AI-assisted data quality assessment for unstructured data.
+agent_distributions:
+- name: lightup-ai@lightup
+  kind: claude-code-plugin
+  install: claude plugin marketplace add lightup-data/lightup && claude plugin install
+    lightup-ai@lightup
+  source: https://github.com/lightup-data/lightup
+  official: true
+- name: lightup
+  kind: gemini-cli-extension
+  install: gemini extensions install https://github.com/lightup-data/lightup
+  source: https://github.com/lightup-data/lightup
+  official: true
+registries_checked:
+- registry: pypi
+  result: 3 first-party packages found
+- registry: npm
+  result: none found
+- registry: maven-central
+  result: none found
+- registry: nuget
+  result: none found
+- registry: pkg.go.dev
+  result: none found
+- registry: rubygems
+  result: none found
+- registry: packagist
+  result: none found
+- registry: crates.io
+  result: none found
