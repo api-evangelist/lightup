@@ -1,22 +1,289 @@
 aid: lightup
 name: Lightup
-description: Lightup is a company surfaced as a portfolio company of a16z and added to the API Evangelist
-  network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: 'Lightup Data, Inc. is an enterprise data quality and data observability
+  platform that lets data teams detect, diagnose, and resolve data issues across cloud
+  and hybrid data stacks. The platform runs pushdown data quality checks (DQIs) directly
+  against customer datasources — Snowflake, Databricks, Redshift, BigQuery, Postgres,
+  Athena, Oracle, Teradata, SAP HANA, Dremio, Incorta, ksqlDB and S3/Azure blob storage
+  — so no customer source data is copied into the Lightup environment. Capabilities
+  include zero-config auto metrics, sliced metrics, AI-based anomaly detection, data
+  profiling, data reconciliation, data lineage, incident management, and an agentic
+  interface (Lightup Agentic) that exposes the platform to MCP-compatible AI agents.
+  Lightup exposes a REST API for workspaces, datasources, metrics, monitors, incidents,
+  integrations, dashboards and users, a Python CLI (lightctl), an Airflow provider,
+  and an official MCP server. Founded by Manu Bansal; backed by a16z; SOC 2 Type 2
+  and ISAE 3000 compliant.'
 url: https://raw.githubusercontent.com/api-evangelist/lightup/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.lightup.ai/images/Lightup-Data-Quality-and-Data-Observability-platform-UI-2048x1068.webp
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - a16z
-x-tier: stub
-x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
+- Data Quality
+- Data Observability
+- Data Monitoring
+- Anomaly Detection
+- Data Engineering
+- Analytics
+- Incident Management
+- Artificial Intelligence
+- Data Governance
 - Company
-apis: []
+apis:
+- aid: lightup:lightup-api-credentials-api
+  name: Lightup API Credentials API
+  description: The API Credentials API from Lightup — 1 operation(s) for api credentials.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - API Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-api-credentials-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-catalogs-api
+  name: Lightup Catalogs API
+  description: The Catalogs API from Lightup — 2 operation(s) for catalogs.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Catalogs
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-catalogs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-dashboard-chart-api
+  name: Lightup Dashboard chart API
+  description: The Dashboard chart API from Lightup — 1 operation(s) for dashboard chart.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Dashboard chart
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-dashboard-chart-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-datapoints-api
+  name: Lightup Datapoints API
+  description: The Datapoints API from Lightup — 1 operation(s) for datapoints.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Datapoints
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-datapoints-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-datasources-api
+  name: Lightup Datasources API
+  description: The Datasources API from Lightup — 3 operation(s) for datasources.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Datasources
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-datasources-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-health-check-api
+  name: Lightup Health check API
+  description: The Health check API from Lightup — 1 operation(s) for health check.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Health check
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-health-check-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-incidents-api
+  name: Lightup Incidents API
+  description: The Incidents API from Lightup — 4 operation(s) for incidents.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Incidents
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-incidents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-integrations-api
+  name: Lightup Integrations API
+  description: The Integrations API from Lightup — 2 operation(s) for integrations.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Integrations
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-integrations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-metrics-api
+  name: Lightup Metrics API
+  description: The Metrics API from Lightup — 2 operation(s) for metrics.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-monitors-api
+  name: Lightup Monitors API
+  description: The Monitors API from Lightup — 3 operation(s) for monitors.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Monitors
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-monitors-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-users-api
+  name: Lightup Users API
+  description: The Users API from Lightup — 4 operation(s) for users.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-workspaces-api
+  name: Lightup Workspaces API
+  description: The Workspaces API from Lightup — 2 operation(s) for workspaces.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Workspaces
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+common:
+- type: Website
+  url: https://www.lightup.ai/
+- type: DeveloperPortal
+  url: https://docs.lightup.ai/
+- type: Documentation
+  url: https://docs.lightup.ai/docs
+- type: APIReference
+  url: https://docs.lightup.ai/reference
+- type: GettingStarted
+  url: https://docs.lightup.ai/docs/quick-start
+- type: Support
+  url: https://www.lightup.ai/contact
+- type: Blog
+  url: https://www.lightup.ai/blog/
+- type: GitHubOrganization
+  url: https://github.com/lightup-data
+- type: Pricing
+  url: https://www.lightup.ai/pricing
+- type: SignUp
+  url: https://my.lightup.ai
+- type: TermsOfService
+  url: https://www.lightup.ai/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.lightup.ai/privacy-policy
+- type: Security
+  url: https://www.lightup.ai/disclosure
+- type: Compliance
+  url: https://docs.lightup.ai/docs/key-security-features
+- type: TrustCenter
+  url: security/lightup-trust-center.yml
+- type: ChangeLog
+  url: changelog/lightup-changelog.yml
+- type: Authentication
+  url: authentication/lightup-authentication.yml
+- type: Conventions
+  url: conventions/lightup-conventions.yml
+- type: Lifecycle
+  url: lifecycle/lightup-lifecycle.yml
+- type: Conformance
+  url: conformance/lightup-conformance.yml
+- type: DataModel
+  url: data-model/lightup-data-model.yml
+- type: Packages
+  url: packages/lightup-packages.yml
+- type: SDKs
+  url: packages/lightup-packages.yml
+- type: CLI
+  url: cli/lightup-cli.yml
+- type: MCPServer
+  url: mcp/lightup-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/lightup-llms.txt
+- type: Sandbox
+  url: sandbox/lightup-sandbox.yml
+- type: VulnerabilityDisclosure
+  url: security/lightup-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/lightup-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/lightup-agentic-access.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence
