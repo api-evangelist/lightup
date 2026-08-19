@@ -1,0 +1,942 @@
+{
+  "item": [
+    {
+      "id": "c57608b4-c8d6-4e84-b09c-bd1756bbcd95",
+      "name": "Metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67f1785e-dbfd-4a17-906e-7a286ada70ad",
+          "name": "Get metrics list",
+          "request": {
+            "name": "Get metrics list",
+            "description": {
+              "content": "List all metrics based on query parameters",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Filter by type of metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Filter by name of the metric"
+                },
+                {
+                  "disabled": false,
+                  "key": "is_live",
+                  "value": "<boolean>",
+                  "description": "Filter by whether metric is live or not"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of source uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of source uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "schema_uuid",
+                  "value": "<string>",
+                  "description": "Filter by schema_uuid"
+                },
+                {
+                  "disabled": false,
+                  "key": "table_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of table uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "table_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of table uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "column_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of column uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "column_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of column uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of metric uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of metric uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Return metrics from offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Return only limit number of metrics"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20c1d0a0-0f6d-4432-869a-5ac1d0ad9ba7",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "is_live",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "source_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "schema_uuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "table_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "table_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "column_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "column_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "monitor_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "monitor_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"creationType\": \"custom\",\n      \"description\": \"\",\n      \"draftUuid\": \"string\",\n      \"hasDraft\": false,\n      \"idSerial\": 7254,\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 1452,\n        \"username\": \"string\"\n      },\n      \"tags\": [\n        \"tag_1\",\n        \"tag_2\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 679,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\",\n      \"workspaceId\": \"string\"\n    },\n    \"config\": {\n      \"sources\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"table\": {\n        \"schemaName\": \"public\",\n        \"tableName\": \"test\",\n        \"type\": \"table\"\n      },\n      \"aggregation\": {\n        \"aggregationWindow\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"sum\"\n      },\n      \"backfillDuration\": 3432,\n      \"collectionMode\": {\n        \"type\": \"scheduled\"\n      },\n      \"collectionWindow\": \"complete\",\n      \"configType\": \"metricConfig\",\n      \"dataTimezone\": \"string\",\n      \"dimension\": \"timeliness\",\n      \"failingRecordsSql\": \"string\",\n      \"inheritTableSettings\": true,\n      \"isLive\": true,\n      \"isStreaming\": false,\n      \"missingValueFilling\": \"zero\",\n      \"partitionOffsets\": {\n        \"includeFutureSeconds\": 0,\n        \"includePastSeconds\": 0\n      },\n      \"partitionTimezone\": \"UTC\",\n      \"partitions\": [\n        {\n          \"columnName\": \"string\",\n          \"format\": \"string\",\n          \"columnType\": \"string\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"format\": \"string\",\n          \"columnType\": \"string\"\n        }\n      ],\n      \"pollingInterval\": 300,\n      \"queryTimezone\": \"UTC\",\n      \"relatedMetrics\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"seasonality\": {\n        \"customSchedules\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"periodInSeconds\": 7465,\n        \"seasonInSeconds\": 6493\n      },\n      \"sliceByColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"synchronizationDelay\": 3600,\n      \"timestampColumn\": \"string\",\n      \"timestampColumnFunctions\": {\n        \"columnToTimestampFunction\": \"string\",\n        \"timestampToColumnFunction\": \"string\"\n      },\n      \"valueColumns\": [\n        {\n          \"columnName\": \"string\",\n          \"columnUuid\": \"string\",\n          \"type\": \"column\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"columnUuid\": \"string\",\n          \"type\": \"column\"\n        }\n      ],\n      \"whereClause\": {\n        \"whereConditions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"clauseLogic\": \"AND\"\n      }\n    },\n    \"apiVersion\": \"v1\",\n    \"draftMetadata\": {\n      \"approvedAt\": 8315.473223031324,\n      \"approvedBy\": {\n        \"email\": \"string\",\n        \"id\": 8511,\n        \"username\": \"string\"\n      },\n      \"approverNotes\": {\n        \"notes\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"notificationChannelUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"parentMetricUuid\": \"string\",\n      \"parentStreamIdSerial\": 4308,\n      \"state\": \"draft\",\n      \"type\": \"new\"\n    },\n    \"mode\": \"published\",\n    \"status\": {\n      \"actualRunConfigVersion\": 0,\n      \"configUpdatedTs\": 8433.948998784557,\n      \"createdTs\": 7524,\n      \"desiredRunConfigVersion\": 0,\n      \"hasDraft\": false,\n      \"lastSampleTs\": 5400.044888065003,\n      \"lastScannedTs\": 574.5505439532161,\n      \"queryExceptionCount\": 0,\n      \"queryTimeoutCount\": 0,\n      \"runStatus\": \"ok\",\n      \"runStatusMessage\": \"string\",\n      \"runtimeConfig\": {\n        \"fullCompareApproximateRowSize\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seasonality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seasonalityDiscoveryStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"streamStartedTs\": 3248.193234124819,\n      \"triggered\": {\n        \"maxTriggeredTs\": 3518,\n        \"triggerRunStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"triggerUuidForMaxTriggeredTs\": \"string\"\n      }\n    },\n    \"type\": \"metric\"\n  },\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"creationType\": \"custom\",\n      \"description\": \"\",\n      \"draftUuid\": \"string\",\n      \"hasDraft\": false,\n      \"idSerial\": 9219,\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 1022,\n        \"username\": \"string\"\n      },\n      \"tags\": [\n        \"tag_1\",\n        \"tag_2\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 2362,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\",\n      \"workspaceId\": \"string\"\n    },\n    \"config\": {\n      \"sources\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"table\": {\n        \"schemaName\": \"public\",\n        \"tableName\": \"test\",\n        \"type\": \"table\"\n      },\n      \"aggregation\": {\n        \"aggregationWindow\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"sum\"\n      },\n      \"backfillDuration\": 5114,\n      \"collectionMode\": {\n        \"type\": \"scheduled\"\n      },\n      \"collectionWindow\": \"complete\",\n      \"configType\": \"metricConfig\",\n      \"dataTimezone\": \"string\",\n      \"dimension\": \"timeliness\",\n      \"failingRecordsSql\": \"string\",\n      \"inheritTableSettings\": true,\n      \"isLive\": true,\n      \"isStreaming\": false,\n      \"missingValueFilling\": \"null\",\n      \"partitionOffsets\": {\n        \"includeFutureSeconds\": 0,\n        \"includePastSeconds\": 0\n      },\n      \"partitionTimezone\": \"UTC\",\n      \"partitions\": [\n        {\n          \"columnName\": \"string\",\n          \"format\": \"string\",\n          \"columnType\": \"string\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"format\": \"string\",\n          \"columnType\": \"string\"\n        }\n      ],\n      \"pollingInterval\": 300,\n      \"queryTimezone\": \"UTC\",\n      \"relatedMetrics\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"seasonality\": {\n        \"customSchedules\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"periodInSeconds\": 2632,\n        \"seasonInSeconds\": 3956\n      },\n      \"sliceByColumns\": [\n        \"string\",\n        \"string\"\n      ],\n      \"synchronizationDelay\": 3600,\n      \"timestampColumn\": \"string\",\n      \"timestampColumnFunctions\": {\n        \"columnToTimestampFunction\": \"string\",\n        \"timestampToColumnFunction\": \"string\"\n      },\n      \"valueColumns\": [\n        {\n          \"columnName\": \"string\",\n          \"columnUuid\": \"string\",\n          \"type\": \"column\"\n        },\n        {\n          \"columnName\": \"string\",\n          \"columnUuid\": \"string\",\n          \"type\": \"column\"\n        }\n      ],\n      \"whereClause\": {\n        \"whereConditions\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"clauseLogic\": \"AND\"\n      }\n    },\n    \"apiVersion\": \"v1\",\n    \"draftMetadata\": {\n      \"approvedAt\": 5926.248125723153,\n      \"approvedBy\": {\n        \"email\": \"string\",\n        \"id\": 9594,\n        \"username\": \"string\"\n      },\n      \"approverNotes\": {\n        \"notes\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      \"description\": \"string\",\n      \"name\": \"string\",\n      \"notificationChannelUuids\": [\n        \"string\",\n        \"string\"\n      ],\n      \"parentMetricUuid\": \"string\",\n      \"parentStreamIdSerial\": 6406,\n      \"state\": \"approved\",\n      \"type\": \"update\"\n    },\n    \"mode\": \"published\",\n    \"status\": {\n      \"actualRunConfigVersion\": 0,\n      \"configUpdatedTs\": 2144.147762723125,\n      \"createdTs\": 6586,\n      \"desiredRunConfigVersion\": 0,\n      \"hasDraft\": false,\n      \"lastSampleTs\": 4188.644375720625,\n      \"lastScannedTs\": 8379.447466132367,\n      \"queryExceptionCount\": 0,\n      \"queryTimeoutCount\": 0,\n      \"runStatus\": \"ok\",\n      \"runStatusMessage\": \"string\",\n      \"runtimeConfig\": {\n        \"fullCompareApproximateRowSize\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seasonality\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"seasonalityDiscoveryStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"streamStartedTs\": 1121.0833123833074,\n      \"triggered\": {\n        \"maxTriggeredTs\": 3380,\n        \"triggerRunStatus\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"triggerUuidForMaxTriggeredTs\": \"string\"\n      }\n    },\n    \"type\": \"metric\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84a1c2b0-f395-4d09-a0f0-d7c6d05c61f0",
+          "name": "Create metric",
+          "request": {
+            "name": "Create metric",
+            "description": {
+              "content": "Create a new metric",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"description\": \"\",\n    \"draftUuid\": \"<string>\",\n    \"hasDraft\": false\n  },\n  \"config\": {\n    \"sources\": [\n      \"<string>\"\n    ],\n    \"table\": {\n      \"tableName\": \"<string>\",\n      \"schemaName\": \"<string>\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"<string>\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": \"<integer>\",\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"failingRecordsSql\": \"<string>\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"missingValueFilling\": \"<string>\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"<string>\",\n        \"format\": \"<string>\",\n        \"columnType\": \"<string>\"\n      },\n      {\n        \"columnName\": \"<string>\",\n        \"format\": \"<string>\",\n        \"columnType\": \"<string>\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": \"<integer>\",\n      \"seasonInSeconds\": \"<integer>\"\n    },\n    \"sliceByColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"<string>\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"<string>\",\n      \"timestampToColumnFunction\": \"<string>\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"<string>\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"<string>\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"draftMetadata\": {\n    \"approvedAt\": \"<number>\",\n    \"approvedBy\": {\n      \"email\": \"<string>\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"notificationChannelUuids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"parentMetricUuid\": \"<string>\",\n    \"parentStreamIdSerial\": \"<integer>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"mode\": \"published\",\n  \"type\": \"metric\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5f8f2e66-4448-4a5f-8c8a-04ee6e7edf43",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"description\": \"\",\n    \"draftUuid\": \"string\",\n    \"hasDraft\": false,\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ]\n  },\n  \"config\": {\n    \"sources\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"table\": {\n      \"schemaName\": \"public\",\n      \"tableName\": \"test\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"15min\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": 5063,\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"string\",\n    \"dimension\": \"custom\",\n    \"failingRecordsSql\": \"string\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"missingValueFilling\": \"null\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"relatedMetrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": 245,\n      \"seasonInSeconds\": 6188\n    },\n    \"sliceByColumns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"string\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"string\",\n      \"timestampToColumnFunction\": \"string\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"string\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"draftMetadata\": {\n    \"approvedAt\": 5407.659056200168,\n    \"approvedBy\": {\n      \"email\": \"string\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"notificationChannelUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parentMetricUuid\": \"string\",\n    \"parentStreamIdSerial\": 5037,\n    \"state\": \"approvalPending\",\n    \"type\": \"new\"\n  },\n  \"mode\": \"published\",\n  \"type\": \"metric\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"creationType\": \"custom\",\n    \"description\": \"\",\n    \"draftUuid\": \"string\",\n    \"hasDraft\": false,\n    \"idSerial\": 8809,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 4843,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 6117,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"string\"\n  },\n  \"config\": {\n    \"sources\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"table\": {\n      \"schemaName\": \"public\",\n      \"tableName\": \"test\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"hour\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": 6977,\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"string\",\n    \"dimension\": \"custom\",\n    \"failingRecordsSql\": \"string\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"isStreaming\": false,\n    \"missingValueFilling\": \"zero\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"relatedMetrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": 6699,\n      \"seasonInSeconds\": 9714\n    },\n    \"sliceByColumns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"string\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"string\",\n      \"timestampToColumnFunction\": \"string\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"draftMetadata\": {\n    \"approvedAt\": 514.1336912157612,\n    \"approvedBy\": {\n      \"email\": \"string\",\n      \"id\": 6656,\n      \"username\": \"string\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"notificationChannelUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parentMetricUuid\": \"string\",\n    \"parentStreamIdSerial\": 251,\n    \"state\": \"approved\",\n    \"type\": \"update\"\n  },\n  \"mode\": \"published\",\n  \"status\": {\n    \"actualRunConfigVersion\": 0,\n    \"configUpdatedTs\": 5040.92034554679,\n    \"createdTs\": 4320,\n    \"desiredRunConfigVersion\": 0,\n    \"hasDraft\": false,\n    \"lastSampleTs\": 3111.880936144293,\n    \"lastScannedTs\": 2963.694499952253,\n    \"queryExceptionCount\": 0,\n    \"queryTimeoutCount\": 0,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"fullCompareApproximateRowSize\": {\n        \"source\": 6194,\n        \"sourceCapturedTs\": 8317.238163415313,\n        \"target\": 1055,\n        \"targetCapturedTs\": 9439.382207705357\n      },\n      \"seasonality\": {\n        \"customSchedules\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"periodInSeconds\": 9773,\n        \"seasonInSeconds\": 2349\n      },\n      \"seasonalityDiscoveryStatus\": \"Time span of data available is less than three days\"\n    },\n    \"streamStartedTs\": 8501.577573366789,\n    \"triggered\": {\n      \"maxTriggeredTs\": 8136,\n      \"triggerRunStatus\": \"completed\",\n      \"triggerUuidForMaxTriggeredTs\": \"string\"\n    }\n  },\n  \"type\": \"metric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cfbba57c-3a1f-4bc3-9803-65351146a0d6",
+          "name": "Delete metric",
+          "request": {
+            "name": "Delete metric",
+            "description": {
+              "content": "Delete a stream",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "44d24be5-b3b1-4b74-9852-0916866e7731",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67d3445b-f2dd-46d8-bfd9-dd39e6d0ecdb",
+          "name": "Get metric",
+          "request": {
+            "name": "Get metric",
+            "description": {
+              "content": "Retrieve a metric",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fb3ba9a6-ac69-4a48-a4df-431573f89382",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"creationType\": \"custom\",\n    \"description\": \"\",\n    \"draftUuid\": \"string\",\n    \"hasDraft\": false,\n    \"idSerial\": 8809,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 4843,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 6117,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"string\"\n  },\n  \"config\": {\n    \"sources\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"table\": {\n      \"schemaName\": \"public\",\n      \"tableName\": \"test\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"hour\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": 6977,\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"string\",\n    \"dimension\": \"custom\",\n    \"failingRecordsSql\": \"string\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"isStreaming\": false,\n    \"missingValueFilling\": \"zero\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"relatedMetrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": 6699,\n      \"seasonInSeconds\": 9714\n    },\n    \"sliceByColumns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"string\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"string\",\n      \"timestampToColumnFunction\": \"string\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"draftMetadata\": {\n    \"approvedAt\": 514.1336912157612,\n    \"approvedBy\": {\n      \"email\": \"string\",\n      \"id\": 6656,\n      \"username\": \"string\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"notificationChannelUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parentMetricUuid\": \"string\",\n    \"parentStreamIdSerial\": 251,\n    \"state\": \"approved\",\n    \"type\": \"update\"\n  },\n  \"mode\": \"published\",\n  \"status\": {\n    \"actualRunConfigVersion\": 0,\n    \"configUpdatedTs\": 5040.92034554679,\n    \"createdTs\": 4320,\n    \"desiredRunConfigVersion\": 0,\n    \"hasDraft\": false,\n    \"lastSampleTs\": 3111.880936144293,\n    \"lastScannedTs\": 2963.694499952253,\n    \"queryExceptionCount\": 0,\n    \"queryTimeoutCount\": 0,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"fullCompareApproximateRowSize\": {\n        \"source\": 6194,\n        \"sourceCapturedTs\": 8317.238163415313,\n        \"target\": 1055,\n        \"targetCapturedTs\": 9439.382207705357\n      },\n      \"seasonality\": {\n        \"customSchedules\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"periodInSeconds\": 9773,\n        \"seasonInSeconds\": 2349\n      },\n      \"seasonalityDiscoveryStatus\": \"Time span of data available is less than three days\"\n    },\n    \"streamStartedTs\": 8501.577573366789,\n    \"triggered\": {\n      \"maxTriggeredTs\": 8136,\n      \"triggerRunStatus\": \"completed\",\n      \"triggerUuidForMaxTriggeredTs\": \"string\"\n    }\n  },\n  \"type\": \"metric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dea2269d-5b1e-42b7-b0be-b315ab3966a4",
+          "name": "Update metric",
+          "request": {
+            "name": "Update metric",
+            "description": {
+              "content": "Update a metric",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"description\": \"\",\n    \"draftUuid\": \"<string>\",\n    \"hasDraft\": false\n  },\n  \"config\": {\n    \"sources\": [\n      \"<string>\"\n    ],\n    \"table\": {\n      \"tableName\": \"<string>\",\n      \"schemaName\": \"<string>\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"<string>\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": \"<integer>\",\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"<string>\",\n    \"dimension\": \"<string>\",\n    \"failingRecordsSql\": \"<string>\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"missingValueFilling\": \"<string>\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"<string>\",\n        \"format\": \"<string>\",\n        \"columnType\": \"<string>\"\n      },\n      {\n        \"columnName\": \"<string>\",\n        \"format\": \"<string>\",\n        \"columnType\": \"<string>\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": \"<integer>\",\n      \"seasonInSeconds\": \"<integer>\"\n    },\n    \"sliceByColumns\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"<string>\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"<string>\",\n      \"timestampToColumnFunction\": \"<string>\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"<string>\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"<string>\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"draftMetadata\": {\n    \"approvedAt\": \"<number>\",\n    \"approvedBy\": {\n      \"email\": \"<string>\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"<string>\",\n    \"name\": \"<string>\",\n    \"notificationChannelUuids\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"parentMetricUuid\": \"<string>\",\n    \"parentStreamIdSerial\": \"<integer>\",\n    \"state\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"mode\": \"published\",\n  \"type\": \"metric\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a688438-f871-4074-96ce-cdf927f67e4d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"description\": \"\",\n    \"draftUuid\": \"string\",\n    \"hasDraft\": false,\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ]\n  },\n  \"config\": {\n    \"sources\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"table\": {\n      \"schemaName\": \"public\",\n      \"tableName\": \"test\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"15min\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": 5063,\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"string\",\n    \"dimension\": \"custom\",\n    \"failingRecordsSql\": \"string\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"missingValueFilling\": \"null\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"relatedMetrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": 245,\n      \"seasonInSeconds\": 6188\n    },\n    \"sliceByColumns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"string\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"string\",\n      \"timestampToColumnFunction\": \"string\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"string\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"draftMetadata\": {\n    \"approvedAt\": 5407.659056200168,\n    \"approvedBy\": {\n      \"email\": \"string\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"notificationChannelUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parentMetricUuid\": \"string\",\n    \"parentStreamIdSerial\": 5037,\n    \"state\": \"approvalPending\",\n    \"type\": \"new\"\n  },\n  \"mode\": \"published\",\n  \"type\": \"metric\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"creationType\": \"custom\",\n    \"description\": \"\",\n    \"draftUuid\": \"string\",\n    \"hasDraft\": false,\n    \"idSerial\": 8809,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 4843,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 6117,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"string\"\n  },\n  \"config\": {\n    \"sources\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"table\": {\n      \"schemaName\": \"public\",\n      \"tableName\": \"test\",\n      \"type\": \"table\"\n    },\n    \"aggregation\": {\n      \"aggregationWindow\": \"hour\",\n      \"type\": \"sum\"\n    },\n    \"backfillDuration\": 6977,\n    \"collectionMode\": {\n      \"type\": \"scheduled\"\n    },\n    \"collectionWindow\": \"complete\",\n    \"configType\": \"metricConfig\",\n    \"dataTimezone\": \"string\",\n    \"dimension\": \"custom\",\n    \"failingRecordsSql\": \"string\",\n    \"inheritTableSettings\": true,\n    \"isLive\": true,\n    \"isStreaming\": false,\n    \"missingValueFilling\": \"zero\",\n    \"partitionOffsets\": {\n      \"includeFutureSeconds\": 0,\n      \"includePastSeconds\": 0\n    },\n    \"partitionTimezone\": \"UTC\",\n    \"partitions\": [\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"format\": \"string\",\n        \"columnType\": \"string\"\n      }\n    ],\n    \"pollingInterval\": 300,\n    \"queryTimezone\": \"UTC\",\n    \"relatedMetrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"seasonality\": {\n      \"customSchedules\": [\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"metadata\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"config\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"periodInSeconds\": 6699,\n      \"seasonInSeconds\": 9714\n    },\n    \"sliceByColumns\": [\n      \"string\",\n      \"string\"\n    ],\n    \"synchronizationDelay\": 3600,\n    \"timestampColumn\": \"string\",\n    \"timestampColumnFunctions\": {\n      \"columnToTimestampFunction\": \"string\",\n      \"timestampToColumnFunction\": \"string\"\n    },\n    \"valueColumns\": [\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      },\n      {\n        \"columnName\": \"string\",\n        \"columnUuid\": \"string\",\n        \"type\": \"column\"\n      }\n    ],\n    \"whereClause\": {\n      \"whereConditions\": [\n        {\n          \"column\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"conditions\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"clauseLogic\": \"AND\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"draftMetadata\": {\n    \"approvedAt\": 514.1336912157612,\n    \"approvedBy\": {\n      \"email\": \"string\",\n      \"id\": 6656,\n      \"username\": \"string\"\n    },\n    \"approverNotes\": {\n      \"notes\": [\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"note\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"noteAt\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    \"description\": \"string\",\n    \"name\": \"string\",\n    \"notificationChannelUuids\": [\n      \"string\",\n      \"string\"\n    ],\n    \"parentMetricUuid\": \"string\",\n    \"parentStreamIdSerial\": 251,\n    \"state\": \"approved\",\n    \"type\": \"update\"\n  },\n  \"mode\": \"published\",\n  \"status\": {\n    \"actualRunConfigVersion\": 0,\n    \"configUpdatedTs\": 5040.92034554679,\n    \"createdTs\": 4320,\n    \"desiredRunConfigVersion\": 0,\n    \"hasDraft\": false,\n    \"lastSampleTs\": 3111.880936144293,\n    \"lastScannedTs\": 2963.694499952253,\n    \"queryExceptionCount\": 0,\n    \"queryTimeoutCount\": 0,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"fullCompareApproximateRowSize\": {\n        \"source\": 6194,\n        \"sourceCapturedTs\": 8317.238163415313,\n        \"target\": 1055,\n        \"targetCapturedTs\": 9439.382207705357\n      },\n      \"seasonality\": {\n        \"customSchedules\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"periodInSeconds\": 9773,\n        \"seasonInSeconds\": 2349\n      },\n      \"seasonalityDiscoveryStatus\": \"Time span of data available is less than three days\"\n    },\n    \"streamStartedTs\": 8501.577573366789,\n    \"triggered\": {\n      \"maxTriggeredTs\": 8136,\n      \"triggerRunStatus\": \"completed\",\n      \"triggerUuidForMaxTriggeredTs\": \"string\"\n    }\n  },\n  \"type\": \"metric\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e62d7143-fbce-45ab-9366-931c461e5631",
+    "name": "Lightup Dashboard API Credentials Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

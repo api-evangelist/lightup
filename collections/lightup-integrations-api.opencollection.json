@@ -1,0 +1,194 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Integrations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integrations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the list of integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/integrations/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ]
+          },
+          "docs": "List all integrations"
+        },
+        {
+          "info": {
+            "name": "Create a new integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/integrations/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new integration"
+        },
+        {
+          "info": {
+            "name": "Get an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/integrations/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the integration"
+              }
+            ]
+          },
+          "docs": "Retrieve an integration"
+        },
+        {
+          "info": {
+            "name": "Update an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/integrations/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the integration"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an integration"
+        },
+        {
+          "info": {
+            "name": "Delete an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/integrations/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the integration"
+              }
+            ]
+          },
+          "docs": "Delete an integration"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

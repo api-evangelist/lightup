@@ -1,0 +1,294 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Datasources API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get datasource list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Return sources from offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Return only limit number of datasources"
+              }
+            ]
+          },
+          "docs": "List all datasources"
+        },
+        {
+          "info": {
+            "name": "Create datasource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new datasource"
+        },
+        {
+          "info": {
+            "name": "Get details about a specific trigger",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/:pk/trigger",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              },
+              {
+                "name": "triggerUuid",
+                "value": "",
+                "type": "query",
+                "description": "Trigger UUID to get"
+              },
+              {
+                "name": "userDefinedId",
+                "value": "",
+                "type": "query",
+                "description": "User defined ID to get"
+              }
+            ]
+          },
+          "docs": "Get details about a specific trigger"
+        },
+        {
+          "info": {
+            "name": "Trigger metric collection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/:pk/trigger",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Trigger metric collection"
+        },
+        {
+          "info": {
+            "name": "Get datasource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/:source_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "source_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ]
+          },
+          "docs": "Retrieve a datasource"
+        },
+        {
+          "info": {
+            "name": "Update datasource",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/:source_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "source_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a datasource"
+        },
+        {
+          "info": {
+            "name": "Delete datasource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/sources/:source_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "source_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ]
+          },
+          "docs": "Delete a datasource"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

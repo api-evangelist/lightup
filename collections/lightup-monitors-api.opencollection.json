@@ -1,0 +1,275 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Monitors API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Monitors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get monitor list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of monitor names"
+              },
+              {
+                "name": "source_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of source uuids"
+              },
+              {
+                "name": "metric_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of metric uuids"
+              },
+              {
+                "name": "monitor_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of monitor uuids"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Return monitors from offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Return only limit number of monitors"
+              }
+            ]
+          },
+          "docs": "\n        List all monitors in the workspace based on filters\n        "
+        },
+        {
+          "info": {
+            "name": "Create monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create monitor"
+        },
+        {
+          "info": {
+            "name": "Get monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/:filter_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get monitor"
+        },
+        {
+          "info": {
+            "name": "Update monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/:filter_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "\n        Update a filter\n        - recreate training job if config has changes that require retraining\n        - delete deployment if not live\n        - recreate deployment if live and config has changes that require redeployment\n        "
+        },
+        {
+          "info": {
+            "name": "Delete monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/:filter_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "\n        Delete a filter\n        - delete live filter deployment, training job and filter preview jobs, if any\n        "
+        },
+        {
+          "info": {
+            "name": "Get slices associated with monitor",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/monitors/:filter_uuid/slices",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "filter_uuid",
+                "value": "",
+                "type": "path",
+                "description": "Monitor UUID"
+              },
+              {
+                "name": "start_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by start time"
+              },
+              {
+                "name": "end_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by end time"
+              }
+            ]
+          },
+          "docs": "Get slices associated with monitor"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -7,16 +7,16 @@ server:
   product_name: Lightup Agentic
   transport: sse
   url: null
-  url_note: The MCP server URL is provisioned per customer and supplied by the Lightup
-    team; it is not a single public endpoint. Clients connect as /sse?host=<your Lightup
-    instance URL>&refresh_token=<your JWT refresh token>.
+  url_note: The MCP server URL is provisioned per customer and supplied by the Lightup team; it is not
+    a single public endpoint. Clients connect as /sse?host=<your Lightup instance URL>&refresh_token=<your
+    JWT refresh token>.
   stateless: true
-  credentials: Each connection carries its own credentials in the URL; nothing is stored
-    server-side and sessions are fully isolated.
+  credentials: Each connection carries its own credentials in the URL; nothing is stored server-side and
+    sessions are fully isolated.
   backend: Calls through to the Lightup REST API on the customer's own instance.
 install:
-  setup_script: 'curl -sL https://raw.githubusercontent.com/lightup-data/lightup/main/setup.sh
-    | bash -s -- claude'
+  setup_script: curl -sL https://raw.githubusercontent.com/lightup-data/lightup/main/setup.sh | bash -s
+    -- claude
   clients:
   - name: Claude Code
     status: available
@@ -29,12 +29,10 @@ install:
     extension_install: gemini extensions install https://github.com/lightup-data/lightup
   - name: Codex CLI
     status: coming soon
-  credential_file: lightup-api-credential*.json downloaded from the Lightup UI (Profile
-    -> API Credentials -> Download); setup auto-discovers it in ~/Downloads, ~/Desktop
-    or ~.
+  credential_file: lightup-api-credential*.json downloaded from the Lightup UI (Profile -> API Credentials
+    -> Download); setup auto-discovers it in ~/Downloads, ~/Desktop or ~.
 prerequisites:
-- An active Lightup instance with at least Viewer access, or a 30-day free trial at
-  https://my.lightup.ai
+- An active Lightup instance with at least Viewer access, or a 30-day free trial at https://my.lightup.ai
 - Network access from the client machine to the Lightup MCP server URL
 tool_count: 41
 tools:
@@ -135,8 +133,14 @@ tools:
 related_repositories:
 - name: lightup
   url: https://github.com/lightup-data/lightup
-  description: Connect Lightup to AI agents via MCP (entry point, setup.sh, client
-    guides)
+  description: Connect Lightup to AI agents via MCP (entry point, setup.sh, client guides)
 - name: lightup-claude-setup
   url: https://github.com/lightup-data/lightup-claude-setup
   description: Connect Lightup to Claude Code via MCP - one-line setup
+deployment:
+  mode: remote
+  endpoint: https://raw.githubusercontent.com/lightup-data/lightup/main/setup.sh
+  verified: probed
+  probe: wall
+  checked: '2026-08-12'
+  source: catalog MCP census

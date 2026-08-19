@@ -1,0 +1,1053 @@
+{
+  "item": [
+    {
+      "id": "8540319d-0df1-4670-a0c6-d41ce56d4fd5",
+      "name": "Monitors",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eb9f3db0-12ac-4b0c-9fac-e1c204a1fe7b",
+          "name": "Get monitor list",
+          "request": {
+            "name": "Get monitor list",
+            "description": {
+              "content": "\n        List all monitors in the workspace based on filters\n        ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor names"
+                },
+                {
+                  "disabled": false,
+                  "key": "names",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor names"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of source uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of source uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of metric uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "metric_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of metric uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "monitor_uuids",
+                  "value": "<string>",
+                  "description": "Filter by list of monitor uuids"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Return monitors from offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Return only limit number of monitors"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "39a9433e-f2a6-48d5-99a0-3be6c7777306",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "names",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "metric_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "monitor_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "monitor_uuids",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"workspaceId\": \"string\",\n      \"idSerial\": 6281,\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 4572,\n        \"username\": \"string\"\n      },\n      \"tags\": [\n        \"tag_1\",\n        \"tag_2\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 6060,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\"\n    },\n    \"config\": {\n      \"metrics\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"alertConfig\": {\n        \"isMuted\": true\n      },\n      \"driftDuration\": 3292,\n      \"isLive\": false,\n      \"liveStartTs\": 8674.302371559234,\n      \"recoveryDuration\": 3589,\n      \"symptom\": {\n        \"bound\": {\n          \"lower\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upper\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"featureConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"manualThreshold\"\n      }\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"configUpdatedTs\": 6986.794124042243,\n      \"createdTs\": 4607.357697645787,\n      \"displayStatus\": \"pausedByUser\",\n      \"lastSampleTs\": 235.62589043550685,\n      \"runStatus\": \"pausedByUser\",\n      \"runStatusMessage\": \"string\",\n      \"runtimeConfig\": {\n        \"lastDiscoveryTs\": 9084,\n        \"symptomConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"training\": {\n        \"isTrained\": true,\n        \"incidentLearning\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"isSlicing\": true,\n        \"status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"totalSlice\": 3814,\n        \"trainedSlice\": 7385,\n        \"trainingError\": \"string\",\n        \"trainingJobState\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"type\": \"rule\"\n  },\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"workspaceId\": \"string\",\n      \"idSerial\": 7808,\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 1742,\n        \"username\": \"string\"\n      },\n      \"tags\": [\n        \"tag_1\",\n        \"tag_2\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 599,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\"\n    },\n    \"config\": {\n      \"metrics\": [\n        \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n      ],\n      \"alertConfig\": {\n        \"isMuted\": true\n      },\n      \"driftDuration\": 8543,\n      \"isLive\": false,\n      \"liveStartTs\": 9999.974215871573,\n      \"recoveryDuration\": 9092,\n      \"symptom\": {\n        \"bound\": {\n          \"lower\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"upper\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"featureConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"manualThreshold\"\n      }\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"configUpdatedTs\": 7197.916978327174,\n      \"createdTs\": 5608.512254177086,\n      \"displayStatus\": \"live\",\n      \"lastSampleTs\": 1132.7235479433018,\n      \"runStatus\": \"exception\",\n      \"runStatusMessage\": \"string\",\n      \"runtimeConfig\": {\n        \"lastDiscoveryTs\": 4023,\n        \"symptomConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"training\": {\n        \"isTrained\": true,\n        \"incidentLearning\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"isSlicing\": false,\n        \"status\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"totalSlice\": 9749,\n        \"trainedSlice\": 1496,\n        \"trainingError\": \"string\",\n        \"trainingJobState\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"type\": \"rule\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23079840-19f6-46f0-bcfa-76b5c1bad254",
+          "name": "Create monitor",
+          "request": {
+            "name": "Create monitor",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\"\n  },\n  \"config\": {\n    \"metrics\": [\n      \"<string>\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": \"<integer>\",\n    \"isLive\": false,\n    \"liveStartTs\": \"<number>\",\n    \"recoveryDuration\": \"<integer>\",\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": \"<number>\",\n        \"upper\": \"<number>\"\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "03a04d9f-d546-4d13-9b35-4fe75f61ece6",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ]\n  },\n  \"config\": {\n    \"metrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": 6337,\n    \"isLive\": false,\n    \"liveStartTs\": 3539.7785596359863,\n    \"recoveryDuration\": 4161,\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": 5128.8001764126275,\n        \"upper\": 9703.207815072841\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"workspaceId\": \"string\",\n    \"idSerial\": 1976,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 1377,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 272,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"metrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": 8782,\n    \"isLive\": false,\n    \"liveStartTs\": 897.2964576554054,\n    \"recoveryDuration\": 3151,\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": 4574.506273472403,\n        \"upper\": 8524.474169552253\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"configUpdatedTs\": 356.1141998948891,\n    \"createdTs\": 693.5566996899512,\n    \"displayStatus\": \"loading\",\n    \"lastSampleTs\": 1874.109229096338,\n    \"runStatus\": \"paused\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"lastDiscoveryTs\": 6967,\n      \"symptomConfig\": {\n        \"bound\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"featureConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"manualThreshold\"\n      }\n    },\n    \"training\": {\n      \"isTrained\": false,\n      \"incidentLearning\": {\n        \"numIncidents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"isSlicing\": false,\n      \"status\": \"notApplicable\",\n      \"totalSlice\": 7217,\n      \"trainedSlice\": 9907,\n      \"trainingError\": \"string\",\n      \"trainingJobState\": \"paused_on_source\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "80252cd2-a457-439e-840b-3ba26e4be0dc",
+          "name": "Delete monitor",
+          "request": {
+            "name": "Delete monitor",
+            "description": {
+              "content": "\n        Delete a filter\n        - delete live filter deployment, training job and filter preview jobs, if any\n        ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter_uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "111d4432-cf34-4eb4-9730-ef52822f86cc",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter_uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "978ff180-27d3-4b5b-a57e-f7c42d3c65ab",
+          "name": "Get monitor",
+          "request": {
+            "name": "Get monitor",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter_uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "977a324f-2e09-4a92-840f-9cad205154a8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter_uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"workspaceId\": \"string\",\n    \"idSerial\": 1976,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 1377,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 272,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"metrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": 8782,\n    \"isLive\": false,\n    \"liveStartTs\": 897.2964576554054,\n    \"recoveryDuration\": 3151,\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": 4574.506273472403,\n        \"upper\": 8524.474169552253\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"configUpdatedTs\": 356.1141998948891,\n    \"createdTs\": 693.5566996899512,\n    \"displayStatus\": \"loading\",\n    \"lastSampleTs\": 1874.109229096338,\n    \"runStatus\": \"paused\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"lastDiscoveryTs\": 6967,\n      \"symptomConfig\": {\n        \"bound\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"featureConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"manualThreshold\"\n      }\n    },\n    \"training\": {\n      \"isTrained\": false,\n      \"incidentLearning\": {\n        \"numIncidents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"isSlicing\": false,\n      \"status\": \"notApplicable\",\n      \"totalSlice\": 7217,\n      \"trainedSlice\": 9907,\n      \"trainingError\": \"string\",\n      \"trainingJobState\": \"paused_on_source\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72178850-6fe6-4a84-985f-2866c6267477",
+          "name": "Update monitor",
+          "request": {
+            "name": "Update monitor",
+            "description": {
+              "content": "\n        Update a filter\n        - recreate training job if config has changes that require retraining\n        - delete deployment if not live\n        - recreate deployment if live and config has changes that require redeployment\n        ",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ":filter_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter_uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\"\n  },\n  \"config\": {\n    \"metrics\": [\n      \"<string>\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": \"<integer>\",\n    \"isLive\": false,\n    \"liveStartTs\": \"<number>\",\n    \"recoveryDuration\": \"<integer>\",\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": \"<number>\",\n        \"upper\": \"<number>\"\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dd7b09ec-33fc-45d9-885c-d504668b9825",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ":filter_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter_uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ]\n  },\n  \"config\": {\n    \"metrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": 6337,\n    \"isLive\": false,\n    \"liveStartTs\": 3539.7785596359863,\n    \"recoveryDuration\": 4161,\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": 5128.8001764126275,\n        \"upper\": 9703.207815072841\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"workspaceId\": \"string\",\n    \"idSerial\": 1976,\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 1377,\n      \"username\": \"string\"\n    },\n    \"tags\": [\n      \"tag_1\",\n      \"tag_2\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 272,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"metrics\": [\n      \"2cc34698-5a25-4e4e-bd01-5664660f22b7\"\n    ],\n    \"alertConfig\": {\n      \"isMuted\": true\n    },\n    \"driftDuration\": 8782,\n    \"isLive\": false,\n    \"liveStartTs\": 897.2964576554054,\n    \"recoveryDuration\": 3151,\n    \"symptom\": {\n      \"bound\": {\n        \"lower\": 4574.506273472403,\n        \"upper\": 8524.474169552253\n      },\n      \"featureConfig\": {\n        \"type\": \"value\"\n      },\n      \"type\": \"manualThreshold\"\n    }\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"configUpdatedTs\": 356.1141998948891,\n    \"createdTs\": 693.5566996899512,\n    \"displayStatus\": \"loading\",\n    \"lastSampleTs\": 1874.109229096338,\n    \"runStatus\": \"paused\",\n    \"runStatusMessage\": \"string\",\n    \"runtimeConfig\": {\n      \"lastDiscoveryTs\": 6967,\n      \"symptomConfig\": {\n        \"bound\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"featureConfig\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"type\": \"manualThreshold\"\n      }\n    },\n    \"training\": {\n      \"isTrained\": false,\n      \"incidentLearning\": {\n        \"numIncidents\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"isSlicing\": false,\n      \"status\": \"notApplicable\",\n      \"totalSlice\": 7217,\n      \"trainedSlice\": 9907,\n      \"trainingError\": \"string\",\n      \"trainingJobState\": \"paused_on_source\"\n    }\n  },\n  \"type\": \"rule\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d8c2aa6-de4f-4599-9fb3-78cb605271bd",
+          "name": "Get slices associated with monitor",
+          "request": {
+            "name": "Get slices associated with monitor",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "monitors",
+                ":filter_uuid",
+                "slices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_ts",
+                  "value": "<number>",
+                  "description": "Filter by start time"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_ts",
+                  "value": "<number>",
+                  "description": "Filter by end time"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "filter_uuid",
+                  "description": "(Required) Monitor UUID"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cde392ab-7faa-44c4-a565-e10e5e022f42",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "monitors",
+                    ":filter_uuid",
+                    "slices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_ts",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_ts",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "filter_uuid",
+                      "description": "(Required) Monitor UUID"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "dc0c19e4-d3cc-44d6-9be6-0a2367e446d0",
+    "name": "Lightup Dashboard API Credentials Monitors API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

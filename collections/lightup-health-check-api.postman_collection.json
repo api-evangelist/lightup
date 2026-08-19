@@ -1,0 +1,82 @@
+{
+  "item": [
+    {
+      "id": "73de51b1-70a9-4d44-b23b-72e18301b9aa",
+      "name": "Health check",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bab93cc1-838c-4764-a3aa-559d235ed2a9",
+          "name": "HealthzView",
+          "request": {
+            "name": "HealthzView",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v0",
+                "healthz",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0a30b644-59ea-4803-b33b-887e3a71916f",
+    "name": "Lightup Dashboard API Credentials Health check API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

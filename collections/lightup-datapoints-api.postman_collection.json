@@ -1,0 +1,232 @@
+{
+  "item": [
+    {
+      "id": "555b0d2f-d6a2-42a8-a276-2522ec82c596",
+      "name": "Datapoints",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "10fdce92-585a-4d59-8301-4bce08b5d276",
+          "name": "Get datapoints for metric",
+          "request": {
+            "name": "Get datapoints for metric",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "metrics",
+                ":metric_uuid",
+                "datapoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start_ts",
+                  "value": "<number>",
+                  "description": "Start timestamp of range"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_ts",
+                  "value": "<number>",
+                  "description": "End timestamp of range"
+                },
+                {
+                  "disabled": false,
+                  "key": "start_recorded_ts",
+                  "value": "<number>",
+                  "description": "Start recorded timestamp of range"
+                },
+                {
+                  "disabled": false,
+                  "key": "end_recorded_ts",
+                  "value": "<number>",
+                  "description": "End recorded timestamp of range"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "metric_uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f48c797-a4e4-4515-b4ed-0493f1e13458",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "metrics",
+                    ":metric_uuid",
+                    "datapoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start_ts",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_ts",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "start_recorded_ts",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "end_recorded_ts",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "metric_uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"eventTs\": 9945.866409869299,\n    \"slice\": {},\n    \"recordedTs\": 224.69259702240896,\n    \"metricUuid\": \"string\",\n    \"value\": 2521.8074393188404\n  },\n  {\n    \"eventTs\": 6080.593193039385,\n    \"slice\": {},\n    \"recordedTs\": 7217.2560943672415,\n    \"metricUuid\": \"string\",\n    \"value\": 8855.962936460654\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b0b25de9-be2e-424e-8115-a9469c6b2d9e",
+    "name": "Lightup Dashboard API Credentials Datapoints API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

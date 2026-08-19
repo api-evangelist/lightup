@@ -1,0 +1,164 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Catalogs API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Catalogs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get the list of catalogs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/system/integrations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get the list of catalogs"
+        },
+        {
+          "info": {
+            "name": "Create a new catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/system/integrations",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new catalog"
+        },
+        {
+          "info": {
+            "name": "Get a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/system/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the catalog"
+              }
+            ]
+          },
+          "docs": "Get a catalog"
+        },
+        {
+          "info": {
+            "name": "Update a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/system/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the catalog"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a catalog"
+        },
+        {
+          "info": {
+            "name": "Delete a catalog",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/system/integrations/:integration_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integration_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the catalog"
+              }
+            ]
+          },
+          "docs": "Delete a catalog"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

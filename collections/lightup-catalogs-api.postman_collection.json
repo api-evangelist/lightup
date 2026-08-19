@@ -1,0 +1,696 @@
+{
+  "item": [
+    {
+      "id": "4d2b2f90-9efc-400e-b060-bece406295c6",
+      "name": "Catalogs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "89a73f39-5a77-4c78-ae01-9b0ea4543454",
+          "name": "Get the list of catalogs",
+          "request": {
+            "name": "Get the list of catalogs",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "system",
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78c4eb4f-6d22-44d1-b73b-0f57b22fb1c0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "system",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 4463,\n        \"username\": \"string\"\n      },\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 5613,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\"\n    },\n    \"config\": {\n      \"baseUrl\": \"string\",\n      \"userId\": 5963,\n      \"userRefreshToken\": \"string\",\n      \"disableCertificateCheck\": false,\n      \"incidentWindow\": 86400,\n      \"type\": \"alation\"\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"lastScannedTs\": 8638.377664606089,\n      \"runStatus\": \"ok\",\n      \"runStatusMessage\": \"string\"\n    }\n  },\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 4085,\n        \"username\": \"string\"\n      },\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 8005,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\"\n    },\n    \"config\": {\n      \"baseUrl\": \"string\",\n      \"userId\": 3668,\n      \"userRefreshToken\": \"string\",\n      \"disableCertificateCheck\": false,\n      \"incidentWindow\": 86400,\n      \"type\": \"alation\"\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"lastScannedTs\": 488.506375928881,\n      \"runStatus\": \"ok\",\n      \"runStatusMessage\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5cc11054-cbf9-4ac4-8d33-3e7d12f48ecb",
+          "name": "Create a new catalog",
+          "request": {
+            "name": "Create a new catalog",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "system",
+                "integrations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\"\n  },\n  \"config\": {\n    \"baseUrl\": \"<string>\",\n    \"userId\": \"<integer>\",\n    \"userRefreshToken\": \"<string>\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"status\": {\n    \"lastScannedTs\": \"<number>\",\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6c6a971c-ac2a-48bd-a4ff-f9d3d85d3462",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "system",
+                    "integrations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\"\n  },\n  \"config\": {\n    \"baseUrl\": \"string\",\n    \"userId\": 6492,\n    \"userRefreshToken\": \"string\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"status\": {\n    \"lastScannedTs\": 9654.988734833922,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 363,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 1434,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"baseUrl\": \"string\",\n    \"userId\": 9635,\n    \"userRefreshToken\": \"string\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"lastScannedTs\": 8640.970186287672,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b21088b-8e9f-452b-83c0-64d6bc912d21",
+          "name": "Delete a catalog",
+          "request": {
+            "name": "Delete a catalog",
+            "description": {
+              "content": "Delete a catalog",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "system",
+                "integrations",
+                ":integration_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "integration_id",
+                  "description": "(Required) UUID of the catalog"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73d5433d-dc03-4a8a-be83-22824a9bcd3a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "system",
+                    "integrations",
+                    ":integration_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integration_id",
+                      "description": "(Required) UUID of the catalog"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e37a58e9-4f8a-49e4-ad85-d75fe9591356",
+          "name": "Get a catalog",
+          "request": {
+            "name": "Get a catalog",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "system",
+                "integrations",
+                ":integration_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "integration_id",
+                  "description": "(Required) UUID of the catalog"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "62316269-2058-43cd-aa7d-b51682257ac2",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "system",
+                    "integrations",
+                    ":integration_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integration_id",
+                      "description": "(Required) UUID of the catalog"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 363,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 1434,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"baseUrl\": \"string\",\n    \"userId\": 9635,\n    \"userRefreshToken\": \"string\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"lastScannedTs\": 8640.970186287672,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b8674531-5b0c-420e-8db7-9485e6cb56ad",
+          "name": "Update a catalog",
+          "request": {
+            "name": "Update a catalog",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "system",
+                "integrations",
+                ":integration_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "integration_id",
+                  "description": "(Required) UUID of the catalog"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\"\n  },\n  \"config\": {\n    \"baseUrl\": \"<string>\",\n    \"userId\": \"<integer>\",\n    \"userRefreshToken\": \"<string>\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"status\": {\n    \"lastScannedTs\": \"<number>\",\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "27b55e07-fb37-4d6b-8666-d4e2534d966e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "system",
+                    "integrations",
+                    ":integration_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integration_id",
+                      "description": "(Required) UUID of the catalog"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\"\n  },\n  \"config\": {\n    \"baseUrl\": \"string\",\n    \"userId\": 6492,\n    \"userRefreshToken\": \"string\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"status\": {\n    \"lastScannedTs\": 9654.988734833922,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 363,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 1434,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\"\n  },\n  \"config\": {\n    \"baseUrl\": \"string\",\n    \"userId\": 9635,\n    \"userRefreshToken\": \"string\",\n    \"disableCertificateCheck\": false,\n    \"incidentWindow\": 86400,\n    \"type\": \"alation\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"lastScannedTs\": 8640.970186287672,\n    \"runStatus\": \"ok\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "cb218b88-eeab-45d5-9dea-eaa326b04cec",
+    "name": "Lightup Dashboard API Credentials Catalogs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Dashboard chart API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Dashboard chart",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get dashboard chart list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/dashboard/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ]
+          },
+          "docs": "Get dashboard chart list"
+        },
+        {
+          "info": {
+            "name": "Create new dashboard chart",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/dashboard/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new dashboard chart"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,182 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Workspaces API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workspaces",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get existing workspaces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/workspaces/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "include_deactivated",
+                "value": "",
+                "type": "query",
+                "description": "Set value to 'true' to include deactivated workspaces in the response. Omit this parameter to exclude"
+              },
+              {
+                "name": "member_only",
+                "value": "",
+                "type": "query",
+                "description": "Set value to 'true' to exclude workspaces where requestor isn't a member. Has no effect unless requestor is an App Admin, as all other users always only see workspaces where they are members."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter workspaces by name. Case sensitive. Exact match."
+              }
+            ]
+          },
+          "docs": "Get existing workspaces"
+        },
+        {
+          "info": {
+            "name": "Create new workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/workspaces/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create new workspace"
+        },
+        {
+          "info": {
+            "name": "Get existing workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/workspaces/:workspace_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ]
+          },
+          "docs": "Get existing workspace"
+        },
+        {
+          "info": {
+            "name": "Modify existing workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/workspaces/:workspace_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Modify existing workspace"
+        },
+        {
+          "info": {
+            "name": "Deactivate existing workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/workspaces/:workspace_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ]
+          },
+          "docs": "Deactivate existing workspace"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

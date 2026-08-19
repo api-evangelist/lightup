@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Datapoints API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datapoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get datapoints for metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/:metric_uuid/datapoints",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "metric_uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "start_ts",
+                "value": "",
+                "type": "query",
+                "description": "Start timestamp of range"
+              },
+              {
+                "name": "end_ts",
+                "value": "",
+                "type": "query",
+                "description": "End timestamp of range"
+              },
+              {
+                "name": "slice",
+                "value": "",
+                "type": "query",
+                "description": "Slice to filter query by"
+              },
+              {
+                "name": "start_recorded_ts",
+                "value": "",
+                "type": "query",
+                "description": "Start recorded timestamp of range"
+              },
+              {
+                "name": "end_recorded_ts",
+                "value": "",
+                "type": "query",
+                "description": "End recorded timestamp of range"
+              }
+            ]
+          },
+          "docs": "Get datapoints for metric"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

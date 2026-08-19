@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get existing application users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/users/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Get existing application users"
+        },
+        {
+          "info": {
+            "name": "Invite user to the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/users/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Invite user to the application"
+        },
+        {
+          "info": {
+            "name": "Get user data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/users/:user_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ]
+          },
+          "docs": "Get user data"
+        },
+        {
+          "info": {
+            "name": "Change user's application role and/or expiration time",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/users/:user_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change user's application role and/or expiration time"
+        },
+        {
+          "info": {
+            "name": "Delete user from the application",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/users/:user_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ]
+          },
+          "docs": "Delete user from the application"
+        },
+        {
+          "info": {
+            "name": "Get existing workspace users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/users/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ]
+          },
+          "docs": "Get existing workspace users"
+        },
+        {
+          "info": {
+            "name": "Add user to the workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/users/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add user to the workspace"
+        },
+        {
+          "info": {
+            "name": "Change user's workspace role",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/users/:user_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Change user's workspace role"
+        },
+        {
+          "info": {
+            "name": "Remove user from the workspace",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/users/:user_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the user"
+              }
+            ]
+          },
+          "docs": "Remove user from the workspace"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,780 @@
+{
+  "item": [
+    {
+      "id": "8c472157-9ee5-4137-b800-521474e9bc0e",
+      "name": "Integrations",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7a5255bb-ea02-4884-8ef0-c62a3faf4b5d",
+          "name": "Get the list of integrations",
+          "request": {
+            "name": "Get the list of integrations",
+            "description": {
+              "content": "List all integrations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "integrations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d2e8c23e-b6db-463f-8190-f94821bc2ee8",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "integrations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 3649,\n        \"username\": \"string\"\n      },\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 4539,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\",\n      \"workspaceId\": \"aa80b91c-95aa-12af-d608-9e94586e7e37\"\n    },\n    \"config\": {\n      \"domainName\": \"string\",\n      \"emailAddressList\": [\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"string\",\n      \"digestPeriodInSeconds\": 0,\n      \"enableRecurring\": false,\n      \"mode\": \"automatic\",\n      \"muteResolvedAlerts\": false,\n      \"sendHealthyDigest\": false,\n      \"timezone\": \"UTC\",\n      \"type\": \"email\"\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"incidentCountReportFailed\": 8855,\n      \"incidentCountReportMuted\": 3681,\n      \"incidentCountReportSuccess\": 6834,\n      \"lastRunTs\": 822.5776706367816,\n      \"lastSentTs\": 4375.711773269557,\n      \"runStatus\": \"unknown\",\n      \"runStatusMessage\": \"string\"\n    }\n  },\n  {\n    \"metadata\": {\n      \"name\": \"string\",\n      \"ownedBy\": {\n        \"email\": \"string\",\n        \"id\": 5773,\n        \"username\": \"string\"\n      },\n      \"updatedBy\": {\n        \"email\": \"string\",\n        \"id\": 8541,\n        \"username\": \"string\"\n      },\n      \"uuid\": \"string\",\n      \"workspaceId\": \"025d1719-d913-5c87-fdd4-6c58c589adab\"\n    },\n    \"config\": {\n      \"domainName\": \"string\",\n      \"emailAddressList\": [\n        \"string\",\n        \"string\"\n      ],\n      \"description\": \"string\",\n      \"digestPeriodInSeconds\": 0,\n      \"enableRecurring\": false,\n      \"mode\": \"automatic\",\n      \"muteResolvedAlerts\": false,\n      \"sendHealthyDigest\": false,\n      \"timezone\": \"UTC\",\n      \"type\": \"email\"\n    },\n    \"apiVersion\": \"v1\",\n    \"status\": {\n      \"incidentCountReportFailed\": 7873,\n      \"incidentCountReportMuted\": 9216,\n      \"incidentCountReportSuccess\": 3884,\n      \"lastRunTs\": 4693.4011686592785,\n      \"lastSentTs\": 3221.6317396905756,\n      \"runStatus\": \"unknown\",\n      \"runStatusMessage\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fc22514-9307-4171-b893-8beb5dd859e1",
+          "name": "Create a new integration",
+          "request": {
+            "name": "Create a new integration",
+            "description": {
+              "content": "Create a new integration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "integrations",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"workspaceId\": \"<uuid>\"\n  },\n  \"config\": {\n    \"domainName\": \"<string>\",\n    \"emailAddressList\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"metadata\": {\n      \"fieldId\": \"<string>\",\n      \"fieldName\": \"<string>\",\n      \"isMultiSelect\": false,\n      \"isRequired\": false,\n      \"type\": \"node\",\n      \"valueType\": \"id\"\n    },\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"status\": {\n    \"incidentCountReportFailed\": \"<integer>\",\n    \"incidentCountReportMuted\": \"<integer>\",\n    \"incidentCountReportSuccess\": \"<integer>\",\n    \"lastRunTs\": \"<number>\",\n    \"lastSentTs\": \"<number>\",\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3a86e552-5164-4017-be83-667fd8188196",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "integrations",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"workspaceId\": \"725b5f5f-951b-a59a-846b-160d2cbd1f49\"\n  },\n  \"config\": {\n    \"domainName\": \"string\",\n    \"emailAddressList\": [\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"status\": {\n    \"incidentCountReportFailed\": 9280,\n    \"incidentCountReportMuted\": 5627,\n    \"incidentCountReportSuccess\": 7219,\n    \"lastRunTs\": 7106.889717485036,\n    \"lastSentTs\": 4887.812201441235,\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 6895,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 5535,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"6babff80-bf01-0614-9898-9d0c3c3acc05\"\n  },\n  \"config\": {\n    \"domainName\": \"string\",\n    \"emailAddressList\": [\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"incidentCountReportFailed\": 1639,\n    \"incidentCountReportMuted\": 9870,\n    \"incidentCountReportSuccess\": 9515,\n    \"lastRunTs\": 6540.658060227616,\n    \"lastSentTs\": 4703.432790365436,\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3423a4a4-8ea4-4b43-bacc-3296f14a861f",
+          "name": "Delete an integration",
+          "request": {
+            "name": "Delete an integration",
+            "description": {
+              "content": "Delete an integration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "integrations",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the integration"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "20de6809-3a42-4af6-8d8e-0e56ada0687e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "integrations",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the integration"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4b9f585-6089-4960-a755-895798d28a47",
+          "name": "Get an integration",
+          "request": {
+            "name": "Get an integration",
+            "description": {
+              "content": "Retrieve an integration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "integrations",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the integration"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "82160b70-6113-4274-ac05-10459ecd5f30",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "integrations",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the integration"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 6895,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 5535,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"6babff80-bf01-0614-9898-9d0c3c3acc05\"\n  },\n  \"config\": {\n    \"domainName\": \"string\",\n    \"emailAddressList\": [\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"incidentCountReportFailed\": 1639,\n    \"incidentCountReportMuted\": 9870,\n    \"incidentCountReportSuccess\": 9515,\n    \"lastRunTs\": 6540.658060227616,\n    \"lastSentTs\": 4703.432790365436,\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5447ee1f-b3f4-42c7-a027-77a5eeb97639",
+          "name": "Update an integration",
+          "request": {
+            "name": "Update an integration",
+            "description": {
+              "content": "Update an integration",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "integrations",
+                ":pk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the integration"
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"workspaceId\": \"<uuid>\"\n  },\n  \"config\": {\n    \"domainName\": \"<string>\",\n    \"emailAddressList\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"description\": \"<string>\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"metadata\": {\n      \"fieldId\": \"<string>\",\n      \"fieldName\": \"<string>\",\n      \"isMultiSelect\": false,\n      \"isRequired\": false,\n      \"type\": \"node\",\n      \"valueType\": \"id\"\n    },\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"status\": {\n    \"incidentCountReportFailed\": \"<integer>\",\n    \"incidentCountReportMuted\": \"<integer>\",\n    \"incidentCountReportSuccess\": \"<integer>\",\n    \"lastRunTs\": \"<number>\",\n    \"lastSentTs\": \"<number>\",\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad2ba613-6d22-4f69-a095-39a775219e42",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "integrations",
+                    ":pk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the integration"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"workspaceId\": \"725b5f5f-951b-a59a-846b-160d2cbd1f49\"\n  },\n  \"config\": {\n    \"domainName\": \"string\",\n    \"emailAddressList\": [\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"status\": {\n    \"incidentCountReportFailed\": 9280,\n    \"incidentCountReportMuted\": 5627,\n    \"incidentCountReportSuccess\": 7219,\n    \"lastRunTs\": 7106.889717485036,\n    \"lastSentTs\": 4887.812201441235,\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"name\": \"string\",\n    \"ownedBy\": {\n      \"email\": \"string\",\n      \"id\": 6895,\n      \"username\": \"string\"\n    },\n    \"updatedBy\": {\n      \"email\": \"string\",\n      \"id\": 5535,\n      \"username\": \"string\"\n    },\n    \"uuid\": \"string\",\n    \"workspaceId\": \"6babff80-bf01-0614-9898-9d0c3c3acc05\"\n  },\n  \"config\": {\n    \"domainName\": \"string\",\n    \"emailAddressList\": [\n      \"string\",\n      \"string\"\n    ],\n    \"description\": \"string\",\n    \"digestPeriodInSeconds\": 0,\n    \"enableRecurring\": false,\n    \"mode\": \"automatic\",\n    \"muteResolvedAlerts\": false,\n    \"sendHealthyDigest\": false,\n    \"timezone\": \"UTC\",\n    \"type\": \"email\"\n  },\n  \"apiVersion\": \"v1\",\n  \"status\": {\n    \"incidentCountReportFailed\": 1639,\n    \"incidentCountReportMuted\": 9870,\n    \"incidentCountReportSuccess\": 9515,\n    \"lastRunTs\": 6540.658060227616,\n    \"lastSentTs\": 4703.432790365436,\n    \"runStatus\": \"unknown\",\n    \"runStatusMessage\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "97aea37c-831b-4c43-be88-7752c141ef0c",
+    "name": "Lightup Dashboard API Credentials Integrations API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

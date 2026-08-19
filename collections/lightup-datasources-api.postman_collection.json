@@ -1,0 +1,1143 @@
+{
+  "item": [
+    {
+      "id": "4598292e-5101-4876-8530-3bc510b17383",
+      "name": "Datasources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "520aace0-9f58-455d-9c97-18eb76e93c48",
+          "name": "Get datasource list",
+          "request": {
+            "name": "Get datasource list",
+            "description": {
+              "content": "List all datasources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Return sources from offset"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Return only limit number of datasources"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f452bab0-e9ff-4b76-aa34-b72625ac0f13",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"apiVersion\": \"v1\",\n    \"config\": {\n      \"connection\": {\n        \"awsAccessKeyId\": \"ABC123\",\n        \"awsSecretAccessKey\": \"********\",\n        \"regionName\": \"us-west-2\",\n        \"s3StagingDir\": \"s3://abc/123\",\n        \"type\": \"athena\"\n      }\n    },\n    \"metadata\": {\n      \"name\": \"Athena DemoDB\",\n      \"ownedBy\": {\n        \"email\": \"abc@example.com\",\n        \"id\": 1,\n        \"username\": \"ABC\"\n      },\n      \"tags\": [\n        \"color\",\n        \"value\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"xyz@example.com\",\n        \"id\": 2,\n        \"username\": \"XYZ\"\n      },\n      \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n      \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n    },\n    \"type\": \"source\"\n  },\n  {\n    \"apiVersion\": \"v1\",\n    \"config\": {\n      \"connection\": {\n        \"awsAccessKeyId\": \"ABC123\",\n        \"awsSecretAccessKey\": \"********\",\n        \"regionName\": \"us-west-2\",\n        \"s3StagingDir\": \"s3://abc/123\",\n        \"type\": \"athena\"\n      }\n    },\n    \"metadata\": {\n      \"name\": \"Athena DemoDB\",\n      \"ownedBy\": {\n        \"email\": \"abc@example.com\",\n        \"id\": 1,\n        \"username\": \"ABC\"\n      },\n      \"tags\": [\n        \"color\",\n        \"value\"\n      ],\n      \"updatedBy\": {\n        \"email\": \"xyz@example.com\",\n        \"id\": 2,\n        \"username\": \"XYZ\"\n      },\n      \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n      \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n    },\n    \"type\": \"source\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e88a20f3-38a6-4387-82af-b90c27a67974",
+          "name": "Create datasource",
+          "request": {
+            "name": "Create datasource",
+            "description": {
+              "content": "Create a new datasource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"workspaceId\": \"<string>\",\n    \"idSerial\": \"<integer>\"\n  },\n  \"config\": {\n    \"connection\": {\n      \"regionName\": \"<string>\",\n      \"s3StagingDir\": \"<string>\",\n      \"awsAccessKeyId\": \"<string>\",\n      \"awsSecretAccessKey\": \"<string>\",\n      \"type\": \"athena\",\n      \"workgroup\": \"<string>\"\n    },\n    \"alationDatasourceId\": \"<integer>\",\n    \"atlanDatasourceId\": \"<string>\",\n    \"governance\": {\n      \"allowPreviewsWhenPaused\": false,\n      \"allowRawDataSamples\": true,\n      \"allowRecordStorage\": true,\n      \"allowScheduleUuids\": [],\n      \"cacheFailingRecordsCount\": false,\n      \"denyScheduleUuids\": [],\n      \"indexedTimestampColumnsOnly\": false,\n      \"maxBackfillDurationInSeconds\": 63244800,\n      \"maxCategoricalDistinctCount\": 50000,\n      \"maxCategoricalDistinctPercent\": 50,\n      \"maxQueryDurationInSeconds\": null,\n      \"maxQueryPeriodInSeconds\": null,\n      \"maxQueryRetries\": 3,\n      \"saveCompleteFullCompareDiffSamples\": false\n    },\n    \"isLive\": true,\n    \"pollingInterval\": 300,\n    \"profiler\": {\n      \"activateSchemas\": false,\n      \"enabled\": true,\n      \"forceScan\": false,\n      \"scanInterval\": 3600,\n      \"schemaListChange\": {\n        \"enabled\": false,\n        \"monitoring\": {\n          \"alertConfig\": {\n            \"channels\": [],\n            \"isMuted\": true,\n            \"mutingSchedules\": []\n          },\n          \"enabled\": false\n        }\n      }\n    }\n  },\n  \"type\": \"source\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "716c47a3-b2b2-41a7-9171-272e75c4373e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"v1\",\n  \"config\": {\n    \"connection\": {\n      \"awsAccessKeyId\": \"ABC123\",\n      \"awsSecretAccessKey\": \"********\",\n      \"regionName\": \"us-west-2\",\n      \"s3StagingDir\": \"s3://abc/123\",\n      \"type\": \"athena\"\n    }\n  },\n  \"metadata\": {\n    \"name\": \"Athena DemoDB\",\n    \"ownedBy\": {\n      \"email\": \"abc@example.com\",\n      \"id\": 1,\n      \"username\": \"ABC\"\n    },\n    \"tags\": [\n      \"color\",\n      \"value\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"xyz@example.com\",\n      \"id\": 2,\n      \"username\": \"XYZ\"\n    },\n    \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n    \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n  },\n  \"type\": \"source\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v1\",\n  \"config\": {\n    \"connection\": {\n      \"awsAccessKeyId\": \"ABC123\",\n      \"awsSecretAccessKey\": \"********\",\n      \"regionName\": \"us-west-2\",\n      \"s3StagingDir\": \"s3://abc/123\",\n      \"type\": \"athena\"\n    }\n  },\n  \"metadata\": {\n    \"name\": \"Athena DemoDB\",\n    \"ownedBy\": {\n      \"email\": \"abc@example.com\",\n      \"id\": 1,\n      \"username\": \"ABC\"\n    },\n    \"tags\": [\n      \"color\",\n      \"value\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"xyz@example.com\",\n      \"id\": 2,\n      \"username\": \"XYZ\"\n    },\n    \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n    \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n  },\n  \"type\": \"source\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09457d5d-7f55-4a19-975a-a1d850ef109e",
+          "name": "Get details about a specific trigger",
+          "request": {
+            "name": "Get details about a specific trigger",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ":pk",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "triggerUuid",
+                  "value": "<string>",
+                  "description": "Trigger UUID to get"
+                },
+                {
+                  "disabled": false,
+                  "key": "userDefinedId",
+                  "value": "<string>",
+                  "description": "User defined ID to get"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fec4319-cb6b-44ce-9834-fe71bb07d772",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ":pk",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "triggerUuid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userDefinedId",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggerUuid\": \"string\",\n  \"config\": {},\n  \"metricUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tableUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triggerStatus\": {\n    \"incidentsCount\": 5860,\n    \"status\": \"pending\",\n    \"summary\": {\n      \"numMonitorsFailed\": 140,\n      \"numMonitorsPassed\": 3431,\n      \"numMonitorsPaused\": 7366,\n      \"numMonitorsPending\": 689\n    }\n  },\n  \"userDefinedId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6b537bd-567a-483f-aafc-ed5cdbaa2ccb",
+          "name": "Trigger metric collection",
+          "request": {
+            "name": "Trigger metric collection",
+            "description": {
+              "content": "",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ":pk",
+                "trigger"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pk",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metricUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tableUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userDefinedId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "63395764-0ea1-4042-8d0c-ffcb65e85d45",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ":pk",
+                    "trigger"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pk",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"metricUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"tableUuids\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"userDefinedId\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggerUuid\": \"string\",\n  \"config\": {},\n  \"metricUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"tableUuids\": [\n    \"string\",\n    \"string\"\n  ],\n  \"triggerStatus\": {\n    \"incidentsCount\": 1576,\n    \"status\": \"pending\",\n    \"summary\": {\n      \"numMonitorsFailed\": 7496,\n      \"numMonitorsPassed\": 7098,\n      \"numMonitorsPaused\": 6320,\n      \"numMonitorsPending\": 8967\n    }\n  },\n  \"userDefinedId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "292d8b2d-3f8d-4c70-8c01-bbafc88aa802",
+          "name": "Delete datasource",
+          "request": {
+            "name": "Delete datasource",
+            "description": {
+              "content": "Delete a datasource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ":source_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_uuid",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef86859a-1d95-48e8-b862-fd581131fb79",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ":source_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_uuid",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9db1c52a-6946-49ec-ae61-e8526a1bde0e",
+          "name": "Get datasource",
+          "request": {
+            "name": "Get datasource",
+            "description": {
+              "content": "Retrieve a datasource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ":source_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_uuid",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "705a268c-3172-495a-a35f-3f969e1b920d",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ":source_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_uuid",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v1\",\n  \"config\": {\n    \"connection\": {\n      \"awsAccessKeyId\": \"ABC123\",\n      \"awsSecretAccessKey\": \"********\",\n      \"regionName\": \"us-west-2\",\n      \"s3StagingDir\": \"s3://abc/123\",\n      \"type\": \"athena\"\n    }\n  },\n  \"metadata\": {\n    \"name\": \"Athena DemoDB\",\n    \"ownedBy\": {\n      \"email\": \"abc@example.com\",\n      \"id\": 1,\n      \"username\": \"ABC\"\n    },\n    \"tags\": [\n      \"color\",\n      \"value\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"xyz@example.com\",\n      \"id\": 2,\n      \"username\": \"XYZ\"\n    },\n    \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n    \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n  },\n  \"type\": \"source\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "008e3377-6029-4d4b-9479-df3fbb61312b",
+          "name": "Update datasource",
+          "request": {
+            "name": "Update datasource",
+            "description": {
+              "content": "Update a datasource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                ":api_version",
+                "ws",
+                ":workspace_id",
+                "sources",
+                ":source_uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "v1",
+                  "key": "api_version",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "workspace_id",
+                  "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "source_uuid",
+                  "description": "(Required) UUID of the datasource."
+                },
+                {
+                  "description": {
+                    "content": "",
+                    "type": "text/plain"
+                  },
+                  "type": "any",
+                  "value": "{{clusterId}}",
+                  "key": "clusterId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"metadata\": {\n    \"name\": \"<string>\",\n    \"workspaceId\": \"<string>\",\n    \"idSerial\": \"<integer>\"\n  },\n  \"config\": {\n    \"connection\": {\n      \"regionName\": \"<string>\",\n      \"s3StagingDir\": \"<string>\",\n      \"awsAccessKeyId\": \"<string>\",\n      \"awsSecretAccessKey\": \"<string>\",\n      \"type\": \"athena\",\n      \"workgroup\": \"<string>\"\n    },\n    \"alationDatasourceId\": \"<integer>\",\n    \"atlanDatasourceId\": \"<string>\",\n    \"governance\": {\n      \"allowPreviewsWhenPaused\": false,\n      \"allowRawDataSamples\": true,\n      \"allowRecordStorage\": true,\n      \"allowScheduleUuids\": [],\n      \"cacheFailingRecordsCount\": false,\n      \"denyScheduleUuids\": [],\n      \"indexedTimestampColumnsOnly\": false,\n      \"maxBackfillDurationInSeconds\": 63244800,\n      \"maxCategoricalDistinctCount\": 50000,\n      \"maxCategoricalDistinctPercent\": 50,\n      \"maxQueryDurationInSeconds\": null,\n      \"maxQueryPeriodInSeconds\": null,\n      \"maxQueryRetries\": 3,\n      \"saveCompleteFullCompareDiffSamples\": false\n    },\n    \"isLive\": true,\n    \"pollingInterval\": 300,\n    \"profiler\": {\n      \"activateSchemas\": false,\n      \"enabled\": true,\n      \"forceScan\": false,\n      \"scanInterval\": 3600,\n      \"schemaListChange\": {\n        \"enabled\": false,\n        \"monitoring\": {\n          \"alertConfig\": {\n            \"channels\": [],\n            \"isMuted\": true,\n            \"mutingSchedules\": []\n          },\n          \"enabled\": false\n        }\n      }\n    }\n  },\n  \"type\": \"source\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8a59b74a-53a6-4301-87ce-aeab2ecc8d86",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    ":api_version",
+                    "ws",
+                    ":workspace_id",
+                    "sources",
+                    ":source_uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "v1",
+                      "key": "api_version",
+                      "description": "(Required) "
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "workspace_id",
+                      "description": "(Required) UUID of the workspace; visible in the workspace URL."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "source_uuid",
+                      "description": "(Required) UUID of the datasource."
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "type": "any",
+                      "value": "{{clusterId}}",
+                      "key": "clusterId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "(Required) Input 'Bearer _access-token_'. To obtain access token, see API, API Credentials: Get access token.",
+                    "key": "authorization",
+                    "value": "string"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"apiVersion\": \"v1\",\n  \"config\": {\n    \"connection\": {\n      \"awsAccessKeyId\": \"ABC123\",\n      \"awsSecretAccessKey\": \"********\",\n      \"regionName\": \"us-west-2\",\n      \"s3StagingDir\": \"s3://abc/123\",\n      \"type\": \"athena\"\n    }\n  },\n  \"metadata\": {\n    \"name\": \"Athena DemoDB\",\n    \"ownedBy\": {\n      \"email\": \"abc@example.com\",\n      \"id\": 1,\n      \"username\": \"ABC\"\n    },\n    \"tags\": [\n      \"color\",\n      \"value\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"xyz@example.com\",\n      \"id\": 2,\n      \"username\": \"XYZ\"\n    },\n    \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n    \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n  },\n  \"type\": \"source\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"apiVersion\": \"v1\",\n  \"config\": {\n    \"connection\": {\n      \"awsAccessKeyId\": \"ABC123\",\n      \"awsSecretAccessKey\": \"********\",\n      \"regionName\": \"us-west-2\",\n      \"s3StagingDir\": \"s3://abc/123\",\n      \"type\": \"athena\"\n    }\n  },\n  \"metadata\": {\n    \"name\": \"Athena DemoDB\",\n    \"ownedBy\": {\n      \"email\": \"abc@example.com\",\n      \"id\": 1,\n      \"username\": \"ABC\"\n    },\n    \"tags\": [\n      \"color\",\n      \"value\"\n    ],\n    \"updatedBy\": {\n      \"email\": \"xyz@example.com\",\n      \"id\": 2,\n      \"username\": \"XYZ\"\n    },\n    \"uuid\": \"435bc80e-9835-45c7-ade6-39f990d83fa6\",\n    \"workspaceId\": \"435bc80e-9835-45c7-ade6-39f990d83fa5\"\n  },\n  \"type\": \"source\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "demo",
+      "key": "clusterId"
+    },
+    {
+      "type": "string",
+      "value": "https://app.{{clusterId}}.lightup.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b477cfed-1f73-42db-8051-db155f4d5a4a",
+    "name": "Lightup Dashboard API Credentials Datasources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Lightup Metrics API provides CRUD interface to Dashboard objects.",
+      "type": "text/plain"
+    }
+  }
+}

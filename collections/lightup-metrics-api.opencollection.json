@@ -1,0 +1,260 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Metrics API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get metrics list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by type of metric"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by name of the metric"
+              },
+              {
+                "name": "is_live",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether metric is live or not"
+              },
+              {
+                "name": "source_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of source uuids"
+              },
+              {
+                "name": "schema_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filter by schema_uuid"
+              },
+              {
+                "name": "table_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of table uuids"
+              },
+              {
+                "name": "column_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of column uuids"
+              },
+              {
+                "name": "monitor_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of monitor uuids"
+              },
+              {
+                "name": "metric_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by list of metric uuids"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Return metrics from offset"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Return only limit number of metrics"
+              }
+            ]
+          },
+          "docs": "List all metrics based on query parameters"
+        },
+        {
+          "info": {
+            "name": "Create metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new metric"
+        },
+        {
+          "info": {
+            "name": "Get metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ]
+          },
+          "docs": "Retrieve a metric"
+        },
+        {
+          "info": {
+            "name": "Update metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a metric"
+        },
+        {
+          "info": {
+            "name": "Delete metric",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/:api_version/ws/:workspace_id/metrics/:pk",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "api_version",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "pk",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the datasource."
+              }
+            ]
+          },
+          "docs": "Delete a stream"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

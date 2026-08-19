@@ -1,0 +1,333 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Lightup Dashboard API Credentials Incidents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Incidents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get incident list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "start_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the data range when the incident was active, this is the start of the range"
+              },
+              {
+                "name": "end_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the data range when the incident was active, this is the end of the range"
+              },
+              {
+                "name": "start_updated_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the data range when the incident was last updated, this is the start of the range"
+              },
+              {
+                "name": "end_updated_ts",
+                "value": "",
+                "type": "query",
+                "description": "Filter by the data range when the incident was last updated, this is the end of the range"
+              },
+              {
+                "name": "status_list",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status of incident. Available options: UNVIEWED:1 VIEWED:2 REJECTED:3 SUBMITTED:4 CLOSED:5  "
+              },
+              {
+                "name": "data_only",
+                "value": "",
+                "type": "query",
+                "description": "If set, response does not contain metadata."
+              },
+              {
+                "name": "with_ref",
+                "value": "",
+                "type": "query",
+                "description": "If set, response contains monitor information or source/table/column information"
+              },
+              {
+                "name": "include_preview",
+                "value": "",
+                "type": "query",
+                "description": "If set, incidents of monitor preview are also returned."
+              },
+              {
+                "name": "metric_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Metric UUIDs"
+              },
+              {
+                "name": "monitor_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Monitor UUIDs"
+              },
+              {
+                "name": "source_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Source UUIDs"
+              },
+              {
+                "name": "table_uuids",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Table UUIDs"
+              },
+              {
+                "name": "names",
+                "value": "",
+                "type": "query",
+                "description": "Filter by Monitor names"
+              }
+            ]
+          },
+          "docs": "Get incident list"
+        },
+        {
+          "info": {
+            "name": "Get the detail of an incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident to get."
+              }
+            ]
+          },
+          "docs": "\n        Return the detail of a single incident.\n        :param request:\n        :param incident_uuid:\n        :return:\n        "
+        },
+        {
+          "info": {
+            "name": "Get the comments associated with the incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid/comments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident to get."
+              }
+            ]
+          },
+          "docs": "Get the comments associated with the incident"
+        },
+        {
+          "info": {
+            "name": "Create comment associated with the incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid/comments",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident to get."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create comment associated with the incident"
+        },
+        {
+          "info": {
+            "name": "Get a specific comment associated with the incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid/comments/:comment_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident."
+              },
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment."
+              }
+            ]
+          },
+          "docs": "Get a specific comment associated with the incident"
+        },
+        {
+          "info": {
+            "name": "Update the comment associated with the incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid/comments/:comment_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident."
+              },
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the comment associated with the incident"
+        },
+        {
+          "info": {
+            "name": "Delete the comment associated with the incident",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.{clusterId}.lightup.ai/api/v0/ws/:workspace_id/incidents/:incident_uuid/comments/:comment_id",
+            "headers": [
+              {
+                "name": "authorization",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "workspace_id",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the workspace; visible in the workspace URL."
+              },
+              {
+                "name": "incident_uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the incident."
+              },
+              {
+                "name": "comment_id",
+                "value": "",
+                "type": "path",
+                "description": "ID of the comment."
+              }
+            ]
+          },
+          "docs": "Delete the comment associated with the incident"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
