@@ -108,6 +108,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - Data Sources
+  tags_raw:
   - Datasources
   properties:
   - type: OpenAPI
@@ -122,6 +124,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - Health Check
+  tags_raw:
   - Health check
   properties:
   - type: OpenAPI
@@ -150,6 +154,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - Integration
+  tags_raw:
   - Integrations
   properties:
   - type: OpenAPI
@@ -192,6 +198,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
