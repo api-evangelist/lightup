@@ -136,7 +136,7 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
-  - Health check
+  - Health Check
   tags_raw:
   - Health check
   properties:
