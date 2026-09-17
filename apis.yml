@@ -116,22 +116,6 @@ apis:
     url: https://docs.lightup.ai/docs
   - type: APIReference
     url: https://docs.lightup.ai/reference
-- aid: lightup:lightup-datasources-api
-  name: Lightup Datasources API
-  description: The Datasources API from Lightup — 3 operation(s) for datasources.
-  humanURL: https://docs.lightup.ai/reference
-  baseURL: https://app.demo.lightup.ai
-  tags:
-  - Data Sources
-  tags_raw:
-  - Datasources
-  properties:
-  - type: OpenAPI
-    url: openapi/lightup-datasources-api-openapi.yml
-  - type: Documentation
-    url: https://docs.lightup.ai/docs
-  - type: APIReference
-    url: https://docs.lightup.ai/reference
 - aid: lightup:lightup-health-check-api
   name: Lightup Health check API
   description: The Health check API from Lightup — 1 operation(s) for health check.
@@ -232,6 +216,20 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/lightup-workspaces-api-openapi.yml
+  - type: Documentation
+    url: https://docs.lightup.ai/docs
+  - type: APIReference
+    url: https://docs.lightup.ai/reference
+- aid: lightup:lightup-data-sources-api
+  name: Lightup Data Sources API
+  description: The Data Sources API from Lightup — 3 operation(s) for data sources.
+  humanURL: https://docs.lightup.ai/reference
+  baseURL: https://app.demo.lightup.ai
+  tags:
+  - Data Sources
+  properties:
+  - type: OpenAPI
+    url: openapi/lightup-data-sources-api-openapi.yml
   - type: Documentation
     url: https://docs.lightup.ai/docs
   - type: APIReference
