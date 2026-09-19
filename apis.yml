@@ -80,6 +80,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - Catalog
+  tags_raw:
   - Catalogs
   properties:
   - type: OpenAPI
@@ -212,6 +214,8 @@ apis:
   humanURL: https://docs.lightup.ai/reference
   baseURL: https://app.demo.lightup.ai
   tags:
+  - Workspace
+  tags_raw:
   - Workspaces
   properties:
   - type: OpenAPI
