@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Incidents API
+  title: Lightup Dashboard Incidents API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -487,9 +487,17 @@ paths:
       summary: Get incident list
       tags:
       - Incidents
+      operationId: getApiV0WsByWorkspaceIdIncidents
+      x-operation-id-source: derived
   /api/v0/ws/{workspace_id}/incidents/{incident_uuid}:
     get:
-      description: "\n        Return the detail of a single incident.\n        :param request:\n        :param incident_uuid:\n        :return:\n        "
+      description: 'Return the detail of a single incident.
+
+        :param request:
+
+        :param incident_uuid:
+
+        :return:'
       parameters:
       - description: UUID of the workspace; visible in the workspace URL.
         explode: true
@@ -791,6 +799,8 @@ paths:
       summary: Get the detail of an incident
       tags:
       - Incidents
+      operationId: getApiV0WsByWorkspaceIdIncidentsByIncidentUuid
+      x-operation-id-source: derived
   /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments:
     get:
       description: ''
@@ -1124,6 +1134,8 @@ paths:
       summary: Get the comments associated with the incident
       tags:
       - Incidents
+      operationId: getApiV0WsByWorkspaceIdIncidentsByIncidentUuidComments
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -1459,6 +1471,8 @@ paths:
       summary: Create comment associated with the incident
       tags:
       - Incidents
+      operationId: postApiV0WsByWorkspaceIdIncidentsByIncidentUuidComments
+      x-operation-id-source: derived
   /api/v0/ws/{workspace_id}/incidents/{incident_uuid}/comments/{comment_id}:
     delete:
       description: ''
@@ -1505,6 +1519,8 @@ paths:
       summary: Delete the comment associated with the incident
       tags:
       - Incidents
+      operationId: deleteApiV0WsByWorkspaceIdIncidentsByIncidentUuidCommentsByCommentId
+      x-operation-id-source: derived
     get:
       description: ''
       parameters:
@@ -1554,6 +1570,8 @@ paths:
       summary: Get a specific comment associated with the incident
       tags:
       - Incidents
+      operationId: getApiV0WsByWorkspaceIdIncidentsByIncidentUuidCommentsByCommentId
+      x-operation-id-source: derived
     put:
       description: ''
       parameters:
@@ -1610,3 +1628,5 @@ paths:
       summary: Update the comment associated with the incident
       tags:
       - Incidents
+      operationId: putApiV0WsByWorkspaceIdIncidentsByIncidentUuidCommentsByCommentId
+      x-operation-id-source: derived

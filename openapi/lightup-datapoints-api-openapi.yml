@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Datapoints API
+  title: Lightup Dashboard Datapoints API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -139,3 +139,5 @@ paths:
       summary: Get datapoints for metric
       tags:
       - Datapoints
+      operationId: getApiByApiVersionWsByWorkspaceIdMetricsByMetricUuidDatapoints
+      x-operation-id-source: derived

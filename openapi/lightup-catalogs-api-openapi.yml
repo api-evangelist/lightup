@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Catalogs API
+  title: Lightup Dashboard Catalogs API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -51,6 +51,8 @@ paths:
       summary: Get the list of catalogs
       tags:
       - Catalogs
+      operationId: getApiByApiVersionSystemIntegrations
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -280,9 +282,10 @@ paths:
       summary: Create a new catalog
       tags:
       - Catalogs
+      operationId: postApiByApiVersionSystemIntegrations
+      x-operation-id-source: derived
   /api/{api_version}/system/integrations/{integration_id}:
     delete:
-      description: Delete a catalog
       parameters:
       - description: ''
         explode: true
@@ -322,6 +325,8 @@ paths:
       summary: Delete a catalog
       tags:
       - Catalogs
+      operationId: deleteApiByApiVersionSystemIntegrationsByIntegrationId
+      x-operation-id-source: derived
     get:
       description: ''
       parameters:
@@ -367,6 +372,8 @@ paths:
       summary: Get a catalog
       tags:
       - Catalogs
+      operationId: getApiByApiVersionSystemIntegrationsByIntegrationId
+      x-operation-id-source: derived
     put:
       description: ''
       parameters:
@@ -419,3 +426,5 @@ paths:
       summary: Update a catalog
       tags:
       - Catalogs
+      operationId: putApiByApiVersionSystemIntegrationsByIntegrationId
+      x-operation-id-source: derived

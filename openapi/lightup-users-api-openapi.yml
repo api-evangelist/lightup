@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Users API
+  title: Lightup Dashboard Users API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -37,6 +37,8 @@ paths:
       summary: Get existing application users
       tags:
       - Users
+      operationId: getApiV0Users
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -162,6 +164,8 @@ paths:
       summary: Invite user to the application
       tags:
       - Users
+      operationId: postApiV0Users
+      x-operation-id-source: derived
   /api/v0/users/{user_id}:
     delete:
       description: ''
@@ -190,6 +194,8 @@ paths:
       summary: Delete user from the application
       tags:
       - Users
+      operationId: deleteApiV0UsersByUserId
+      x-operation-id-source: derived
     get:
       description: ''
       parameters:
@@ -221,6 +227,8 @@ paths:
       summary: Get user data
       tags:
       - Users
+      operationId: getApiV0UsersByUserId
+      x-operation-id-source: derived
     patch:
       description: ''
       parameters:
@@ -292,6 +300,8 @@ paths:
       summary: Change user's application role and/or expiration time
       tags:
       - Users
+      operationId: patchApiV0UsersByUserId
+      x-operation-id-source: derived
   /api/v0/ws/{workspace_id}/users/:
     get:
       description: ''
@@ -326,6 +336,8 @@ paths:
       summary: Get existing workspace users
       tags:
       - Users
+      operationId: getApiV0WsByWorkspaceIdUsers
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -427,6 +439,8 @@ paths:
       summary: Add user to the workspace
       tags:
       - Users
+      operationId: postApiV0WsByWorkspaceIdUsers
+      x-operation-id-source: derived
   /api/v0/ws/{workspace_id}/users/{user_id}:
     delete:
       description: ''
@@ -464,6 +478,8 @@ paths:
       summary: Remove user from the workspace
       tags:
       - Users
+      operationId: deleteApiV0WsByWorkspaceIdUsersByUserId
+      x-operation-id-source: derived
     patch:
       description: ''
       parameters:
@@ -530,3 +546,5 @@ paths:
       summary: Change user's workspace role
       tags:
       - Users
+      operationId: patchApiV0WsByWorkspaceIdUsersByUserId
+      x-operation-id-source: derived

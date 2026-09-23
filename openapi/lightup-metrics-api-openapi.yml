@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Metrics API
+  title: Lightup Dashboard Metrics API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -175,6 +175,8 @@ paths:
       summary: Get metrics list
       tags:
       - Metrics
+      operationId: getApiByApiVersionWsByWorkspaceIdMetrics
+      x-operation-id-source: derived
     post:
       description: Create a new metric
       parameters:
@@ -2317,6 +2319,8 @@ paths:
       summary: Create metric
       tags:
       - Metrics
+      operationId: postApiByApiVersionWsByWorkspaceIdMetrics
+      x-operation-id-source: derived
   /api/{api_version}/ws/{workspace_id}/metrics/{pk}:
     delete:
       description: Delete a stream
@@ -2368,6 +2372,8 @@ paths:
       summary: Delete metric
       tags:
       - Metrics
+      operationId: deleteApiByApiVersionWsByWorkspaceIdMetricsByPk
+      x-operation-id-source: derived
     get:
       description: Retrieve a metric
       parameters:
@@ -2422,6 +2428,8 @@ paths:
       summary: Get metric
       tags:
       - Metrics
+      operationId: getApiByApiVersionWsByWorkspaceIdMetricsByPk
+      x-operation-id-source: derived
     put:
       description: Update a metric
       parameters:
@@ -2483,3 +2491,5 @@ paths:
       summary: Update metric
       tags:
       - Metrics
+      operationId: putApiByApiVersionWsByWorkspaceIdMetricsByPk
+      x-operation-id-source: derived

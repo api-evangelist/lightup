@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Monitors API
+  title: Lightup Dashboard Monitors API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -14,7 +14,7 @@ tags:
 paths:
   /api/{api_version}/ws/{workspace_id}/monitors/:
     get:
-      description: "\n        List all monitors in the workspace based on filters\n        "
+      description: List all monitors in the workspace based on filters
       parameters:
       - description: ''
         explode: true
@@ -122,6 +122,8 @@ paths:
       summary: Get monitor list
       tags:
       - Monitors
+      operationId: getApiByApiVersionWsByWorkspaceIdMonitors
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -910,9 +912,13 @@ paths:
       summary: Create monitor
       tags:
       - Monitors
+      operationId: postApiByApiVersionWsByWorkspaceIdMonitors
+      x-operation-id-source: derived
   /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}:
     delete:
-      description: "\n        Delete a filter\n        - delete live filter deployment, training job and filter preview jobs, if any\n        "
+      description: 'Delete a filter
+
+        - delete live filter deployment, training job and filter preview jobs, if any'
       parameters:
       - description: ''
         explode: true
@@ -960,6 +966,8 @@ paths:
       summary: Delete monitor
       tags:
       - Monitors
+      operationId: deleteApiByApiVersionWsByWorkspaceIdMonitorsByFilterUuid
+      x-operation-id-source: derived
     get:
       description: ''
       parameters:
@@ -1013,8 +1021,16 @@ paths:
       summary: Get monitor
       tags:
       - Monitors
+      operationId: getApiByApiVersionWsByWorkspaceIdMonitorsByFilterUuid
+      x-operation-id-source: derived
     put:
-      description: "\n        Update a filter\n        - recreate training job if config has changes that require retraining\n        - delete deployment if not live\n        - recreate deployment if live and config has changes that require redeployment\n        "
+      description: 'Update a filter
+
+        - recreate training job if config has changes that require retraining
+
+        - delete deployment if not live
+
+        - recreate deployment if live and config has changes that require redeployment'
       parameters:
       - description: ''
         explode: true
@@ -1073,6 +1089,8 @@ paths:
       summary: Update monitor
       tags:
       - Monitors
+      operationId: putApiByApiVersionWsByWorkspaceIdMonitorsByFilterUuid
+      x-operation-id-source: derived
   /api/{api_version}/ws/{workspace_id}/monitors/{filter_uuid}/slices:
     get:
       description: ''
@@ -1155,3 +1173,5 @@ paths:
       summary: Get slices associated with monitor
       tags:
       - Monitors
+      operationId: getApiByApiVersionWsByWorkspaceIdMonitorsByFilterUuidSlices
+      x-operation-id-source: derived

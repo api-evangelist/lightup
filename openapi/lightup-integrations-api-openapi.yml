@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Integrations API
+  title: Lightup Dashboard Integrations API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -60,8 +60,9 @@ paths:
       summary: Get the list of integrations
       tags:
       - Integrations
+      operationId: getApiByApiVersionWsByWorkspaceIdIntegrations
+      x-operation-id-source: derived
     post:
-      description: Create a new integration
       parameters:
       - description: ''
         explode: true
@@ -998,9 +999,10 @@ paths:
       summary: Create a new integration
       tags:
       - Integrations
+      operationId: postApiByApiVersionWsByWorkspaceIdIntegrations
+      x-operation-id-source: derived
   /api/{api_version}/ws/{workspace_id}/integrations/{pk}:
     delete:
-      description: Delete an integration
       parameters:
       - description: ''
         explode: true
@@ -1049,6 +1051,8 @@ paths:
       summary: Delete an integration
       tags:
       - Integrations
+      operationId: deleteApiByApiVersionWsByWorkspaceIdIntegrationsByPk
+      x-operation-id-source: derived
     get:
       description: Retrieve an integration
       parameters:
@@ -1103,8 +1107,9 @@ paths:
       summary: Get an integration
       tags:
       - Integrations
+      operationId: getApiByApiVersionWsByWorkspaceIdIntegrationsByPk
+      x-operation-id-source: derived
     put:
-      description: Update an integration
       parameters:
       - description: ''
         explode: true
@@ -1164,3 +1169,5 @@ paths:
       summary: Update an integration
       tags:
       - Integrations
+      operationId: putApiByApiVersionWsByWorkspaceIdIntegrationsByPk
+      x-operation-id-source: derived

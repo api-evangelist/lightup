@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Workspaces API
+  title: Lightup Dashboard Workspaces API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -176,6 +176,8 @@ paths:
       summary: Get existing workspaces
       tags:
       - Workspaces
+      operationId: getApiByApiVersionWorkspaces
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -388,6 +390,8 @@ paths:
       summary: Create new workspace
       tags:
       - Workspaces
+      operationId: postApiByApiVersionWorkspaces
+      x-operation-id-source: derived
   /api/{api_version}/workspaces/{workspace_id}:
     delete:
       description: ''
@@ -430,6 +434,8 @@ paths:
       summary: Deactivate existing workspace
       tags:
       - Workspaces
+      operationId: deleteApiByApiVersionWorkspacesByWorkspaceId
+      x-operation-id-source: derived
     get:
       description: ''
       parameters:
@@ -475,6 +481,8 @@ paths:
       summary: Get existing workspace
       tags:
       - Workspaces
+      operationId: getApiByApiVersionWorkspacesByWorkspaceId
+      x-operation-id-source: derived
     patch:
       description: ''
       parameters:
@@ -596,3 +604,5 @@ paths:
       summary: Modify existing workspace
       tags:
       - Workspaces
+      operationId: patchApiByApiVersionWorkspacesByWorkspaceId
+      x-operation-id-source: derived

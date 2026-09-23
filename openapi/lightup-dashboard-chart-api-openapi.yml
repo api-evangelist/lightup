@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
   description: Lightup Metrics API provides CRUD interface to Dashboard objects.
-  title: Lightup Dashboard API Credentials Dashboard chart API
+  title: Lightup Dashboard Dashboard chart API
   version: 1.0.0
 servers:
 - description: Enter your Lightup subdomain
@@ -60,6 +60,8 @@ paths:
       summary: Get dashboard chart list
       tags:
       - Dashboard chart
+      operationId: getApiByApiVersionWsByWorkspaceIdDashboard
+      x-operation-id-source: derived
     post:
       description: ''
       parameters:
@@ -414,3 +416,5 @@ paths:
       summary: Create new dashboard chart
       tags:
       - Dashboard chart
+      operationId: postApiByApiVersionWsByWorkspaceIdDashboard
+      x-operation-id-source: derived
