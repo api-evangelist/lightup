@@ -48,6 +48,9 @@ x-backed-by:
 specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-19'
+x-docs-platform: readme
+x-docs-platform-confidence: high
+x-docs-platform-checked: 2026-10-03
 tags:
 - Data Quality
 - Data Observability
@@ -244,6 +247,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/lightup-capability-edges.yml
+  name: Lightup Business Capability Map
 - type: Overlay
   url: overlays/lightup-dashboard-overlay.yaml
 - type: Website
