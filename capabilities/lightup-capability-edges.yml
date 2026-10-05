@@ -1,0 +1,45 @@
+slug: lightup
+provider: Lightup
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Metrics
+  spec_file: lightup-metrics-api-openapi.yml
+  capability_id: BC-610.30
+  capability_id_l1: BC-610
+  capability_name: Data Quality Management
+  confidence: 0.8
+  evidence: '"Create metric" / "Get metrics list" on a platform whose metrics are "pushdown data quality
+    checks (DQIs) directly against customer datasources"'
+  reason: Metric definition CRUD is the core data-quality indicator surface of this data observability
+    platform.
+- tag: Monitors
+  spec_file: lightup-monitors-api-openapi.yml
+  capability_id: BC-610.30
+  capability_id_l1: BC-610
+  capability_name: Data Quality Management
+  confidence: 0.78
+  evidence: '"Create monitor", "Get slices associated with monitor" for a platform that lets teams "detect,
+    diagnose, and resolve data issues"'
+  reason: Monitors watch data-quality metrics for anomalies across data slices; this is data quality monitoring
+    rather than IT infrastructure monitoring.
+- tag: Incidents
+  spec_file: lightup-incidents-api-openapi.yml
+  capability_id: BC-610.30
+  capability_id_l1: BC-610
+  capability_name: Data Quality Management
+  confidence: 0.7
+  evidence: '"Get incident list", "Get the detail of an incident", "Create comment associated with the
+    incident"'
+  reason: Incidents here are data-quality anomalies raised by DQI checks, with collaboration comments
+    for triage — data quality monitoring and remediation, not IT service incidents.
