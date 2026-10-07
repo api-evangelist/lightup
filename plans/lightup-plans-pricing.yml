@@ -1,0 +1,32 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.lightup.ai/pricing/
+sources:
+- https://www.lightup.ai/pricing/
+- https://www.lightup.ai/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: business-product
+pricing_basis: negotiated
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Deployment Cloud Cloud, Hybrid
+  managed_tier: Cloud
+published: false
+note: Annual subscription plans with no numeric prices; both tiers say 'Get Quote'. Deployment options
+  include Cloud and Hybrid (Enterprise).
+plan_count: 2
+plans:
+- name: Cloud
+  price_text: Get Quote
+  period: none
+  included_quota: 10 users, 2 workspaces, 30 days retention, Community support
+- name: Enterprise
+  price_text: Get Quote
+  period: none
+  included_quota: Custom users/workspaces, 6+ months retention, hybrid deployment
