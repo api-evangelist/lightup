@@ -64,39 +64,152 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Lightup Data, Inc. is an enterprise data quality and data observability platform that lets data teams detect, diagnose, and resolve data issues across cloud and hybrid data stacks. Checks (DQIs) are pushed down to the customer's own datasources — Snowflake, Databricks, Redshift, BigQuery, Postgres, Athena, Oracle, Teradata, SAP HANA, Dremio, Incorta, ksqlDB, S3 and Azure blob storage — so no customer source data is copied into the Lightup environment.
+Lightup Data, Inc. is an enterprise data quality and data observability platform that lets data teams detect, diagnose, and resolve data issues across cloud and hybrid data stacks. The platform runs pushdown data quality checks (DQIs) directly against customer datasources — Snowflake, Databricks, Redshift, BigQuery, Postgres, Athena, Oracle, Teradata, SAP HANA, Dremio, Incorta, ksqlDB and S3/Azure blob storage — so no customer source data is copied into the Lightup environment. Capabilities include zero-config auto metrics, sliced metrics, AI-based anomaly detection, data profiling, data reconciliation, data lineage, incident management, and an agentic interface (Lightup Agentic) that exposes the platform to MCP-compatible AI agents. Lightup exposes a REST API for workspaces, datasources, metrics, monitors, incidents, integrations, dashboards and users, a Python CLI (lightctl), an Airflow provider, and an official MCP server. Founded by Manu Bansal; backed by a16z; SOC 2 Type 2 and ISAE 3000 compliant.
 
-- Website: https://www.lightup.ai/
-- Documentation: https://docs.lightup.ai/docs
-- API reference: https://docs.lightup.ai/reference
-- GitHub: https://github.com/lightup-data
+**Areas:** Data Quality · Data Observability · Data Monitoring · Anomaly Detection · Data Engineering · Analytics · Incident Management · Artificial Intelligence · Data Governance · Company
 
-Backed by: a16z
+## Lightup on APIs.io
 
-## API
+Everything profiled for Lightup is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/lightup/](https://apis.io/providers/lightup/)** — or go straight to one of the APIs or properties below.
 
-The Lightup Dashboard API is an OpenAPI 3.1.0 REST API covering workspaces, datasources, metrics, monitors, incidents, integrations, data catalogs, dashboard charts and users. It is deployed per customer at `https://app.{clusterId}.lightup.ai`. Requests carry a JWT access token obtained by exchanging the refresh token from a downloaded API credential file.
+### APIs (12)
 
-## Artifacts in this repo
+- [Lightup API Credentials API](https://apis.io/apis/lightup/lightup-api-credentials-api/) — The API Credentials API from Lightup — 1 operation(s) for api credentials.
+- [Lightup Catalogs API](https://apis.io/apis/lightup/lightup-catalogs-api/) — The Catalogs API from Lightup — 2 operation(s) for catalogs.
+- [Lightup Dashboard chart API](https://apis.io/apis/lightup/lightup-dashboard-chart-api/) — The Dashboard chart API from Lightup — 1 operation(s) for dashboard chart.
+- [Lightup Datapoints API](https://apis.io/apis/lightup/lightup-datapoints-api/) — The Datapoints API from Lightup — 1 operation(s) for datapoints.
+- [Lightup Health check API](https://apis.io/apis/lightup/lightup-health-check-api/) — The Health check API from Lightup — 1 operation(s) for health check.
+- [Lightup Incidents API](https://apis.io/apis/lightup/lightup-incidents-api/) — The Incidents API from Lightup — 4 operation(s) for incidents.
+- [Lightup Integrations API](https://apis.io/apis/lightup/lightup-integrations-api/) — The Integrations API from Lightup — 2 operation(s) for integrations.
+- [Lightup Metrics API](https://apis.io/apis/lightup/lightup-metrics-api/) — The Metrics API from Lightup — 2 operation(s) for metrics.
+- [Lightup Monitors API](https://apis.io/apis/lightup/lightup-monitors-api/) — The Monitors API from Lightup — 3 operation(s) for monitors.
+- [Lightup Users API](https://apis.io/apis/lightup/lightup-users-api/) — The Users API from Lightup — 4 operation(s) for users.
+- [Lightup Workspaces API](https://apis.io/apis/lightup/lightup-workspaces-api/) — The Workspaces API from Lightup — 2 operation(s) for workspaces.
+- [Lightup Data Sources API](https://apis.io/apis/lightup/lightup-data-sources-api/) — The Data Sources API from Lightup — 3 operation(s) for data sources.
 
-| Artifact | Path | Method |
-|---|---|---|
-| OpenAPI 3.1.0 (54 operations) | `openapi/` | searched |
-| llms.txt | `llms/` | searched |
-| MCP server (Lightup Agentic, 41 tools) | `mcp/` | searched |
-| Packages / SDKs (3 PyPI packages) | `packages/` | searched |
-| CLI (`lightctl`) | `cli/` | searched |
-| Authentication profile | `authentication/` | searched |
-| Changelog (release notes) | `changelog/` | searched |
-| Conformance (SOC 2 Type 2, ISAE 3000) | `conformance/` | searched |
-| Sandbox / trial | `sandbox/` | searched |
-| Vulnerability disclosure, trust center, domain security | `security/` | searched / probed |
-| Well-known probe (no surface published) | `well-known/` | searched |
-| API conventions | `conventions/` | derived |
-| Lifecycle | `lifecycle/` | derived |
-| Data model | `data-model/` | derived |
-| OpenAPI Overlay | `overlays/` | generated |
-| Agent Skills (4) | `skills/` | generated |
-| Agentic access (54 operations) | `agentic-access/` | generated |
+### Published properties
 
-Not published by Lightup, so deliberately absent: AsyncAPI / webhooks (event delivery is via outbound notification connectors), OAuth scopes (auth is a JWT refresh/access exchange, not OAuth), an error catalog (no 4xx/5xx documented and no error reference), gRPC, embedded UI components, and decline codes (not a payments provider).
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [lightup](https://apis.io/servers/lightup/lightup/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Lightup Agentic Access](https://apis.io/agentic-access/lightup/lightup-agentic-access/)
+
+#### Collections (12)
+
+Postman and Open Collection request collections.
+
+- [Lightup Dashboard API Credentials API](https://apis.io/collections/lightup/open-lightup-api-credentials-api/)
+- [Lightup Dashboard API Credentials Catalogs API](https://apis.io/collections/lightup/open-lightup-catalogs-api/)
+- [Lightup Dashboard API Credentials Dashboard chart API](https://apis.io/collections/lightup/open-lightup-dashboard-chart-api/)
+- [Lightup Dashboard API Credentials Datapoints API](https://apis.io/collections/lightup/open-lightup-datapoints-api/)
+- [Lightup Dashboard API Credentials Datasources API](https://apis.io/collections/lightup/open-lightup-datasources-api/)
+- [Lightup Dashboard API Credentials Health check API](https://apis.io/collections/lightup/open-lightup-health-check-api/)
+- [Lightup Dashboard API Credentials Incidents API](https://apis.io/collections/lightup/open-lightup-incidents-api/)
+- [Lightup Dashboard API Credentials Integrations API](https://apis.io/collections/lightup/open-lightup-integrations-api/)
+- [Lightup Dashboard API Credentials Metrics API](https://apis.io/collections/lightup/open-lightup-metrics-api/)
+- [Lightup Dashboard API Credentials Monitors API](https://apis.io/collections/lightup/open-lightup-monitors-api/)
+- [Lightup Dashboard API Credentials Users API](https://apis.io/collections/lightup/open-lightup-users-api/)
+- [Lightup Dashboard API Credentials Workspaces API](https://apis.io/collections/lightup/open-lightup-workspaces-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Lightup Dashboard Overlay](https://apis.io/overlays/lightup/lightup-dashboard-overlay/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Lightup Authentication](https://apis.io/security/lightup/lightup-authentication/)
+- [Lightup Domain Security](https://apis.io/security/lightup/lightup-domain-security/)
+- [Lightup Trust Center](https://apis.io/security/lightup/lightup-trust-center/)
+- [Lightup Vulnerability Disclosure](https://apis.io/security/lightup/lightup-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Lightup Plans Pricing](https://apis.io/plans/lightup/lightup-plans-pricing/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.lightup.ai/)
+- [Documentation](https://docs.lightup.ai/docs)
+- [Getting started](https://docs.lightup.ai/docs/quick-start)
+- [API reference](https://docs.lightup.ai/reference)
+- [Pricing](https://www.lightup.ai/pricing)
+- [Sign up](https://my.lightup.ai)
+- [Support](https://www.lightup.ai/contact)
+- [Blog](https://www.lightup.ai/blog/)
+- [Security](https://www.lightup.ai/disclosure)
+- [Compliance](https://docs.lightup.ai/docs/key-security-features)
+- [Terms of service](https://www.lightup.ai/terms-of-service)
+- [Privacy policy](https://www.lightup.ai/privacy-policy)
+- [GitHub](https://github.com/lightup-data)
+
+## API Evangelist rating
+
+**Kin Score 54.9** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 42.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 28.9 |
+| Developer ergonomics | 61.3 |
+| Access clarity | 71.1 |
+
+**Agent readiness 24.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 30.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/lightup/](https://apis.io/providers/lightup/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Lightup: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/lightup/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
